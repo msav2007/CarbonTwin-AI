@@ -10,6 +10,7 @@ interface OptionCardProps {
   description: string;
   icon: LucideIcon;
   impact: "low" | "medium" | "high";
+  badge?: string;
   selected: boolean;
   onClick: () => void;
 }
@@ -19,6 +20,7 @@ export function OptionCard({
   description,
   icon: Icon,
   impact,
+  badge,
   selected,
   onClick,
 }: OptionCardProps) {
@@ -26,6 +28,7 @@ export function OptionCard({
     <motion.button
       type="button"
       onClick={onClick}
+      aria-pressed={selected}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       className={cn(
@@ -37,8 +40,10 @@ export function OptionCard({
     >
       {selected && (
         <motion.div
-          layoutId="option-check"
           className="absolute right-4 top-4 flex h-6 w-6 items-center justify-center rounded-full bg-primary"
+          initial={{ scale: 0.75, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.2 }}
         >
           <Check className="h-3.5 w-3.5 text-primary-foreground" />
         </motion.div>
@@ -69,7 +74,7 @@ export function OptionCard({
                 IMPACT_COLORS[impact]
               )}
             >
-              {impact} impact
+              {badge ?? `${impact} impact`}
             </span>
           </div>
           <p className="mt-1 text-sm text-[#94A3B8]">{description}</p>

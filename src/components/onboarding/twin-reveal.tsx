@@ -4,36 +4,52 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   Car,
   Cpu,
+  Gauge,
   Home,
+  LayoutDashboard,
+  Leaf,
   Plane,
+  RotateCcw,
   ShoppingBag,
-  Utensils,
   Sparkles,
+  Target,
+  TrendingDown,
+  Utensils,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/shared/container";
 import { useCountUp } from "@/hooks/use-count-up";
-import { formatTonnes } from "@/lib/carbon/calculator";
+import {
+  formatTonnes,
+  type CategoryBreakdown,
+  type CategoryKey,
+} from "@/lib/carbon/calculator";
 import { useOnboardingStore } from "@/store/onboarding";
-import type { CategoryBreakdown } from "@/lib/carbon/calculator";
 
 const CATEGORY_META: {
-  key: keyof CategoryBreakdown;
+  key: CategoryKey;
   label: string;
   icon: typeof Car;
   color: string;
 }[] = [
   { key: "transport", label: "Transport", icon: Car, color: "#00D4FF" },
-  { key: "food", label: "Food", icon: Utensils, color: "#38BDF8" },
+  { key: "food", label: "Food", icon: Utensils, color: "#22C55E" },
   { key: "home", label: "Home Energy", icon: Home, color: "#7DF9FF" },
-  { key: "travel", label: "Travel", icon: Plane, color: "#6366F1" },
-  { key: "shopping", label: "Shopping", icon: ShoppingBag, color: "#818CF8" },
+  { key: "travel", label: "Travel", icon: Plane, color: "#A78BFA" },
+  { key: "shopping", label: "Shopping", icon: ShoppingBag, color: "#F59E0B" },
 ];
+
+const DOMINANT_ICON: Record<CategoryKey, typeof Car> = {
+  transport: Car,
+  food: Leaf,
+  home: Home,
+  travel: Plane,
+  shopping: ShoppingBag,
+};
 
 function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
   const [animated, setAnimated] = useState(0);
@@ -42,20 +58,21 @@ function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
   const offset = circumference - (animated / 100) * circumference;
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      let start = 0;
-      const duration = 2000;
+    const timeout = window.setTimeout(() => {
+      const duration = 1800;
       const startTime = performance.now();
+
       const tick = (now: number) => {
-        const p = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        start = Math.round(eased * score);
-        setAnimated(start);
-        if (p < 1) requestAnimationFrame(tick);
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setAnimated(Math.round(eased * score));
+        if (progress < 1) requestAnimationFrame(tick);
       };
+
       requestAnimationFrame(tick);
     }, delay);
-    return () => clearTimeout(timeout);
+
+    return () => window.clearTimeout(timeout);
   }, [score, delay]);
 
   return (
@@ -69,7 +86,7 @@ function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
           stroke="rgba(0,212,255,0.08)"
           strokeWidth="10"
         />
-        <motion.circle
+        <circle
           cx="100"
           cy="100"
           r={radius}
@@ -84,15 +101,16 @@ function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
         <defs>
           <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#00D4FF" />
-            <stop offset="100%" stopColor="#7DF9FF" />
+            <stop offset="55%" stopColor="#7DF9FF" />
+            <stop offset="100%" stopColor="#22C55E" />
           </linearGradient>
         </defs>
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <motion.span
-          initial={{ opacity: 0, scale: 0.5 }}
+          initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 0.35, duration: 0.45 }}
           className="font-display text-5xl font-bold text-[#F8FAFC]"
         >
           {animated}
@@ -109,19 +127,22 @@ function TypewriterSummary({ text }: { text: string }) {
   const [displayed, setDisplayed] = useState("");
 
   useEffect(() => {
-    let i = 0;
-    const delay = setTimeout(() => {
-      const interval = setInterval(() => {
-        if (i <= text.length) {
-          setDisplayed(text.slice(0, i));
-          i++;
-        } else {
-          clearInterval(interval);
+    let interval: number | undefined;
+    const timeout = window.setTimeout(() => {
+      let index = 0;
+      interval = window.setInterval(() => {
+        setDisplayed(text.slice(0, index));
+        index += 1;
+        if (index > text.length) {
+          window.clearInterval(interval);
         }
-      }, 18);
-      return () => clearInterval(interval);
-    }, 1200);
-    return () => clearTimeout(delay);
+      }, 16);
+    }, 800);
+
+    return () => {
+      window.clearTimeout(timeout);
+      if (interval) window.clearInterval(interval);
+    };
   }, [text]);
 
   return (
@@ -132,28 +153,101 @@ function TypewriterSummary({ text }: { text: string }) {
   );
 }
 
+function TwinAvatar({
+  code,
+  category,
+}: {
+  code: string;
+  category: CategoryKey;
+}) {
+  const Icon = DOMINANT_ICON[category];
+
+  return (
+    <div className="relative mx-auto h-36 w-36">
+      <motion.div
+        className="absolute inset-0 rounded-full border border-cyan-300/25"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute inset-3 rounded-full border border-dashed border-cyan-300/20"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.25, duration: 0.6, type: "spring" }}
+        className="absolute inset-7 flex flex-col items-center justify-center rounded-3xl border border-cyan-300/25 bg-gradient-to-br from-cyan-500/25 via-blue-500/10 to-emerald-400/10 shadow-cyan"
+      >
+        <Icon className="h-9 w-9 text-primary" />
+        <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7DF9FF]">
+          {code}
+        </span>
+      </motion.div>
+    </div>
+  );
+}
+
+function MetricCard({
+  icon: Icon,
+  label,
+  value,
+  tone = "primary",
+}: {
+  icon: typeof Gauge;
+  label: string;
+  value: string;
+  tone?: "primary" | "success" | "warning";
+}) {
+  const toneClass = {
+    primary: "text-primary",
+    success: "text-success",
+    warning: "text-amber-300",
+  }[tone];
+
+  return (
+    <div className="rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4">
+      <div className="flex items-center gap-2 text-[#94A3B8]">
+        <Icon className="h-4 w-4" />
+        <span className="text-xs uppercase tracking-[0.14em]">{label}</span>
+      </div>
+      <p className={`mt-3 font-display text-2xl font-bold ${toneClass}`}>
+        {value}
+      </p>
+    </div>
+  );
+}
+
+function getCategoryMeta(category: CategoryKey) {
+  return CATEGORY_META.find((item) => item.key === category) ?? CATEGORY_META[0];
+}
+
 export function TwinReveal() {
   const router = useRouter();
   const { result } = useOnboardingStore();
+  const isReady = Boolean(result && Array.isArray(result.recommendedActions));
+
   const annual = useCountUp({
     end: result ? result.annualKg / 1000 : 0,
     decimals: 1,
-    duration: 2000,
+    duration: 1800,
     startOnView: false,
   });
-  const monthly = useCountUp({
-    end: result?.monthlyKg ?? 0,
+  const target = useCountUp({
+    end: result ? result.targetAnnualKg / 1000 : 0,
+    decimals: 1,
     duration: 1800,
     startOnView: false,
   });
 
   useEffect(() => {
-    if (!result) {
+    if (!isReady) {
       router.replace("/onboarding");
     }
-  }, [result, router]);
+  }, [isReady, router]);
 
-  if (!result) {
+  if (!result || !isReady) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#08111B]">
         <motion.div
@@ -166,17 +260,33 @@ export function TwinReveal() {
     );
   }
 
-  const { twin, carbonScore, breakdown, breakdownPct, vsAveragePct } = result;
+  const {
+    twin,
+    carbonScore,
+    targetScore,
+    breakdown,
+    breakdownPct,
+    vsAveragePct,
+    dailyKg,
+    dailyBudgetKg,
+    reductionPotentialKg,
+    recommendedActions,
+    targetAnnualKg,
+  } = result;
+  const topMeta = getCategoryMeta(result.topCategory);
+  const budgetPct = Math.min(140, Math.round((dailyKg / dailyBudgetKg) * 100));
+  const reductionPct = Math.round((reductionPotentialKg / result.annualKg) * 100);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#08111B]">
+    <div className="relative isolate min-h-screen overflow-hidden bg-[#08111B]">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="aurora absolute inset-0" />
         <div className="absolute inset-0 bg-radial-glow" />
+        <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-[0.25]" />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 1.4 }}
           className="absolute left-1/2 top-1/4 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[#00D4FF]/10 blur-[150px]"
         />
       </div>
@@ -201,184 +311,279 @@ export function TwinReveal() {
         </Container>
       </header>
 
-      <Container className="py-10 sm:py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="font-mono text-xs uppercase tracking-[0.25em] text-primary"
-          >
-            Carbon Twin Reveal
-          </motion.p>
-
+      <Container className="py-10 sm:py-14">
+        <div className="mx-auto max-w-6xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.6, type: "spring" }}
-            className="mx-auto mt-6 flex h-24 w-24 items-center justify-center rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/20 to-blue-600/10 text-4xl shadow-cyan"
-          >
-            {twin.avatarEmoji}
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 font-display text-4xl font-bold text-[#F8FAFC] sm:text-5xl"
+            transition={{ duration: 0.7 }}
+            className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]"
           >
-            Meet{" "}
-            <span className="text-gradient">{twin.name}</span>
-          </motion.h1>
+            <section className="glass-strong rounded-2xl p-6 sm:p-8">
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
+                Carbon Twin Reveal
+              </p>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.65 }}
-            className="mt-3 flex flex-wrap items-center justify-center gap-2"
-          >
-            <Badge variant="glow">{twin.personality}</Badge>
-            {twin.traits.map((trait) => (
-              <Badge key={trait} variant="outline" className="text-[#94A3B8]">
-                {trait}
-              </Badge>
-            ))}
+              <div className="mt-8 grid gap-8 md:grid-cols-[10rem_1fr] md:items-center">
+                <TwinAvatar
+                  code={twin.avatarCode}
+                  category={twin.dominantCategory}
+                />
+
+                <div>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="font-display text-4xl font-bold text-[#F8FAFC] sm:text-5xl"
+                  >
+                    Meet <span className="text-gradient">{twin.name}</span>
+                  </motion.h1>
+                  <p className="mt-2 text-sm text-[#7DF9FF]">
+                    Built for {twin.ownerName} - {twin.archetype}
+                  </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <Badge variant="glow">{twin.personality}</Badge>
+                    {twin.traits.map((trait) => (
+                      <Badge key={trait} variant="outline" className="text-[#94A3B8]">
+                        {trait}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 rounded-2xl border border-cyan-400/15 bg-white/[0.025] p-5">
+                <div className="mb-4 flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  <h2 className="font-display text-lg font-semibold text-[#F8FAFC]">
+                    Twin Speaks
+                  </h2>
+                </div>
+                <TypewriterSummary text={twin.summary} />
+              </div>
+            </section>
+
+            <section className="glass-strong rounded-2xl p-6 sm:p-8">
+              <ScoreRing score={carbonScore} delay={350} />
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div ref={annual.ref}>
+                  <MetricCard
+                    icon={Gauge}
+                    label="Annual CO2"
+                    value={`${annual.formatted}t`}
+                  />
+                </div>
+                <div ref={target.ref}>
+                  <MetricCard
+                    icon={TrendingDown}
+                    label="Action target"
+                    value={`${target.formatted}t`}
+                    tone="success"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.14em] text-[#94A3B8]">
+                      Daily budget
+                    </p>
+                    <p className="mt-1 font-display text-2xl font-bold text-[#F8FAFC]">
+                      {dailyKg} kg / {dailyBudgetKg} kg
+                    </p>
+                  </div>
+                  <Badge variant={dailyKg <= dailyBudgetKg ? "success" : "glow"}>
+                    {budgetPct}%
+                  </Badge>
+                </div>
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/[0.06]">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-[#22C55E] via-[#7DF9FF] to-[#F59E0B]"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${Math.min(budgetPct, 100)}%` }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                </div>
+                <p className="mt-3 text-xs text-[#94A3B8]">
+                  Compared to the 4.2t global average baseline.
+                </p>
+              </div>
+            </section>
           </motion.div>
 
-          <p className="mt-2 text-sm text-[#7DF9FF]">{twin.archetype}</p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-          className="mx-auto mt-12 grid max-w-4xl gap-6 lg:grid-cols-[1fr_1.2fr]"
-        >
-          <div className="glass-strong rounded-2xl p-6 glow-cyan sm:p-8">
-            <ScoreRing score={carbonScore} delay={600} />
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <div className="rounded-xl border border-cyan-500/[0.08] bg-white/[0.02] p-4 text-center">
-                <p ref={annual.ref} className="font-display text-2xl font-bold text-primary">
-                  {annual.formatted}t
-                </p>
-                <p className="mt-1 text-xs text-[#94A3B8]">Annual CO₂</p>
+          <div className="mt-6 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+            <motion.section
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.6 }}
+              className="glass-strong rounded-2xl p-6 sm:p-8"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="font-display text-xl font-semibold text-[#F8FAFC]">
+                    Emissions fingerprint
+                  </h2>
+                  <p className="mt-1 text-sm text-[#94A3B8]">
+                    {formatTonnes(result.annualKg)}t total - strongest signal:
+                    {" "}
+                    {topMeta.label.toLowerCase()}
+                  </p>
+                </div>
+                <Badge variant="glow" className="shrink-0">
+                  {vsAveragePct > 0 ? "+" : ""}
+                  {vsAveragePct}% avg
+                </Badge>
               </div>
-              <div className="rounded-xl border border-cyan-500/[0.08] bg-white/[0.02] p-4 text-center">
-                <p ref={monthly.ref} className="font-display text-2xl font-bold text-[#7DF9FF]">
-                  {monthly.formatted} kg
-                </p>
-                <p className="mt-1 text-xs text-[#94A3B8]">Monthly CO₂</p>
-              </div>
-            </div>
-            <div className="mt-4 rounded-xl border border-cyan-500/[0.08] bg-white/[0.02] p-4 text-center">
-              <p
-                className={`font-display text-lg font-bold ${
-                  vsAveragePct <= 0 ? "text-success" : "text-amber-400"
-                }`}
-              >
-                {vsAveragePct > 0 ? "+" : ""}
-                {vsAveragePct}% vs. average
-              </p>
-              <p className="mt-1 text-xs text-[#94A3B8]">
-                Compared to 4.2t global average
-              </p>
-            </div>
-          </div>
 
-          <div className="glass-strong rounded-2xl p-6 sm:p-8">
-            <h2 className="font-display text-lg font-semibold text-[#F8FAFC]">
-              Emissions Breakdown
-            </h2>
-            <p className="mt-1 text-sm text-[#94A3B8]">
-              {formatTonnes(result.annualKg)}t total · by category
-            </p>
-            <div className="mt-6 space-y-4">
-              {CATEGORY_META.map((cat, i) => {
-                const Icon = cat.icon;
-                const kg = breakdown[cat.key];
-                const pct = breakdownPct[cat.key];
-                return (
-                  <motion.div
-                    key={cat.key}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                  >
-                    <div className="mb-1.5 flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2">
-                        <Icon className="h-4 w-4 text-[#94A3B8]" />
-                        <span className="text-[#F8FAFC]">{cat.label}</span>
+              <div className="mt-7 space-y-4">
+                {CATEGORY_META.map((cat, i) => {
+                  const Icon = cat.icon;
+                  const kg = breakdown[cat.key as keyof CategoryBreakdown];
+                  const pct = breakdownPct[cat.key as keyof CategoryBreakdown];
+
+                  return (
+                    <motion.div
+                      key={cat.key}
+                      initial={{ opacity: 0, x: 18 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.55 + i * 0.08 }}
+                    >
+                      <div className="mb-1.5 flex items-center justify-between gap-3 text-sm">
+                        <div className="flex min-w-0 items-center gap-2">
+                          <Icon className="h-4 w-4 shrink-0 text-[#94A3B8]" />
+                          <span className="truncate text-[#F8FAFC]">
+                            {cat.label}
+                          </span>
+                        </div>
+                        <span className="shrink-0 font-mono text-[#94A3B8]">
+                          {kg.toLocaleString()} kg / {pct}%
+                        </span>
                       </div>
-                      <span className="font-mono text-[#94A3B8]">
-                        {kg.toLocaleString()} kg · {pct}%
-                      </span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-white/[0.05]">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${pct}%` }}
-                        transition={{
-                          duration: 1,
-                          delay: 1 + i * 0.1,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: cat.color }}
-                      />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
+                      <div className="h-2 overflow-hidden rounded-full bg-white/[0.05]">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${pct}%` }}
+                          transition={{
+                            duration: 1,
+                            delay: 0.7 + i * 0.1,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: cat.color }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="mx-auto mt-8 max-w-4xl"
-        >
-          <div className="glass-strong rounded-2xl border border-cyan-400/15 p-6 sm:p-8">
-            <div className="mb-4 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <h2 className="font-display text-lg font-semibold text-[#F8FAFC]">
-                Twin Speaks
-              </h2>
-            </div>
-            <TypewriterSummary text={twin.summary} />
-          </div>
-        </motion.div>
+            <motion.section
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="glass-strong rounded-2xl p-6 sm:p-8"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="font-display text-xl font-semibold text-[#F8FAFC]">
+                    First action plan
+                  </h2>
+                  <p className="mt-1 text-sm text-[#94A3B8]">
+                    Potential reduction: {reductionPotentialKg.toLocaleString()} kg
+                    CO2/year ({reductionPct}%)
+                  </p>
+                </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10">
+                  <Target className="h-5 w-5 text-success" />
+                </div>
+              </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8 }}
-          className="mx-auto mt-10 flex max-w-md flex-col items-center gap-3 sm:flex-row sm:justify-center"
-        >
-          <Button variant="glow" size="xl" asChild className="w-full sm:w-auto">
-            <Link href="/dashboard">
-              Enter Dashboard
-              <ArrowRight />
-            </Link>
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto"
-            onClick={() => {
-              useOnboardingStore.getState().reset();
-              router.push("/onboarding");
-            }}
+              <div className="mt-6 space-y-3">
+                {recommendedActions.map((action, index) => {
+                  const meta = getCategoryMeta(action.category);
+
+                  return (
+                    <motion.div
+                      key={action.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.75 + index * 0.08 }}
+                      className="rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="mb-2 flex flex-wrap items-center gap-2">
+                            <Badge variant="outline" className="text-[#94A3B8]">
+                              {meta.label}
+                            </Badge>
+                            <Badge variant="glow">
+                              {action.annualSavingsKg} kg saved
+                            </Badge>
+                          </div>
+                          <h3 className="font-medium text-[#F8FAFC]">
+                            {action.title}
+                          </h3>
+                          <p className="mt-1 text-sm leading-relaxed text-[#94A3B8]">
+                            {action.description}
+                          </p>
+                        </div>
+                        <span className="shrink-0 rounded-full border border-cyan-400/20 px-2.5 py-1 text-xs text-[#7DF9FF]">
+                          {action.difficulty}
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.section>
+          </div>
+
+          <motion.section
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="mt-6 rounded-2xl border border-cyan-400/15 bg-gradient-to-r from-cyan-500/[0.12] via-white/[0.03] to-emerald-400/[0.08] p-6 sm:p-8"
           >
-            Retake Onboarding
-          </Button>
-        </motion.div>
+            <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                  Simulation seed
+                </p>
+                <h2 className="mt-2 font-display text-2xl font-semibold text-[#F8FAFC]">
+                  If you apply this plan, {twin.name} projects a score of{" "}
+                  <span className="text-gradient">{targetScore}/100</span>.
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-[#94A3B8]">
+                  That would move your annual footprint toward{" "}
+                  {formatTonnes(targetAnnualKg)}t CO2 while preserving the
+                  lifestyle pattern you entered.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+                <Button variant="glow" size="lg" asChild>
+                  <Link href="/dashboard">
+                    <LayoutDashboard />
+                    Enter Dashboard
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    useOnboardingStore.getState().reset();
+                    router.push("/onboarding");
+                  }}
+                >
+                  <RotateCcw />
+                  Retake
+                </Button>
+              </div>
+            </div>
+          </motion.section>
+        </div>
       </Container>
     </div>
   );

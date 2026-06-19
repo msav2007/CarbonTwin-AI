@@ -27,6 +27,16 @@ export const useOnboardingStore = create<OnboardingStore>()(
     }),
     {
       name: "carbontwin-onboarding",
+      version: 2,
+      migrate: (persistedState) => {
+        const state = persistedState as Partial<OnboardingStore>;
+
+        return {
+          step: Math.min(Math.max(state.step ?? 1, 1), 5),
+          data: state.data ?? {},
+          result: null,
+        };
+      },
       partialize: (state) => ({
         step: state.step,
         data: state.data,

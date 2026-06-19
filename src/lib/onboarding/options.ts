@@ -13,6 +13,9 @@ import {
   Zap,
   Home,
   Building2,
+  User,
+  Users,
+  Target,
   Plane,
   MapPin,
   Globe,
@@ -27,6 +30,7 @@ export interface OnboardingOption<T extends string = string> {
   description: string;
   icon: LucideIcon;
   impact: "low" | "medium" | "high";
+  badge?: string;
 }
 
 export const TRANSPORT_OPTIONS: OnboardingOption<OnboardingData["transport"]>[] =
@@ -123,6 +127,34 @@ export const ENERGY_OPTIONS: OnboardingOption<OnboardingData["homeEnergy"]>[] = 
   },
 ];
 
+export const HOUSEHOLD_OPTIONS: OnboardingOption<OnboardingData["household"]>[] =
+  [
+    {
+      value: "solo",
+      label: "Solo home",
+      description: "One-person household or private studio",
+      icon: User,
+      impact: "high",
+      badge: "More per person",
+    },
+    {
+      value: "couple",
+      label: "Shared by two",
+      description: "Two people sharing core home energy",
+      icon: Users,
+      impact: "medium",
+      badge: "Shared load",
+    },
+    {
+      value: "family",
+      label: "Family / shared home",
+      description: "Three or more people sharing utilities",
+      icon: Home,
+      impact: "low",
+      badge: "Lower per person",
+    },
+  ];
+
 export const TRAVEL_OPTIONS: OnboardingOption<OnboardingData["travel"]>[] = [
   {
     value: "rare",
@@ -172,6 +204,42 @@ export const SHOPPING_OPTIONS: OnboardingOption<OnboardingData["shopping"]>[] =
     },
   ];
 
+export const MOTIVATION_OPTIONS: OnboardingOption<OnboardingData["motivation"]>[] =
+  [
+    {
+      value: "shrink-footprint",
+      label: "Shrink my footprint",
+      description: "Prioritize the highest-carbon decisions first",
+      icon: Target,
+      impact: "low",
+      badge: "Climate",
+    },
+    {
+      value: "lower-bills",
+      label: "Lower bills",
+      description: "Find actions that cut energy and money waste",
+      icon: Zap,
+      impact: "medium",
+      badge: "Savings",
+    },
+    {
+      value: "travel-smarter",
+      label: "Travel smarter",
+      description: "Balance trips with better routes and offsets",
+      icon: Plane,
+      impact: "medium",
+      badge: "Mobility",
+    },
+    {
+      value: "consume-less",
+      label: "Consume less",
+      description: "Reduce purchases, packaging, and delivery impact",
+      icon: ShoppingBag,
+      impact: "low",
+      badge: "Lifestyle",
+    },
+  ];
+
 export const STEP_META = [
   { id: 1, title: "Transport", subtitle: "How do you get around?" },
   { id: 2, title: "Food", subtitle: "What's on your plate?" },
@@ -181,7 +249,7 @@ export const STEP_META = [
     title: "Travel & Shopping",
     subtitle: "Flights and consumption habits",
   },
-  { id: 5, title: "Review", subtitle: "Confirm your lifestyle profile" },
+  { id: 5, title: "Calibrate Twin", subtitle: "Name and confirm your profile" },
 ] as const;
 
 export const IMPACT_COLORS = {
@@ -198,8 +266,10 @@ export function getOptionLabel(
     transport: TRANSPORT_OPTIONS,
     diet: FOOD_OPTIONS,
     homeEnergy: ENERGY_OPTIONS,
+    household: HOUSEHOLD_OPTIONS,
     travel: TRAVEL_OPTIONS,
     shopping: SHOPPING_OPTIONS,
+    motivation: MOTIVATION_OPTIONS,
   };
   return maps[field]?.find((o) => o.value === value)?.label ?? value;
 }

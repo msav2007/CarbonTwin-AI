@@ -7,11 +7,18 @@ export interface UserProfile {
 }
 
 export interface OnboardingData {
+  name: string;
   transport: "car" | "transit" | "bike" | "walk" | "mixed";
   diet: "meat-heavy" | "balanced" | "vegetarian" | "vegan";
   homeEnergy: "low" | "medium" | "high";
+  household: "solo" | "couple" | "family";
   shopping: "minimal" | "moderate" | "frequent";
   travel: "rare" | "occasional" | "frequent";
+  motivation:
+    | "shrink-footprint"
+    | "lower-bills"
+    | "travel-smarter"
+    | "consume-less";
 }
 
 export interface CarbonTwin {
@@ -92,7 +99,7 @@ export const MVP_FEATURES = [
     id: "receipts",
     title: "AI Receipt Analysis",
     description:
-      "Snap a receipt photo — Gemini Vision breaks down every item's carbon cost.",
+      "Snap a receipt photo - Gemini Vision breaks down every item's carbon cost.",
     icon: "ScanLine",
   },
   {

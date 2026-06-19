@@ -44,7 +44,7 @@ export function Hero() {
                 PromptWars Challenge 3 · AI Carbon Intelligence
               </Badge>
 
-              <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl">
+              <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight text-[#F8FAFC] sm:text-5xl xl:text-6xl">
                 {headlineWords.map((word, i) => (
                   <motion.span
                     key={word}
@@ -72,12 +72,12 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.45, duration: 0.6 }}
-                className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+                className="mt-6 max-w-xl text-base leading-relaxed text-[#94A3B8] sm:text-lg"
               >
                 Climate data is abstract. Your twin makes it{" "}
-                <span className="font-medium text-foreground/90">personal</span>,{" "}
-                <span className="font-medium text-foreground/90">visual</span>, and{" "}
-                <span className="font-medium text-foreground/90">actionable</span>{" "}
+                <span className="font-medium text-[#F8FAFC]">personal</span>,{" "}
+                <span className="font-medium text-[#F8FAFC]">visual</span>, and{" "}
+                <span className="font-medium text-[#F8FAFC]">actionable</span>{" "}
                 — powered by Gemini multimodal AI.
               </motion.p>
 
@@ -90,20 +90,20 @@ export function Hero() {
                 {storyBeats.map((beat) => (
                   <div
                     key={beat.act}
-                    className="group flex items-start gap-4 rounded-xl border border-white/[0.04] bg-white/[0.02] p-3.5 transition-colors hover:border-primary/15 hover:bg-white/[0.04]"
+                    className="group flex items-start gap-4 rounded-xl border border-cyan-500/[0.06] bg-white/[0.02] p-3.5 transition-all hover:border-cyan-400/20 hover:bg-cyan-500/[0.03]"
                   >
                     <span className="font-mono text-xs font-bold text-primary">
                       {beat.act}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-foreground/95">
+                      <p className="text-sm font-semibold text-[#F8FAFC]">
                         {beat.title}
                       </p>
-                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                      <p className="mt-0.5 text-xs leading-relaxed text-[#94A3B8]">
                         {beat.text}
                       </p>
                     </div>
-                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-primary/60" />
+                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#94A3B8]/40 transition-transform group-hover:translate-x-0.5 group-hover:text-primary/70" />
                   </div>
                 ))}
               </motion.div>
@@ -132,7 +132,7 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.85 }}
-                className="mt-4 text-xs text-muted-foreground/80"
+                className="mt-4 text-xs text-[#94A3B8]/80"
               >
                 Full judge demo in under 3 minutes · No credit card
               </motion.p>
@@ -145,7 +145,7 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative lg:pl-4"
           >
-            <div className="pointer-events-none absolute -inset-8 rounded-full bg-emerald-500/10 blur-3xl" />
+            <div className="pointer-events-none absolute -inset-8 rounded-full bg-[#00D4FF]/[0.07] blur-3xl" />
             <TwinPreview />
           </motion.div>
         </div>

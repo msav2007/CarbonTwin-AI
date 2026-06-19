@@ -36,6 +36,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -49,6 +53,14 @@ const config: Config = {
           "3": "hsl(var(--chart-3))",
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
+        },
+        brand: {
+          bg: "#08111B",
+          primary: "#00D4FF",
+          accent: "#7DF9FF",
+          text: "#F8FAFC",
+          muted: "#94A3B8",
+          success: "#22C55E",
         },
       },
       borderRadius: {
@@ -81,8 +93,8 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.35", transform: "scale(1)" },
-          "50%": { opacity: "0.65", transform: "scale(1.05)" },
+          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
+          "50%": { opacity: "0.55", transform: "scale(1.04)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
@@ -99,14 +111,18 @@ const config: Config = {
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(to right, hsl(var(--border) / 0.4) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px)",
+          "linear-gradient(to right, hsl(192 100% 50% / 0.04) 1px, transparent 1px), linear-gradient(to bottom, hsl(192 100% 50% / 0.04) 1px, transparent 1px)",
         "radial-glow":
-          "radial-gradient(ellipse 70% 55% at 50% -10%, hsl(152 72% 40% / 0.22), transparent 70%)",
+          "radial-gradient(ellipse 70% 55% at 50% -10%, hsl(192 100% 50% / 0.14), transparent 70%)",
         "radial-glow-bottom":
-          "radial-gradient(ellipse 60% 40% at 50% 110%, hsl(172 60% 30% / 0.15), transparent 70%)",
+          "radial-gradient(ellipse 60% 40% at 50% 110%, hsl(210 90% 55% / 0.1), transparent 70%)",
       },
       backgroundSize: {
         grid: "64px 64px",
+      },
+      boxShadow: {
+        cyan: "0 0 40px -8px hsl(192 100% 50% / 0.4)",
+        "cyan-sm": "0 0 20px -4px hsl(192 100% 50% / 0.3)",
       },
     },
   },

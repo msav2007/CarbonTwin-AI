@@ -69,22 +69,22 @@ export function Features() {
             const Icon = iconMap[feature.icon] ?? Sparkles;
             return (
               <motion.div key={feature.id} variants={item}>
-                <Card className="group relative h-full overflow-hidden border-white/[0.06] bg-white/[0.02] transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/25 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-primary/[0.06]">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <Card className="group relative h-full overflow-hidden border-cyan-500/[0.08] bg-white/[0.02] transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/25 hover:bg-cyan-500/[0.03] hover:shadow-cyan-sm">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <CardHeader className="relative pb-3">
                     <div className="mb-3 flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20 transition-all duration-300 group-hover:scale-105 group-hover:bg-primary/20 group-hover:ring-primary/40">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-500/15 bg-cyan-500/10 transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-400/30 group-hover:bg-cyan-500/15">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
-                      <span className="font-mono text-xs text-muted-foreground/50">
+                      <span className="font-mono text-xs text-[#94A3B8]/50">
                         0{index + 1}
                       </span>
                     </div>
                     <CardTitle>{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative">
-                    <CardDescription className="text-sm leading-relaxed">
+                    <CardDescription className="text-sm leading-relaxed text-[#94A3B8]">
                       {feature.description}
                     </CardDescription>
                   </CardContent>

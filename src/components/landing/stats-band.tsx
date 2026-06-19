@@ -15,6 +15,7 @@ const stats = [
     label: "Global emissions per year",
     context: "The scale of the crisis",
     color: "text-red-400/90",
+    barColor: "from-red-500/60 to-red-400",
     barPct: 100,
   },
   {
@@ -26,6 +27,7 @@ const stats = [
     label: "Average personal footprint",
     context: "What most people emit annually",
     color: "text-amber-400/90",
+    barColor: "from-amber-500/60 to-amber-400",
     barPct: 72,
   },
   {
@@ -36,7 +38,8 @@ const stats = [
     unit: "",
     label: "Want to reduce emissions",
     context: "But lack personalized guidance",
-    color: "text-emerald-400/90",
+    color: "text-[#7DF9FF]",
+    barColor: "from-[#00D4FF]/60 to-[#7DF9FF]",
     barPct: 73,
   },
   {
@@ -47,7 +50,8 @@ const stats = [
     unit: "potential savings",
     label: "Avg. twin-identified savings",
     context: "Per user, first 90 days",
-    color: "text-teal-300",
+    color: "text-success",
+    barColor: "from-success/60 to-success",
     barPct: 58,
   },
 ];
@@ -74,31 +78,31 @@ function StatCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.55, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-300 hover:border-primary/20 hover:bg-white/[0.04]"
+      className="group relative overflow-hidden rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-6 transition-all duration-300 hover:border-cyan-400/25 hover:bg-cyan-500/[0.03] hover:shadow-cyan-sm"
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
       <div className="flex items-start justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] ring-1 ring-white/[0.06]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/10 bg-cyan-500/[0.05]">
           <Icon className={`h-5 w-5 ${stat.color}`} />
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8]/60">
           {stat.context}
         </span>
       </div>
 
       <div className="mt-5">
-        <p className={`font-display text-4xl font-bold tracking-tight sm:text-5xl ${stat.color}`}>
+        <p
+          className={`font-display text-4xl font-bold tracking-tight sm:text-5xl ${stat.color}`}
+        >
           {formatted}
         </p>
         {stat.unit && (
-          <p className="mt-1 text-xs font-medium text-muted-foreground">
-            {stat.unit}
-          </p>
+          <p className="mt-1 text-xs font-medium text-[#94A3B8]">{stat.unit}</p>
         )}
       </div>
 
-      <p className="mt-4 text-sm font-medium text-foreground/90">{stat.label}</p>
+      <p className="mt-4 text-sm font-medium text-[#F8FAFC]/90">{stat.label}</p>
 
       <div className="mt-4 h-1 overflow-hidden rounded-full bg-white/[0.05]">
         <motion.div
@@ -106,7 +110,7 @@ function StatCard({
           whileInView={{ width: `${stat.barPct}%` }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.3 + index * 0.1 }}
-          className="h-full rounded-full bg-gradient-to-r from-primary/60 to-primary"
+          className={`h-full rounded-full bg-gradient-to-r ${stat.barColor}`}
         />
       </div>
     </motion.div>
@@ -127,7 +131,7 @@ export function StatsBand() {
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
             The Problem · The Opportunity
           </p>
-          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-[#F8FAFC] sm:text-3xl">
             Carbon is invisible.{" "}
             <span className="text-gradient">We make it undeniable.</span>
           </h2>

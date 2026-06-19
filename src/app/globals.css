@@ -4,32 +4,35 @@
 
 @layer base {
   :root {
-    --background: 160 35% 2.5%;
-    --foreground: 150 25% 98%;
-    --card: 160 28% 5%;
-    --card-foreground: 150 25% 98%;
-    --popover: 160 28% 5%;
-    --popover-foreground: 150 25% 98%;
-    --primary: 152 68% 48%;
-    --primary-foreground: 160 35% 3%;
-    --secondary: 160 20% 8%;
-    --secondary-foreground: 150 18% 92%;
-    --muted: 160 16% 10%;
-    --muted-foreground: 150 10% 52%;
-    --accent: 152 50% 12%;
-    --accent-foreground: 152 65% 78%;
+    --background: 210 54% 7%;
+    --foreground: 210 40% 98%;
+    --card: 210 45% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 210 45% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 192 100% 50%;
+    --primary-foreground: 210 54% 7%;
+    --secondary: 210 35% 12%;
+    --secondary-foreground: 210 25% 92%;
+    --muted: 210 30% 14%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 186 100% 74%;
+    --accent-foreground: 210 54% 7%;
+    --success: 142 71% 45%;
+    --success-foreground: 210 40% 98%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 160 14% 12%;
-    --input: 160 14% 12%;
-    --ring: 152 68% 48%;
+    --border: 200 40% 16%;
+    --input: 200 40% 16%;
+    --ring: 192 100% 50%;
     --radius: 0.875rem;
-    --chart-1: 152 68% 48%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --glow: 152 68% 48%;
+    --chart-1: 192 100% 50%;
+    --chart-2: 210 90% 55%;
+    --chart-3: 220 70% 50%;
+    --chart-4: 186 100% 74%;
+    --chart-5: 142 71% 45%;
+    --glow: 192 100% 50%;
+    --glow-accent: 186 100% 74%;
   }
 }
 
@@ -45,52 +48,53 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: #08111b;
     background-image:
-      radial-gradient(ellipse 120% 80% at 50% -30%, hsl(152 68% 20% / 0.12), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(172 50% 15% / 0.08), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 0% 100%, hsl(152 60% 12% / 0.06), transparent 50%);
+      radial-gradient(ellipse 120% 70% at 50% -25%, hsl(192 100% 50% / 0.09), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, hsl(210 90% 55% / 0.06), transparent 50%),
+      radial-gradient(ellipse 50% 40% at 0% 100%, hsl(220 70% 50% / 0.05), transparent 50%);
   }
 
   ::selection {
-    @apply bg-primary/35 text-foreground;
+    @apply bg-primary/25 text-foreground;
   }
 }
 
 @layer components {
   .glass {
-    @apply border border-white/[0.07] bg-white/[0.025] backdrop-blur-2xl;
+    @apply border border-cyan-500/[0.08] bg-white/[0.02] backdrop-blur-2xl;
   }
 
   .glass-strong {
-    @apply border border-white/[0.09] bg-white/[0.045] backdrop-blur-2xl;
+    @apply border border-cyan-400/[0.12] bg-white/[0.03] backdrop-blur-2xl;
     box-shadow:
-      0 0 0 1px hsl(152 68% 48% / 0.04),
-      0 24px 48px -12px hsl(0 0% 0% / 0.5),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
+      0 0 0 1px hsl(192 100% 50% / 0.05),
+      0 24px 48px -12px hsl(210 54% 4% / 0.7),
+      inset 0 1px 0 0 hsl(186 100% 74% / 0.06);
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-emerald-100 via-emerald-300 to-teal-200 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#7DF9FF] via-[#00D4FF] to-[#38BDF8] bg-clip-text text-transparent;
   }
 
   .text-gradient-warm {
-    @apply bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-200 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#F8FAFC] via-[#7DF9FF] to-[#00D4FF] bg-clip-text text-transparent;
   }
 
-  .glow-emerald {
+  .glow-cyan {
     box-shadow:
-      0 0 100px -25px hsl(var(--glow) / 0.55),
-      0 0 0 1px hsl(var(--glow) / 0.12),
-      inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
+      0 0 80px -20px hsl(192 100% 50% / 0.45),
+      0 0 0 1px hsl(192 100% 50% / 0.12),
+      inset 0 1px 0 0 hsl(186 100% 74% / 0.08);
   }
 
   .glow-line {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      hsl(var(--glow) / 0.15) 20%,
-      hsl(var(--glow) / 0.7) 50%,
-      hsl(var(--glow) / 0.15) 80%,
+      hsl(192 100% 50% / 0.12) 20%,
+      hsl(186 100% 74% / 0.55) 50%,
+      hsl(192 100% 50% / 0.12) 80%,
       transparent 100%
     );
   }
@@ -99,20 +103,20 @@
     background: radial-gradient(
       ellipse 80% 60% at 50% 50%,
       transparent 30%,
-      hsl(160 35% 2% / 0.6) 100%
+      hsl(210 54% 5% / 0.65) 100%
     );
   }
 
   .noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.025;
+    opacity: 0.022;
   }
 
   .aurora {
     background:
-      radial-gradient(ellipse 50% 80% at 20% 40%, hsl(152 68% 30% / 0.15), transparent 50%),
-      radial-gradient(ellipse 50% 60% at 80% 20%, hsl(172 60% 25% / 0.1), transparent 50%),
-      radial-gradient(ellipse 40% 50% at 60% 80%, hsl(160 50% 20% / 0.08), transparent 50%);
+      radial-gradient(ellipse 55% 75% at 15% 35%, hsl(192 100% 50% / 0.1), transparent 55%),
+      radial-gradient(ellipse 50% 55% at 85% 15%, hsl(210 90% 55% / 0.08), transparent 50%),
+      radial-gradient(ellipse 45% 50% at 55% 85%, hsl(220 70% 50% / 0.06), transparent 50%);
   }
 
   .btn-shine {
@@ -127,7 +131,7 @@
     background: linear-gradient(
       105deg,
       transparent 35%,
-      hsl(0 0% 100% / 0.14) 50%,
+      hsl(186 100% 74% / 0.18) 50%,
       transparent 65%
     );
     transform: translateX(-100%);
@@ -142,6 +146,10 @@
   .twin-ring-reverse {
     stroke-dasharray: 3 8;
     animation: spin-slow 45s linear infinite reverse;
+  }
+
+  .text-success {
+    color: #22c55e;
   }
 }
 
@@ -174,7 +182,7 @@
 @keyframes pulse-ring {
   0% {
     transform: scale(0.95);
-    opacity: 0.6;
+    opacity: 0.5;
   }
   50% {
     transform: scale(1.05);
@@ -182,15 +190,6 @@
   }
   100% {
     transform: scale(0.95);
-    opacity: 0.6;
-  }
-}
-
-@keyframes orbit {
-  from {
-    transform: rotate(0deg) translateX(42px) rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg) translateX(42px) rotate(-360deg);
+    opacity: 0.5;
   }
 }

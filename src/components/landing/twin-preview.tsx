@@ -15,20 +15,20 @@ import {
 import { useCountUp } from "@/hooks/use-count-up";
 
 const categories = [
-  { label: "Transport", pct: 34, color: "hsl(152 68% 48%)", icon: Car },
-  { label: "Diet", pct: 28, color: "hsl(172 55% 42%)", icon: Utensils },
-  { label: "Energy", pct: 22, color: "hsl(160 50% 38%)", icon: Zap },
-  { label: "Shopping", pct: 16, color: "hsl(140 45% 45%)", icon: Leaf },
+  { label: "Transport", pct: 34, color: "#00D4FF", icon: Car },
+  { label: "Diet", pct: 28, color: "#38BDF8", icon: Utensils },
+  { label: "Energy", pct: 22, color: "#7DF9FF", icon: Zap },
+  { label: "Shopping", pct: 16, color: "#6366F1", icon: Leaf },
 ];
 
 function TwinOrb() {
   return (
     <div className="relative mx-auto flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
       <div
-        className="absolute inset-0 rounded-full opacity-40"
+        className="absolute inset-0 rounded-full opacity-50"
         style={{
           background:
-            "radial-gradient(circle, hsl(152 68% 48% / 0.35) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(0,212,255,0.25) 0%, transparent 70%)",
           animation: "pulse-ring 4s ease-in-out infinite",
         }}
       />
@@ -41,14 +41,14 @@ function TwinOrb() {
           cx="100"
           cy="100"
           r="88"
-          stroke="hsl(152 68% 48% / 0.15)"
+          stroke="rgba(0,212,255,0.12)"
           strokeWidth="1"
         />
         <circle
           cx="100"
           cy="100"
           r="72"
-          stroke="hsl(152 68% 48% / 0.25)"
+          stroke="rgba(0,212,255,0.22)"
           strokeWidth="1"
           className="twin-ring origin-center"
           style={{ transformOrigin: "100px 100px" }}
@@ -57,7 +57,7 @@ function TwinOrb() {
           cx="100"
           cy="100"
           r="58"
-          stroke="hsl(172 55% 42% / 0.2)"
+          stroke="rgba(125,249,255,0.15)"
           strokeWidth="1"
           className="twin-ring-reverse origin-center"
           style={{ transformOrigin: "100px 100px" }}
@@ -73,7 +73,7 @@ function TwinOrb() {
               cy={y}
               r="4"
               fill={cat.color}
-              opacity="0.8"
+              opacity="0.85"
             />
           );
         })}
@@ -85,15 +85,15 @@ function TwinOrb() {
         className="relative flex h-28 w-28 flex-col items-center justify-center rounded-full sm:h-32 sm:w-32"
         style={{
           background:
-            "radial-gradient(circle at 35% 30%, hsl(152 68% 55%), hsl(160 50% 25%) 60%, hsl(160 40% 12%))",
+            "radial-gradient(circle at 35% 30%, #7DF9FF, #00D4FF 45%, #0c4a6e 75%, #08111B)",
           boxShadow:
-            "0 0 60px hsl(152 68% 48% / 0.4), inset 0 2px 20px hsl(0 0% 100% / 0.15)",
+            "0 0 60px rgba(0,212,255,0.35), inset 0 2px 20px rgba(125,249,255,0.2)",
         }}
       >
-        <span className="font-display text-2xl font-bold text-white sm:text-3xl">
+        <span className="font-display text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
           4.1
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-widest text-white/70">
+        <span className="text-[10px] font-medium uppercase tracking-widest text-[#F8FAFC]/70">
           tonnes/yr
         </span>
       </motion.div>
@@ -140,40 +140,44 @@ export function TwinPreview() {
       transition={{ duration: 1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
       className="relative w-full"
     >
-      <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-b from-emerald-500/20 via-teal-500/5 to-transparent opacity-80 blur-2xl" />
+      <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-b from-[#00D4FF]/15 via-[#3B82F6]/5 to-transparent opacity-90 blur-2xl" />
 
-      <div className="glass-strong relative overflow-hidden rounded-[1.75rem] glow-emerald">
+      <div className="glass-strong relative overflow-hidden rounded-[1.75rem] glow-cyan">
         <div className="absolute inset-x-0 top-0 h-px glow-line" />
 
-        <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5">
+        <div className="flex items-center justify-between border-b border-cyan-500/[0.08] px-5 py-3.5">
           <div className="flex items-center gap-2">
             <div className="flex gap-1.5">
-              <div className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
-              <div className="h-2.5 w-2.5 rounded-full bg-amber-400/60" />
-              <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60" />
+              <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
+              <div className="h-2.5 w-2.5 rounded-full bg-amber-400/50" />
+              <div className="h-2.5 w-2.5 rounded-full bg-[#00D4FF]/60" />
             </div>
-            <span className="font-mono text-[11px] text-muted-foreground">
+            <span className="font-mono text-[11px] text-[#94A3B8]">
               carbontwin.ai · live twin
             </span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1">
+          <div className="flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2.5 py-1">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00D4FF] opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#00D4FF]" />
             </span>
-            <span className="text-[10px] font-medium uppercase tracking-wider text-emerald-400">
+            <span className="text-[10px] font-medium uppercase tracking-wider text-[#7DF9FF]">
               Syncing
             </span>
           </div>
         </div>
 
         <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
-          <div className="border-b border-white/[0.06] p-6 lg:border-b-0 lg:border-r lg:p-8">
+          <div className="border-b border-cyan-500/[0.06] p-6 lg:border-b-0 lg:border-r lg:p-8">
             <TwinOrb />
 
             <div className="mt-6 text-center">
-              <p className="font-display text-lg font-bold">Eco-Alex</p>
-              <p className="text-sm text-emerald-400/90">Mindful Urbanist · Twin #A7F2</p>
+              <p className="font-display text-lg font-bold text-[#F8FAFC]">
+                Eco-Alex
+              </p>
+              <p className="text-sm text-[#7DF9FF]">
+                Mindful Urbanist · Twin #A7F2
+              </p>
             </div>
 
             <div className="mt-5 space-y-2.5">
@@ -187,11 +191,11 @@ export function TwinPreview() {
                     transition={{ delay: 0.6 + i * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                    <span className="w-16 text-xs text-muted-foreground">
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-[#94A3B8]" />
+                    <span className="w-16 text-xs text-[#94A3B8]">
                       {cat.label}
                     </span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.05]">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${cat.pct}%` }}
@@ -200,7 +204,7 @@ export function TwinPreview() {
                         style={{ backgroundColor: cat.color }}
                       />
                     </div>
-                    <span className="w-8 text-right font-mono text-xs text-foreground/70">
+                    <span className="w-8 text-right font-mono text-xs text-[#F8FAFC]/70">
                       {cat.pct}%
                     </span>
                   </motion.div>
@@ -215,23 +219,23 @@ export function TwinPreview() {
                 <p className="font-display text-xl font-bold text-primary">
                   {footprint.formatted}t
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
                   Footprint
                 </p>
               </div>
               <div ref={savings.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-emerald-400">
+                <p className="font-display text-xl font-bold text-success">
                   {savings.formatted}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
                   Saved
                 </p>
               </div>
               <div ref={reduction.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-teal-300">
+                <p className="font-display text-xl font-bold text-success">
                   -{reduction.formatted}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
                   vs. Avg
                 </p>
               </div>
@@ -241,36 +245,36 @@ export function TwinPreview() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Gauge className="h-4 w-4 text-primary" />
-                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  <span className="text-xs font-medium uppercase tracking-wider text-[#94A3B8]">
                     Carbon Budget
                   </span>
                 </div>
-                <span className="font-display text-2xl font-bold text-emerald-400">
+                <span className="font-display text-2xl font-bold text-[#7DF9FF]">
                   68%
                 </span>
               </div>
-              <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/[0.06]">
+              <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/[0.05]">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: "68%" }}
                   transition={{ duration: 1.6, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-emerald-700 via-emerald-400 to-teal-300"
+                  className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-[#0369A1] via-[#00D4FF] to-[#7DF9FF]"
                 >
                   <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%]" />
                 </motion.div>
               </div>
-              <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
+              <div className="mt-2 flex justify-between text-[11px] text-[#94A3B8]">
                 <span>7.2 kg CO₂ used today</span>
                 <span>10.5 kg limit</span>
               </div>
             </div>
 
             <div className="glass rounded-xl p-4">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#94A3B8]">
                 <MessageCircle className="h-3.5 w-3.5 text-primary" />
                 Twin Speaks
               </div>
-              <p className="mt-2.5 min-h-[3.5rem] text-sm leading-relaxed text-foreground/90">
+              <p className="mt-2.5 min-h-[3.5rem] text-sm leading-relaxed text-[#F8FAFC]/90">
                 &ldquo;
                 <TypewriterText text={twinMessage} />
                 &rdquo;
@@ -287,7 +291,7 @@ export function TwinPreview() {
                   className="glass flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5"
                 >
                   <Icon className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs text-muted-foreground">{label}</span>
+                  <span className="text-xs text-[#94A3B8]">{label}</span>
                 </div>
               ))}
             </div>

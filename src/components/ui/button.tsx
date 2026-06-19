@@ -11,16 +11,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 hover:shadow-primary/30",
+          "bg-primary text-primary-foreground shadow-cyan-sm hover:bg-[#33ddff] hover:shadow-cyan active:scale-[0.98]",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-white/10 bg-white/5 shadow-sm backdrop-blur-sm hover:border-white/20 hover:bg-white/10",
+          "border border-cyan-500/20 bg-white/[0.02] text-foreground shadow-sm backdrop-blur-sm hover:border-cyan-400/40 hover:bg-cyan-500/[0.06] hover:shadow-cyan-sm active:scale-[0.98]",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-white/5 hover:text-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        glow: "btn-shine bg-primary text-primary-foreground shadow-lg glow-emerald hover:brightness-110",
+        ghost:
+          "text-muted-foreground hover:bg-cyan-500/[0.06] hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:text-[#7DF9FF] hover:underline",
+        glow: "btn-shine bg-primary text-primary-foreground shadow-cyan glow-cyan hover:bg-[#33ddff] hover:shadow-cyan active:scale-[0.98]",
       },
       size: {
         default: "h-10 px-5 py-2",

@@ -139,7 +139,7 @@ export function Navbar() {
                   </Link>
                 </Button>
                 <Button variant="glow" asChild className="w-full">
-                  <Link href="/signup" onClick={() => setMobileOpen(false)}>
+                  <Link href="/onboarding" onClick={() => setMobileOpen(false)}>
                     Get Your Twin
                   </Link>
                 </Button>

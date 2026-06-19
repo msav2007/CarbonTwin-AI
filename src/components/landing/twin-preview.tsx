@@ -97,8 +97,7 @@ function TwinOrb() {
           tonnes/yr
         </span>
       </motion.div>
-
-    </motion.div>
+    </div>
   );
 }
 

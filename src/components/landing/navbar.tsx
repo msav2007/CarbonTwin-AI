@@ -77,7 +77,7 @@ export function Navbar() {
               <Link href="/login">Log in</Link>
             </Button>
             <Button variant="glow" size="sm" asChild className="hidden sm:inline-flex">
-              <Link href="/signup">Get Your Twin</Link>
+              <Link href="/onboarding">Get Your Twin</Link>
             </Button>
             <Button
               variant="ghost"

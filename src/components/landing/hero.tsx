@@ -115,7 +115,7 @@ export function Hero() {
                 className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
               >
                 <Button variant="glow" size="xl" asChild>
-                  <Link href="/signup">
+                  <Link href="/onboarding">
                     Create Your Twin
                     <ArrowRight />
                   </Link>

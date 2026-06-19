@@ -46,7 +46,7 @@ export function DemoSection() {
                 hear it speak. Every step is designed to make judges lean forward.
               </p>
               <Button variant="glow" size="lg" className="mt-8" asChild>
-                <Link href="/signup">
+                <Link href="/onboarding">
                   Run the Demo
                   <ArrowRight />
                 </Link>
@@ -118,7 +118,7 @@ export function CTA() {
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="glow" size="xl" asChild>
-                <Link href="/signup">
+                <Link href="/onboarding">
                   Get Started Free
                   <ArrowRight />
                 </Link>

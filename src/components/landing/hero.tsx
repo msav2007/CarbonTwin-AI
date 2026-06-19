@@ -87,7 +87,7 @@ export function Hero() {
                 transition={{ delay: 0.55, duration: 0.5 }}
                 className="mt-8 space-y-3"
               >
-                {storyBeats.map((beat, i) => (
+                {storyBeats.map((beat) => (
                   <div
                     key={beat.act}
                     className="group flex items-start gap-4 rounded-xl border border-white/[0.04] bg-white/[0.02] p-3.5 transition-colors hover:border-primary/15 hover:bg-white/[0.04]"

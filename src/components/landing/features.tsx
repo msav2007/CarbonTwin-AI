@@ -48,14 +48,14 @@ export function Features() {
     <section id="features" className="py-24 sm:py-32">
       <Container>
         <SectionHeader
-          eyebrow="Core Features"
+          eyebrow="AI Arsenal"
           title={
             <>
-              Six AI superpowers,{" "}
-              <span className="text-gradient">one twin</span>
+              Not features.{" "}
+              <span className="text-gradient">Superpowers.</span>
             </>
           }
-          description="Every feature is engineered for judge wow-factor — strong multimodal AI, instant visual feedback, and a demo flow that lands in under 3 minutes."
+          description="Each capability is a judge-demo moment — multimodal AI that you can see, hear, and interact with in real time."
         />
 
         <motion.div
@@ -69,20 +69,21 @@ export function Features() {
             const Icon = iconMap[feature.icon] ?? Sparkles;
             return (
               <motion.div key={feature.id} variants={item}>
-                <Card className="group relative h-full overflow-hidden border-border/50 bg-card/40 transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:bg-card/70 hover:shadow-xl hover:shadow-primary/5">
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                  <CardHeader className="pb-3">
+                <Card className="group relative h-full overflow-hidden border-white/[0.06] bg-white/[0.02] transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/25 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-primary/[0.06]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  <CardHeader className="relative pb-3">
                     <div className="mb-3 flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20 transition-all group-hover:bg-primary/20 group-hover:ring-primary/35">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20 transition-all duration-300 group-hover:scale-105 group-hover:bg-primary/20 group-hover:ring-primary/40">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
-                      <span className="font-mono text-xs text-muted-foreground/60">
+                      <span className="font-mono text-xs text-muted-foreground/50">
                         0{index + 1}
                       </span>
                     </div>
                     <CardTitle>{feature.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="relative">
                     <CardDescription className="text-sm leading-relaxed">
                       {feature.description}
                     </CardDescription>

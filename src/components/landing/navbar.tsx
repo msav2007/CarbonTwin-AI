@@ -38,8 +38,10 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-          scrolled && "border-b border-white/5 bg-background/70 backdrop-blur-2xl"
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          scrolled
+            ? "border-b border-white/[0.06] bg-background/80 shadow-lg shadow-black/20 backdrop-blur-2xl"
+            : "bg-transparent"
         )}
       >
         <Container className="flex h-16 items-center justify-between lg:h-[4.5rem]">

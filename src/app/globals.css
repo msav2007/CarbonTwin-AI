@@ -4,31 +4,32 @@
 
 @layer base {
   :root {
-    --background: 158 32% 3%;
-    --foreground: 150 20% 97%;
-    --card: 158 24% 6%;
-    --card-foreground: 150 20% 97%;
-    --popover: 158 24% 6%;
-    --popover-foreground: 150 20% 97%;
-    --primary: 152 72% 46%;
-    --primary-foreground: 158 32% 4%;
-    --secondary: 158 18% 10%;
-    --secondary-foreground: 150 15% 90%;
-    --muted: 158 14% 12%;
-    --muted-foreground: 150 8% 55%;
-    --accent: 152 55% 14%;
-    --accent-foreground: 152 70% 75%;
+    --background: 160 35% 2.5%;
+    --foreground: 150 25% 98%;
+    --card: 160 28% 5%;
+    --card-foreground: 150 25% 98%;
+    --popover: 160 28% 5%;
+    --popover-foreground: 150 25% 98%;
+    --primary: 152 68% 48%;
+    --primary-foreground: 160 35% 3%;
+    --secondary: 160 20% 8%;
+    --secondary-foreground: 150 18% 92%;
+    --muted: 160 16% 10%;
+    --muted-foreground: 150 10% 52%;
+    --accent: 152 50% 12%;
+    --accent-foreground: 152 65% 78%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 158 14% 14%;
-    --input: 158 14% 14%;
-    --ring: 152 72% 46%;
+    --border: 160 14% 12%;
+    --input: 160 14% 12%;
+    --ring: 152 68% 48%;
     --radius: 0.875rem;
-    --chart-1: 152 72% 46%;
+    --chart-1: 152 68% 48%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --glow: 152 68% 48%;
   }
 }
 
@@ -44,48 +45,74 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -30%, hsl(152 68% 20% / 0.12), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, hsl(172 50% 15% / 0.08), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, hsl(152 60% 12% / 0.06), transparent 50%);
   }
 
   ::selection {
-    @apply bg-primary/30 text-foreground;
+    @apply bg-primary/35 text-foreground;
   }
 }
 
 @layer components {
   .glass {
-    @apply border border-white/[0.08] bg-white/[0.03] backdrop-blur-2xl;
+    @apply border border-white/[0.07] bg-white/[0.025] backdrop-blur-2xl;
   }
 
   .glass-strong {
-    @apply border border-white/10 bg-white/[0.06] backdrop-blur-2xl shadow-2xl shadow-black/20;
+    @apply border border-white/[0.09] bg-white/[0.045] backdrop-blur-2xl;
+    box-shadow:
+      0 0 0 1px hsl(152 68% 48% / 0.04),
+      0 24px 48px -12px hsl(0 0% 0% / 0.5),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.04);
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-emerald-200 via-emerald-400 to-teal-300 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-emerald-100 via-emerald-300 to-teal-200 bg-clip-text text-transparent;
   }
 
-  .text-gradient-subtle {
-    @apply bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent;
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-200 bg-clip-text text-transparent;
   }
 
   .glow-emerald {
     box-shadow:
-      0 0 80px -20px hsl(152 72% 46% / 0.5),
-      0 0 0 1px hsl(152 72% 46% / 0.1);
+      0 0 100px -25px hsl(var(--glow) / 0.55),
+      0 0 0 1px hsl(var(--glow) / 0.12),
+      inset 0 1px 0 0 hsl(0 0% 100% / 0.06);
   }
 
   .glow-line {
     background: linear-gradient(
       90deg,
-      transparent,
-      hsl(152 72% 46% / 0.6),
-      transparent
+      transparent 0%,
+      hsl(var(--glow) / 0.15) 20%,
+      hsl(var(--glow) / 0.7) 50%,
+      hsl(var(--glow) / 0.15) 80%,
+      transparent 100%
+    );
+  }
+
+  .vignette {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      transparent 30%,
+      hsl(160 35% 2% / 0.6) 100%
     );
   }
 
   .noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+  }
+
+  .aurora {
+    background:
+      radial-gradient(ellipse 50% 80% at 20% 40%, hsl(152 68% 30% / 0.15), transparent 50%),
+      radial-gradient(ellipse 50% 60% at 80% 20%, hsl(172 60% 25% / 0.1), transparent 50%),
+      radial-gradient(ellipse 40% 50% at 60% 80%, hsl(160 50% 20% / 0.08), transparent 50%);
   }
 
   .btn-shine {
@@ -99,12 +126,22 @@
     inset: 0;
     background: linear-gradient(
       105deg,
-      transparent 40%,
-      hsl(0 0% 100% / 0.12) 50%,
-      transparent 60%
+      transparent 35%,
+      hsl(0 0% 100% / 0.14) 50%,
+      transparent 65%
     );
     transform: translateX(-100%);
-    animation: shine 4s ease-in-out infinite;
+    animation: shine 5s ease-in-out infinite;
+  }
+
+  .twin-ring {
+    stroke-dasharray: 4 6;
+    animation: spin-slow 30s linear infinite;
+  }
+
+  .twin-ring-reverse {
+    stroke-dasharray: 3 8;
+    animation: spin-slow 45s linear infinite reverse;
   }
 }
 
@@ -117,9 +154,43 @@
 @keyframes shine {
   0%,
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-120%);
+  }
+  45%,
+  55% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
   }
   50% {
-    transform: translateX(100%);
+    transform: scale(1.05);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(42px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(42px) rotate(-360deg);
   }
 }

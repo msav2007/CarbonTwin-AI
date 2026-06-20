@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Cpu, X } from "lucide-react";
-import { Container } from "@/components/shared/container";
+import { X } from "lucide-react";
 import { ProgressBar } from "@/components/onboarding/progress-bar";
+import { SiteHeader } from "@/components/shared/site-header";
 
 interface OnboardingShellProps {
   step: number;
@@ -21,16 +21,8 @@ export function OnboardingShell({ step, children }: OnboardingShellProps) {
         <div className="vignette absolute inset-0" />
       </div>
 
-      <header className="border-b border-cyan-500/[0.06] bg-[#08111B]/80 backdrop-blur-xl">
-        <Container className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10">
-              <Cpu className="h-4 w-4 text-primary" />
-            </div>
-            <span className="font-display font-bold text-[#F8FAFC]">
-              Carbon<span className="text-primary">Twin</span>
-            </span>
-          </Link>
+      <SiteHeader
+        rightSlot={
           <Link
             href="/"
             className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#94A3B8] transition-colors hover:bg-white/5 hover:text-[#F8FAFC]"
@@ -38,10 +30,10 @@ export function OnboardingShell({ step, children }: OnboardingShellProps) {
             <X className="h-4 w-4" />
             Exit
           </Link>
-        </Container>
-      </header>
+        }
+      />
 
-      <Container className="py-8 sm:py-12">
+      <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <ProgressBar currentStep={step} />
           <motion.div
@@ -54,7 +46,7 @@ export function OnboardingShell({ step, children }: OnboardingShellProps) {
             {children}
           </motion.div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 }

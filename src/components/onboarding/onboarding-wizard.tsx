@@ -14,7 +14,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LiveFootprintPreview } from "@/components/onboarding/live-footprint-preview";
 import { OnboardingShell } from "@/components/onboarding/onboarding-shell";
-import { OptionCard } from "@/components/onboarding/option-card";
+import { OptionGroup } from "@/components/onboarding/option-group";
+import { PageState } from "@/components/shared/page-state";
 import {
   ENERGY_OPTIONS,
   FOOD_OPTIONS,
@@ -26,6 +27,7 @@ import {
   TRANSPORT_OPTIONS,
   TRAVEL_OPTIONS,
 } from "@/lib/onboarding/options";
+import { sanitizeNameInput, validateDisplayName } from "@/lib/onboarding/validation";
 import {
   calculateCarbonResult,
   isOnboardingComplete,
@@ -46,6 +48,14 @@ const GENERATION_STAGES = [
   "Assembling Carbon Twin",
 ];
 
+const STEP_HELP: Record<number, string> = {
+  1: "Transport sets the tone for recurring emissions, so we start with how you move every week.",
+  2: "Food choices shape the daily footprint more than most people expect.",
+  3: "Home energy and shared living tell us how much of your footprint is structural versus habit-based.",
+  4: "Travel and shopping reveal the spikes and hidden embodied carbon in your lifestyle.",
+  5: "Name your twin and choose the first goal so the assistant can coach with the right tone.",
+};
+
 const REVIEW_ITEMS: {
   field: keyof OnboardingData;
   label: string;
@@ -59,21 +69,42 @@ const REVIEW_ITEMS: {
   { field: "shopping", label: "Shopping", step: 4 },
 ];
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mb-3 text-sm font-medium text-[#F8FAFC]">{children}</h2>
-  );
-}
-
 export function OnboardingWizard() {
   const router = useRouter();
-  const { step, data, setStep, updateData, setResult } = useOnboardingStore();
+  const {
+    hasHydrated,
+    step,
+    data,
+    setStep,
+    updateData,
+    setResult,
+  } = useOnboardingStore();
   const [direction, setDirection] = useState(1);
   const [generating, setGenerating] = useState(false);
   const [generationStage, setGenerationStage] = useState(0);
+  const [nameTouched, setNameTouched] = useState(false);
+
+  if (!hasHydrated) {
+    return (
+      <PageState
+        eyebrow="Loading session"
+        title="Restoring your carbon journey"
+        description="We are syncing your saved onboarding progress so you can continue without losing context."
+      />
+    );
+  }
 
   const currentStep = Math.min(Math.max(step, 1), STEP_META.length);
   const meta = STEP_META[currentStep - 1];
+  const lifestyleComplete = Boolean(
+    data.transport &&
+      data.diet &&
+      data.homeEnergy &&
+      data.household &&
+      data.travel &&
+      data.shopping
+  );
+  const nameError = validateDisplayName(data.name ?? "");
 
   const goNext = () => {
     setDirection(1);
@@ -91,15 +122,6 @@ export function OnboardingWizard() {
     setStep(targetStep);
   };
 
-  const lifestyleComplete = Boolean(
-    data.transport &&
-      data.diet &&
-      data.homeEnergy &&
-      data.household &&
-      data.travel &&
-      data.shopping
-  );
-
   const canProceed = (): boolean => {
     switch (currentStep) {
       case 1:
@@ -111,14 +133,16 @@ export function OnboardingWizard() {
       case 4:
         return !!data.travel && !!data.shopping;
       case 5:
-        return lifestyleComplete && !!data.name?.trim() && !!data.motivation;
+        return lifestyleComplete && !nameError && !!data.motivation;
       default:
         return false;
     }
   };
 
   const handleGenerate = async () => {
-    if (!isOnboardingComplete(data)) return;
+    setNameTouched(true);
+    if (!isOnboardingComplete(data) || nameError) return;
+
     setGenerating(true);
     setDirection(1);
 
@@ -158,98 +182,66 @@ export function OnboardingWizard() {
                 <h1 className="mt-2 font-display text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
                   {meta.subtitle}
                 </h1>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#94A3B8] sm:text-base">
+                  {STEP_HELP[currentStep]}
+                </p>
               </div>
 
               {currentStep === 1 && (
-                <div className="space-y-3">
-                  {TRANSPORT_OPTIONS.map((opt) => (
-                    <OptionCard
-                      key={opt.value}
-                      {...opt}
-                      selected={data.transport === opt.value}
-                      onClick={() => updateData({ transport: opt.value })}
-                    />
-                  ))}
-                </div>
+                <OptionGroup
+                  legend="How do you move most weeks?"
+                  name="transport"
+                  options={TRANSPORT_OPTIONS}
+                  selectedValue={data.transport}
+                  onSelect={(transport) => updateData({ transport })}
+                />
               )}
 
               {currentStep === 2 && (
-                <div className="space-y-3">
-                  {FOOD_OPTIONS.map((opt) => (
-                    <OptionCard
-                      key={opt.value}
-                      {...opt}
-                      selected={data.diet === opt.value}
-                      onClick={() => updateData({ diet: opt.value })}
-                    />
-                  ))}
-                </div>
+                <OptionGroup
+                  legend="Which diet best matches your current routine?"
+                  name="diet"
+                  options={FOOD_OPTIONS}
+                  selectedValue={data.diet}
+                  onSelect={(diet) => updateData({ diet })}
+                />
               )}
 
               {currentStep === 3 && (
                 <div className="space-y-8">
-                  <div>
-                    <SectionLabel>Home energy intensity</SectionLabel>
-                    <div className="space-y-3">
-                      {ENERGY_OPTIONS.map((opt) => (
-                        <OptionCard
-                          key={opt.value}
-                          {...opt}
-                          selected={data.homeEnergy === opt.value}
-                          onClick={() => updateData({ homeEnergy: opt.value })}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <SectionLabel>How is that home energy shared?</SectionLabel>
-                    <div className="space-y-3">
-                      {HOUSEHOLD_OPTIONS.map((opt) => (
-                        <OptionCard
-                          key={opt.value}
-                          {...opt}
-                          selected={data.household === opt.value}
-                          onClick={() => updateData({ household: opt.value })}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  <OptionGroup
+                    legend="Home energy intensity"
+                    name="home-energy"
+                    options={ENERGY_OPTIONS}
+                    selectedValue={data.homeEnergy}
+                    onSelect={(homeEnergy) => updateData({ homeEnergy })}
+                  />
+                  <OptionGroup
+                    legend="How is that home energy shared?"
+                    name="household"
+                    options={HOUSEHOLD_OPTIONS}
+                    selectedValue={data.household}
+                    onSelect={(household) => updateData({ household })}
+                  />
                 </div>
               )}
 
               {currentStep === 4 && (
                 <div className="space-y-8">
-                  <div>
-                    <SectionLabel>
-                      How often do you fly or take long trips?
-                    </SectionLabel>
-                    <div className="space-y-3">
-                      {TRAVEL_OPTIONS.map((opt) => (
-                        <OptionCard
-                          key={opt.value}
-                          {...opt}
-                          selected={data.travel === opt.value}
-                          onClick={() => updateData({ travel: opt.value })}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <SectionLabel>
-                      How would you describe your shopping habits?
-                    </SectionLabel>
-                    <div className="space-y-3">
-                      {SHOPPING_OPTIONS.map((opt) => (
-                        <OptionCard
-                          key={opt.value}
-                          {...opt}
-                          selected={data.shopping === opt.value}
-                          onClick={() => updateData({ shopping: opt.value })}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  <OptionGroup
+                    legend="How often do you fly or take longer trips?"
+                    name="travel"
+                    options={TRAVEL_OPTIONS}
+                    selectedValue={data.travel}
+                    onSelect={(travel) => updateData({ travel })}
+                  />
+                  <OptionGroup
+                    legend="How would you describe your shopping habits?"
+                    name="shopping"
+                    options={SHOPPING_OPTIONS}
+                    selectedValue={data.shopping}
+                    onSelect={(shopping) => updateData({ shopping })}
+                  />
                 </div>
               )}
 
@@ -269,28 +261,30 @@ export function OnboardingWizard() {
                       maxLength={32}
                       autoComplete="given-name"
                       placeholder="Your name or nickname"
+                      onBlur={() => setNameTouched(true)}
                       onChange={(event) =>
-                        updateData({ name: event.target.value })
+                        updateData({
+                          name: sanitizeNameInput(event.target.value),
+                        })
                       }
                       className="mt-3 h-12 w-full rounded-xl border border-cyan-500/15 bg-[#07101A] px-4 text-sm text-[#F8FAFC] outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
                     />
+                    {nameTouched && nameError ? (
+                      <p className="mt-2 text-sm text-amber-300">{nameError}</p>
+                    ) : (
+                      <p className="mt-2 text-xs text-[#94A3B8]">
+                        We use this only to personalize your twin narrative and dashboard.
+                      </p>
+                    )}
                   </div>
 
-                  <div>
-                    <SectionLabel>
-                      What should your Carbon Twin optimize for first?
-                    </SectionLabel>
-                    <div className="space-y-3">
-                      {MOTIVATION_OPTIONS.map((opt) => (
-                        <OptionCard
-                          key={opt.value}
-                          {...opt}
-                          selected={data.motivation === opt.value}
-                          onClick={() => updateData({ motivation: opt.value })}
-                        />
-                      ))}
-                    </div>
-                  </div>
+                  <OptionGroup
+                    legend="What should your Carbon Twin optimize for first?"
+                    name="motivation"
+                    options={MOTIVATION_OPTIONS}
+                    selectedValue={data.motivation}
+                    onSelect={(motivation) => updateData({ motivation })}
+                  />
 
                   <div className="rounded-2xl border border-cyan-400/[0.12] bg-white/[0.025] p-5">
                     <div className="mb-4 flex items-center gap-2">
@@ -359,7 +353,7 @@ export function OnboardingWizard() {
                             {GENERATION_STAGES[generationStage]}
                           </p>
                           <p className="text-xs text-[#94A3B8]">
-                            Building your reveal from live carbon signals.
+                            Building your assistant profile from the signals you provided.
                           </p>
                         </div>
                       </div>
@@ -368,9 +362,7 @@ export function OnboardingWizard() {
                           className="h-full rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
                           animate={{
                             width: `${
-                              ((generationStage + 1) /
-                                GENERATION_STAGES.length) *
-                              100
+                              ((generationStage + 1) / GENERATION_STAGES.length) * 100
                             }%`,
                           }}
                           transition={{ duration: 0.4 }}

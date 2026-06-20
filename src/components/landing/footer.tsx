@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Cpu } from "lucide-react";
 import { Container } from "@/components/shared/container";
+import { JourneyLink } from "@/components/shared/journey-link";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
   { href: "#features", label: "Features" },
   { href: "#how-it-works", label: "How It Works" },
   { href: "#demo", label: "Demo" },
-  { href: "/login", label: "Log in" },
-  { href: "/signup", label: "Sign up" },
 ];
 
 export function Footer() {
@@ -40,6 +39,9 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+            <JourneyLink className="text-sm text-[#94A3B8] transition-colors hover:text-[#F8FAFC]">
+              Start onboarding
+            </JourneyLink>
           </nav>
         </div>
 
@@ -48,7 +50,7 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-[#94A3B8] sm:flex-row">
           <p>PromptWars Challenge 3 · National Hackathon 2026</p>
           <p className="font-mono text-xs">
-            Next.js · Gemini · Supabase · Vercel
+            Next.js · TypeScript · Framer Motion · Vercel
           </p>
         </div>
       </Container>

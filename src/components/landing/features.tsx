@@ -5,12 +5,12 @@ import {
   Clock,
   Gauge,
   MessageCircle,
-  ScanLine,
   Sparkles,
   TrendingUp,
+  Leaf,
   type LucideIcon,
 } from "lucide-react";
-import { MVP_FEATURES } from "@/types";
+import { LIVE_FEATURES } from "@/lib/landing/content";
 import {
   Card,
   CardContent,
@@ -25,9 +25,9 @@ const iconMap: Record<string, LucideIcon> = {
   Sparkles,
   TrendingUp,
   Clock,
-  ScanLine,
   MessageCircle,
   Gauge,
+  Leaf,
 };
 
 const container = {
@@ -48,14 +48,14 @@ export function Features() {
     <section id="features" className="py-24 sm:py-32">
       <Container>
         <SectionHeader
-          eyebrow="AI Arsenal"
+          eyebrow="Live Product"
           title={
             <>
-              Not features.{" "}
-              <span className="text-gradient">Superpowers.</span>
+              Built for decisions, not{" "}
+              <span className="text-gradient">climate theater.</span>
             </>
           }
-          description="Each capability is a judge-demo moment — multimodal AI that you can see, hear, and interact with in real time."
+          description="Every capability on this page exists in the product right now and is driven by the inputs each user provides."
         />
 
         <motion.div
@@ -65,7 +65,7 @@ export function Features() {
           viewport={{ once: true, margin: "-60px" }}
           className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {MVP_FEATURES.map((feature, index) => {
+          {LIVE_FEATURES.map((feature, index) => {
             const Icon = iconMap[feature.icon] ?? Sparkles;
             return (
               <motion.div key={feature.id} variants={item}>

@@ -5,8 +5,8 @@ import { Activity, Gauge, Radar, SignalHigh } from "lucide-react";
 import {
   calculatePartialCarbonEstimate,
   formatTonnes,
-  type CategoryBreakdown,
 } from "@/lib/carbon/calculator";
+import type { CategoryBreakdown } from "@/lib/carbon/types";
 import type { OnboardingData } from "@/types";
 import { cn } from "@/lib/utils";
 

@@ -1,19 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
-
-const demoHighlights = [
-  { title: "Carbon Twin Generation", detail: "Named AI avatar + 4.1t footprint score" },
-  { title: "Future Simulator", detail: "1, 5, 10 year emission projections" },
-  { title: "What-If Time Machine", detail: "Side-by-side lifestyle comparisons" },
-  { title: "AI Receipt Analysis", detail: "Gemini Vision → itemized carbon cost" },
-  { title: "Twin Speaks", detail: "Real-time personalized narration" },
-  { title: "Carbon Budget Meter", detail: "Daily allowance with live progress" },
-];
+import { JourneyLink } from "@/components/shared/journey-link";
+import { DEMO_HIGHLIGHTS } from "@/lib/landing/content";
 
 export function DemoSection() {
   return (
@@ -38,18 +30,18 @@ export function DemoSection() {
                 Judge demo script
               </div>
               <h2 className="font-display text-3xl font-bold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
-                Six wow-moments.{" "}
-                <span className="text-gradient">One flow.</span>
+                One complete journey.{" "}
+                <span className="text-gradient">No fake features.</span>
               </h2>
               <p className="mt-5 text-base leading-relaxed text-[#94A3B8] sm:text-lg">
-                Sign up → onboard → meet twin → simulate future → scan receipt →
-                hear it speak. Every step is designed to make judges lean forward.
+                Start on the onboarding flow, reveal the twin, open the dashboard,
+                and show how recommendations change the long-term trajectory.
               </p>
               <Button variant="glow" size="lg" className="mt-8" asChild>
-                <Link href="/onboarding">
+                <JourneyLink resumeChildren="Open My Dashboard">
                   Run the Demo
                   <ArrowRight />
-                </Link>
+                </JourneyLink>
               </Button>
             </motion.div>
 
@@ -60,7 +52,7 @@ export function DemoSection() {
               transition={{ duration: 0.6 }}
               className="space-y-3"
             >
-              {demoHighlights.map((item, i) => (
+              {DEMO_HIGHLIGHTS.map((item, i) => (
                 <motion.li
                   key={item.title}
                   initial={{ opacity: 0, x: 16 }}
@@ -109,22 +101,24 @@ export function CTA() {
               The future is personal
             </p>
             <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
-              Your carbon story starts{" "}
-              <span className="text-gradient">with one twin</span>
+              Show judges a carbon assistant{" "}
+              <span className="text-gradient">that earns trust</span>
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base text-[#94A3B8] sm:text-lg">
-              Join CarbonTwin AI and turn invisible emissions into a living,
-              speaking companion that guides every choice.
+              CarbonTwin turns personal habits into a profile, a reveal moment,
+              a simulation, and a practical reduction plan you can act on immediately.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="glow" size="xl" asChild>
-                <Link href="/onboarding">
-                  Get Started Free
+                <JourneyLink resumeChildren="Return to Dashboard">
+                  Build My Twin
                   <ArrowRight />
-                </Link>
+                </JourneyLink>
               </Button>
               <Button variant="ghost" size="lg" asChild>
-                <Link href="/login">Already have an account?</Link>
+                <JourneyLink resumeChildren="Retake onboarding">
+                  See the onboarding flow
+                </JourneyLink>
               </Button>
             </div>
           </div>

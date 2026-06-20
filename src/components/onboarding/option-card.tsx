@@ -10,6 +10,7 @@ interface OptionCardProps {
   description: string;
   icon: LucideIcon;
   impact: "low" | "medium" | "high";
+  name: string;
   badge?: string;
   selected: boolean;
   onClick: () => void;
@@ -20,6 +21,7 @@ export function OptionCard({
   description,
   icon: Icon,
   impact,
+  name,
   badge,
   selected,
   onClick,
@@ -28,11 +30,13 @@ export function OptionCard({
     <motion.button
       type="button"
       onClick={onClick}
-      aria-pressed={selected}
+      role="radio"
+      aria-checked={selected}
+      aria-label={`${name}: ${label}`}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
       className={cn(
-        "group relative w-full rounded-2xl border p-4 text-left transition-all duration-200 sm:p-5",
+        "group relative w-full rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/25 sm:p-5",
         selected
           ? "border-primary/50 bg-cyan-500/10 shadow-cyan-sm"
           : "border-cyan-500/[0.08] bg-white/[0.02] hover:border-cyan-400/25 hover:bg-cyan-500/[0.04]"

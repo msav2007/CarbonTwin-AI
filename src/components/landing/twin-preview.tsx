@@ -1,27 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Car,
   Gauge,
   Leaf,
   MessageCircle,
-  ScanLine,
   TrendingUp,
   Utensils,
   Zap,
 } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
+import { calculateCarbonResult, formatTonnes } from "@/lib/carbon/calculator";
+import { useOnboardingStore } from "@/store/onboarding";
+import type { OnboardingData } from "@/types";
 
-const categories = [
-  { label: "Transport", pct: 34, color: "#00D4FF", icon: Car },
-  { label: "Diet", pct: 28, color: "#38BDF8", icon: Utensils },
-  { label: "Energy", pct: 22, color: "#7DF9FF", icon: Zap },
-  { label: "Shopping", pct: 16, color: "#6366F1", icon: Leaf },
-];
+const sampleProfile: OnboardingData = {
+  name: "Ava",
+  transport: "mixed",
+  diet: "balanced",
+  homeEnergy: "medium",
+  household: "couple",
+  shopping: "moderate",
+  travel: "occasional",
+  motivation: "shrink-footprint",
+};
 
-function TwinOrb() {
+const sampleResult = calculateCarbonResult(sampleProfile);
+
+function TwinOrb({ annualTonnes }: { annualTonnes: string }) {
   return (
     <div className="relative mx-auto flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
       <div
@@ -62,21 +69,6 @@ function TwinOrb() {
           className="twin-ring-reverse origin-center"
           style={{ transformOrigin: "100px 100px" }}
         />
-        {categories.map((cat, i) => {
-          const angle = (i * 90 - 90) * (Math.PI / 180);
-          const x = 100 + Math.cos(angle) * 78;
-          const y = 100 + Math.sin(angle) * 78;
-          return (
-            <circle
-              key={cat.label}
-              cx={x}
-              cy={y}
-              r="4"
-              fill={cat.color}
-              opacity="0.85"
-            />
-          );
-        })}
       </svg>
 
       <motion.div
@@ -91,7 +83,7 @@ function TwinOrb() {
         }}
       >
         <span className="font-display text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
-          4.1
+          {annualTonnes}
         </span>
         <span className="text-[10px] font-medium uppercase tracking-widest text-[#F8FAFC]/70">
           tonnes/yr
@@ -101,37 +93,54 @@ function TwinOrb() {
   );
 }
 
-function TypewriterText({ text }: { text: string }) {
-  const [displayed, setDisplayed] = useState("");
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i <= text.length) {
-        setDisplayed(text.slice(0, i));
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 28);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return (
-    <span>
-      {displayed}
-      <span className="ml-0.5 inline-block h-3.5 w-0.5 animate-pulse bg-primary" />
-    </span>
-  );
-}
-
 export function TwinPreview() {
-  const footprint = useCountUp({ end: 4.1, duration: 2200, decimals: 1 });
-  const savings = useCountUp({ end: 12, duration: 1800, suffix: "kg" });
-  const reduction = useCountUp({ end: 8, duration: 1600, suffix: "%" });
+  const { hasHydrated, result } = useOnboardingStore();
+  const activeResult = hasHydrated && result ? result : sampleResult;
+  const isPersonal = hasHydrated && Boolean(result);
+  const annual = useCountUp({
+    end: activeResult.annualKg / 1000,
+    duration: 1800,
+    decimals: 1,
+    startOnView: false,
+  });
+  const score = useCountUp({
+    end: activeResult.carbonScore,
+    duration: 1500,
+    startOnView: false,
+  });
+  const savings = useCountUp({
+    end: activeResult.recommendedActions[0]?.annualSavingsKg ?? 0,
+    duration: 1600,
+    suffix: "kg",
+    startOnView: false,
+  });
 
-  const twinMessage =
-    "Your transport choices saved 12kg CO₂ this week. Swap one car trip for transit — I'd drop 8% lighter!";
+  const breakdownRows = [
+    {
+      label: "Transport",
+      pct: activeResult.breakdownPct.transport,
+      color: "#00D4FF",
+      icon: Car,
+    },
+    {
+      label: "Food",
+      pct: activeResult.breakdownPct.food,
+      color: "#22C55E",
+      icon: Utensils,
+    },
+    {
+      label: "Home",
+      pct: activeResult.breakdownPct.home,
+      color: "#7DF9FF",
+      icon: Zap,
+    },
+    {
+      label: "Shopping",
+      pct: activeResult.breakdownPct.shopping,
+      color: "#F59E0B",
+      icon: Leaf,
+    },
+  ];
 
   return (
     <motion.div
@@ -153,59 +162,53 @@ export function TwinPreview() {
               <div className="h-2.5 w-2.5 rounded-full bg-[#00D4FF]/60" />
             </div>
             <span className="font-mono text-[11px] text-[#94A3B8]">
-              carbontwin.ai · live twin
+              {isPersonal ? "your live twin" : "sample twin powered by the live engine"}
             </span>
           </div>
-          <div className="flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2.5 py-1">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00D4FF] opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#00D4FF]" />
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-wider text-[#7DF9FF]">
-              Syncing
-            </span>
+          <div className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-[#7DF9FF]">
+            {isPersonal ? "Personalized" : "Sample"}
           </div>
         </div>
 
         <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
           <div className="border-b border-cyan-500/[0.06] p-6 lg:border-b-0 lg:border-r lg:p-8">
-            <TwinOrb />
+            <TwinOrb annualTonnes={formatTonnes(activeResult.annualKg)} />
 
             <div className="mt-6 text-center">
               <p className="font-display text-lg font-bold text-[#F8FAFC]">
-                Eco-Alex
+                {activeResult.twin.name}
               </p>
               <p className="text-sm text-[#7DF9FF]">
-                Mindful Urbanist · Twin #A7F2
+                {activeResult.twin.personality} · {activeResult.twin.avatarCode}
               </p>
             </div>
 
             <div className="mt-5 space-y-2.5">
-              {categories.map((cat, i) => {
-                const Icon = cat.icon;
+              {breakdownRows.map((row, index) => {
+                const Icon = row.icon;
                 return (
                   <motion.div
-                    key={cat.label}
+                    key={row.label}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + i * 0.1 }}
+                    transition={{ delay: 0.45 + index * 0.08 }}
                     className="flex items-center gap-3"
                   >
                     <Icon className="h-3.5 w-3.5 shrink-0 text-[#94A3B8]" />
                     <span className="w-16 text-xs text-[#94A3B8]">
-                      {cat.label}
+                      {row.label}
                     </span>
                     <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.05]">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${cat.pct}%` }}
-                        transition={{ duration: 1, delay: 0.8 + i * 0.12 }}
+                        animate={{ width: `${row.pct}%` }}
+                        transition={{ duration: 1, delay: 0.6 + index * 0.1 }}
                         className="h-full rounded-full"
-                        style={{ backgroundColor: cat.color }}
+                        style={{ backgroundColor: row.color }}
                       />
                     </div>
                     <span className="w-8 text-right font-mono text-xs text-[#F8FAFC]/70">
-                      {cat.pct}%
+                      {row.pct}%
                     </span>
                   </motion.div>
                 );
@@ -215,12 +218,20 @@ export function TwinPreview() {
 
           <div className="space-y-4 p-6 lg:p-8">
             <div className="grid grid-cols-3 gap-3">
-              <div ref={footprint.ref} className="glass rounded-xl p-3 text-center">
+              <div ref={annual.ref} className="glass rounded-xl p-3 text-center">
                 <p className="font-display text-xl font-bold text-primary">
-                  {footprint.formatted}t
+                  {annual.formatted}t
                 </p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
-                  Footprint
+                  Annual
+                </p>
+              </div>
+              <div ref={score.ref} className="glass rounded-xl p-3 text-center">
+                <p className="font-display text-xl font-bold text-success">
+                  {score.formatted}
+                </p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
+                  Score
                 </p>
               </div>
               <div ref={savings.ref} className="glass rounded-xl p-3 text-center">
@@ -228,15 +239,7 @@ export function TwinPreview() {
                   {savings.formatted}
                 </p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
-                  Saved
-                </p>
-              </div>
-              <div ref={reduction.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-success">
-                  -{reduction.formatted}
-                </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
-                  vs. Avg
+                  Top save
                 </p>
               </div>
             </div>
@@ -250,48 +253,55 @@ export function TwinPreview() {
                   </span>
                 </div>
                 <span className="font-display text-2xl font-bold text-[#7DF9FF]">
-                  68%
+                  {Math.round(
+                    (activeResult.dailyKg / activeResult.dailyBudgetKg) * 100
+                  )}
+                  %
                 </span>
               </div>
               <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/[0.05]">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: "68%" }}
-                  transition={{ duration: 1.6, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+                  animate={{
+                    width: `${Math.min(
+                      100,
+                      Math.round(
+                        (activeResult.dailyKg / activeResult.dailyBudgetKg) * 100
+                      )
+                    )}%`,
+                  }}
+                  transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-[#0369A1] via-[#00D4FF] to-[#7DF9FF]"
                 >
                   <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%]" />
                 </motion.div>
               </div>
               <div className="mt-2 flex justify-between text-[11px] text-[#94A3B8]">
-                <span>7.2 kg CO₂ used today</span>
-                <span>10.5 kg limit</span>
+                <span>{activeResult.dailyKg} kg/day today</span>
+                <span>{activeResult.dailyBudgetKg} kg target</span>
               </div>
             </div>
 
             <div className="glass rounded-xl p-4">
               <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#94A3B8]">
                 <MessageCircle className="h-3.5 w-3.5 text-primary" />
-                Twin Speaks
+                Coach note
               </div>
               <p className="mt-2.5 min-h-[3.5rem] text-sm leading-relaxed text-[#F8FAFC]/90">
-                &ldquo;
-                <TypewriterText text={twinMessage} />
-                &rdquo;
+                {activeResult.coach[0].description}
               </p>
             </div>
 
             <div className="flex gap-2">
-              {[
-                { icon: TrendingUp, label: "2030 → 3.2t" },
-                { icon: ScanLine, label: "3 receipts" },
-              ].map(({ icon: Icon, label }) => (
+              {activeResult.simulations.steady.outlook.slice(0, 2).map((outlook) => (
                 <div
-                  key={label}
+                  key={outlook.years}
                   className="glass flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5"
                 >
-                  <Icon className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs text-[#94A3B8]">{label}</span>
+                  <TrendingUp className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-xs text-[#94A3B8]">
+                    {outlook.years}y {"->"} {formatTonnes(outlook.plannedAnnualKg)}t
+                  </span>
                 </div>
               ))}
             </div>

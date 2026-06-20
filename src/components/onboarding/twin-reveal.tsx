@@ -25,9 +25,8 @@ import { Container } from "@/components/shared/container";
 import { useCountUp } from "@/hooks/use-count-up";
 import {
   formatTonnes,
-  type CategoryBreakdown,
-  type CategoryKey,
 } from "@/lib/carbon/calculator";
+import type { CategoryBreakdown, CategoryKey } from "@/lib/carbon/types";
 import { useOnboardingStore } from "@/store/onboarding";
 
 const CATEGORY_META: {

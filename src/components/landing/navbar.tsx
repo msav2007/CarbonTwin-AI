@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Cpu, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
+import { JourneyLink } from "@/components/shared/journey-link";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -74,10 +75,12 @@ export function Navbar() {
               asChild
               className="hidden sm:inline-flex"
             >
-              <Link href="/login">Log in</Link>
+              <a href="#demo">See the flow</a>
             </Button>
             <Button variant="glow" size="sm" asChild className="hidden sm:inline-flex">
-              <Link href="/onboarding">Get Your Twin</Link>
+              <JourneyLink resumeChildren="Open Dashboard">
+                Get Your Twin
+              </JourneyLink>
             </Button>
             <Button
               variant="ghost"
@@ -134,14 +137,17 @@ export function Navbar() {
               </nav>
               <div className="mt-8 flex flex-col gap-3">
                 <Button variant="outline" asChild className="w-full">
-                  <Link href="/login" onClick={() => setMobileOpen(false)}>
-                    Log in
-                  </Link>
+                  <a href="#demo" onClick={() => setMobileOpen(false)}>
+                    See the flow
+                  </a>
                 </Button>
                 <Button variant="glow" asChild className="w-full">
-                  <Link href="/onboarding" onClick={() => setMobileOpen(false)}>
+                  <JourneyLink
+                    onClick={() => setMobileOpen(false)}
+                    resumeChildren="Open Dashboard"
+                  >
                     Get Your Twin
-                  </Link>
+                  </JourneyLink>
                 </Button>
               </div>
             </motion.div>

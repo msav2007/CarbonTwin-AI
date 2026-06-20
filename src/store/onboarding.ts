@@ -1,12 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CarbonResult } from "@/lib/carbon/calculator";
+import type { CarbonResult } from "@/lib/carbon/types";
 import type { OnboardingData } from "@/types";
 
 interface OnboardingStore {
+  hasHydrated: boolean;
   step: number;
   data: Partial<OnboardingData>;
   result: CarbonResult | null;
+  setHasHydrated: (hasHydrated: boolean) => void;
   setStep: (step: number) => void;
   updateData: (data: Partial<OnboardingData>) => void;
   setResult: (result: CarbonResult) => void;
@@ -16,9 +18,11 @@ interface OnboardingStore {
 export const useOnboardingStore = create<OnboardingStore>()(
   persist(
     (set) => ({
+      hasHydrated: false,
       step: 1,
       data: {},
       result: null,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
       setStep: (step) => set({ step }),
       updateData: (data) =>
         set((state) => ({ data: { ...state.data, ...data } })),
@@ -42,6 +46,9 @@ export const useOnboardingStore = create<OnboardingStore>()(
         data: state.data,
         result: state.result,
       }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );

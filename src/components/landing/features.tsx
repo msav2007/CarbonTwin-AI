@@ -69,22 +69,22 @@ export function Features() {
             const Icon = iconMap[feature.icon] ?? Sparkles;
             return (
               <motion.div key={feature.id} variants={item}>
-                <Card className="group relative h-full overflow-hidden border-cyan-500/[0.08] bg-white/[0.02] transition-all duration-500 hover:-translate-y-1.5 hover:border-cyan-400/25 hover:bg-cyan-500/[0.03] hover:shadow-cyan-sm">
+                <Card className="group relative h-full overflow-hidden border-border bg-slate-50 transition-all duration-500 hover:-translate-y-1.5 hover:border-border hover:bg-slate-50 hover:shadow-sm">
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <CardHeader className="relative pb-3">
                     <div className="mb-3 flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-500/15 bg-cyan-500/10 transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-400/30 group-hover:bg-cyan-500/15">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-500/15 bg-primary/10 transition-all duration-300 group-hover:scale-105 group-hover:border-border group-hover:bg-primary/10">
                         <Icon className="h-5 w-5 text-primary" />
                       </div>
-                      <span className="font-mono text-xs text-[#94A3B8]/50">
+                      <span className="font-mono text-xs text-muted-foreground/50">
                         0{index + 1}
                       </span>
                     </div>
                     <CardTitle>{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative">
-                    <CardDescription className="text-sm leading-relaxed text-[#94A3B8]">
+                    <CardDescription className="text-sm leading-relaxed text-muted-foreground">
                       {feature.description}
                     </CardDescription>
                   </CardContent>

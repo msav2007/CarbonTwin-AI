@@ -13,7 +13,7 @@ export default function ProgressPage() {
   if (!hasHydrated || !result) {
     return (
       <Container className="py-20 text-center">
-        <p className="text-[#94A3B8]">Loading tracker...</p>
+        <p className="text-muted-foreground">Loading tracker...</p>
       </Container>
     );
   }
@@ -32,43 +32,43 @@ export default function ProgressPage() {
             <Activity className="mr-2 h-3.5 w-3.5" />
             Progress Tracking
           </Badge>
-          <h1 className="font-display text-3xl font-bold tracking-tight text-[#F8FAFC] sm:text-4xl">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Daily <span className="text-gradient">Carbon Budget</span>
           </h1>
-          <p className="mt-4 text-base text-[#94A3B8]">
+          <p className="mt-4 text-base text-muted-foreground">
             Monitor your daily footprint against your personal reduction targets.
           </p>
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
-          <Card className="border-cyan-500/[0.08] bg-white/[0.02]">
+          <Card className="border-border bg-slate-50">
             <CardContent className="p-6">
-              <p className="text-sm font-medium text-[#94A3B8]">Daily Target</p>
-              <p className="mt-2 font-display text-3xl font-bold text-[#F8FAFC]">{result.dailyBudgetKg} <span className="text-lg text-[#94A3B8] font-normal">kg</span></p>
+              <p className="text-sm font-medium text-muted-foreground">Daily Target</p>
+              <p className="mt-2 font-display text-3xl font-bold text-foreground">{result.dailyBudgetKg} <span className="text-lg text-muted-foreground font-normal">kg</span></p>
             </CardContent>
           </Card>
-          <Card className="border-cyan-500/[0.08] bg-white/[0.02]">
+          <Card className="border-border bg-slate-50">
             <CardContent className="p-6">
-              <p className="text-sm font-medium text-[#94A3B8]">Current Daily Avg</p>
-              <p className={`mt-2 font-display text-3xl font-bold ${budgetPct > 100 ? 'text-red-400' : 'text-success'}`}>{result.dailyKg} <span className="text-lg text-[#94A3B8] font-normal">kg</span></p>
+              <p className="text-sm font-medium text-muted-foreground">Current Daily Avg</p>
+              <p className={`mt-2 font-display text-3xl font-bold ${budgetPct > 100 ? 'text-red-400' : 'text-green-600'}`}>{result.dailyKg} <span className="text-lg text-muted-foreground font-normal">kg</span></p>
             </CardContent>
           </Card>
-          <Card className="border-cyan-500/[0.08] bg-white/[0.02]">
+          <Card className="border-border bg-slate-50">
             <CardContent className="p-6">
-              <p className="text-sm font-medium text-[#94A3B8]">Current Score</p>
+              <p className="text-sm font-medium text-muted-foreground">Current Score</p>
               <p className="mt-2 font-display text-3xl font-bold text-primary">{result.carbonScore}</p>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="border-cyan-500/[0.08] bg-white/[0.02]">
+        <Card className="border-border bg-slate-50">
           <CardHeader>
             <CardTitle>Budget Utilization</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-[#94A3B8]">Daily Allowance Used</span>
-              <span className="font-bold text-[#F8FAFC]">{budgetPct}%</span>
+              <span className="text-sm font-medium text-muted-foreground">Daily Allowance Used</span>
+              <span className="font-bold text-foreground">{budgetPct}%</span>
             </div>
             <div className="h-4 w-full bg-white/5 rounded-full overflow-hidden">
               <motion.div 
@@ -84,7 +84,7 @@ export default function ProgressPage() {
               </p>
             )}
             {budgetPct <= 100 && (
-              <div className="mt-4 flex items-center gap-2 text-sm text-success">
+              <div className="mt-4 flex items-center gap-2 text-sm text-green-600">
                 <CheckCircle2 className="h-4 w-4" />
                 You are staying within your daily carbon budget. Great job!
               </div>

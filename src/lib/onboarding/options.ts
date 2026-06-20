@@ -253,8 +253,8 @@ export const STEP_META = [
 ] as const;
 
 export const IMPACT_COLORS = {
-  low: "border-cyan-400/30 bg-cyan-500/5 text-[#7DF9FF]",
-  medium: "border-amber-400/30 bg-amber-500/5 text-amber-300",
+  low: "border-border bg-primary/10 text-primary",
+  medium: "border-amber-400/30 bg-amber-500/5 text-amber-500",
   high: "border-red-400/30 bg-red-500/5 text-red-300",
 } as const;
 

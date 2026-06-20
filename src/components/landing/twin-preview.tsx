@@ -82,10 +82,10 @@ function TwinOrb({ annualTonnes }: { annualTonnes: string }) {
             "0 0 60px rgba(0,212,255,0.35), inset 0 2px 20px rgba(125,249,255,0.2)",
         }}
       >
-        <span className="font-display text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
+        <span className="font-display text-2xl font-bold text-foreground sm:text-3xl">
           {annualTonnes}
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-widest text-[#F8FAFC]/70">
+        <span className="text-[10px] font-medium uppercase tracking-widest text-foreground/70">
           tonnes/yr
         </span>
       </motion.div>
@@ -154,31 +154,31 @@ export function TwinPreview() {
       <div className="glass-strong relative overflow-hidden rounded-[1.75rem] glow-cyan">
         <div className="absolute inset-x-0 top-0 h-px glow-line" />
 
-        <div className="flex items-center justify-between border-b border-cyan-500/[0.08] px-5 py-3.5">
+        <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
           <div className="flex items-center gap-2">
             <div className="flex gap-1.5">
               <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
               <div className="h-2.5 w-2.5 rounded-full bg-amber-400/50" />
               <div className="h-2.5 w-2.5 rounded-full bg-[#00D4FF]/60" />
             </div>
-            <span className="font-mono text-[11px] text-[#94A3B8]">
+            <span className="font-mono text-[11px] text-muted-foreground">
               {isPersonal ? "your live twin" : "sample twin powered by the live engine"}
             </span>
           </div>
-          <div className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-[#7DF9FF]">
+          <div className="rounded-full border border-border bg-primary/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-primary">
             {isPersonal ? "Personalized" : "Sample"}
           </div>
         </div>
 
         <div className="grid gap-0 lg:grid-cols-[1fr_1.1fr]">
-          <div className="border-b border-cyan-500/[0.06] p-6 lg:border-b-0 lg:border-r lg:p-8">
+          <div className="border-b border-border p-6 lg:border-b-0 lg:border-r lg:p-8">
             <TwinOrb annualTonnes={formatTonnes(activeResult.annualKg)} />
 
             <div className="mt-6 text-center">
-              <p className="font-display text-lg font-bold text-[#F8FAFC]">
+              <p className="font-display text-lg font-bold text-foreground">
                 {activeResult.twin.name}
               </p>
-              <p className="text-sm text-[#7DF9FF]">
+              <p className="text-sm text-primary">
                 {activeResult.twin.personality} · {activeResult.twin.avatarCode}
               </p>
             </div>
@@ -194,11 +194,11 @@ export function TwinPreview() {
                     transition={{ delay: 0.45 + index * 0.08 }}
                     className="flex items-center gap-3"
                   >
-                    <Icon className="h-3.5 w-3.5 shrink-0 text-[#94A3B8]" />
-                    <span className="w-16 text-xs text-[#94A3B8]">
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                    <span className="w-16 text-xs text-muted-foreground">
                       {row.label}
                     </span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.05]">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-50">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${row.pct}%` }}
@@ -207,7 +207,7 @@ export function TwinPreview() {
                         style={{ backgroundColor: row.color }}
                       />
                     </div>
-                    <span className="w-8 text-right font-mono text-xs text-[#F8FAFC]/70">
+                    <span className="w-8 text-right font-mono text-xs text-foreground/70">
                       {row.pct}%
                     </span>
                   </motion.div>
@@ -222,23 +222,23 @@ export function TwinPreview() {
                 <p className="font-display text-xl font-bold text-primary">
                   {annual.formatted}t
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
                   Annual
                 </p>
               </div>
               <div ref={score.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-success">
+                <p className="font-display text-xl font-bold text-green-600">
                   {score.formatted}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
                   Score
                 </p>
               </div>
               <div ref={savings.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-success">
+                <p className="font-display text-xl font-bold text-green-600">
                   {savings.formatted}
                 </p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-[#94A3B8]">
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
                   Top save
                 </p>
               </div>
@@ -248,18 +248,18 @@ export function TwinPreview() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Gauge className="h-4 w-4 text-primary" />
-                  <span className="text-xs font-medium uppercase tracking-wider text-[#94A3B8]">
+                  <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                     Carbon Budget
                   </span>
                 </div>
-                <span className="font-display text-2xl font-bold text-[#7DF9FF]">
+                <span className="font-display text-2xl font-bold text-primary">
                   {Math.round(
                     (activeResult.dailyKg / activeResult.dailyBudgetKg) * 100
                   )}
                   %
                 </span>
               </div>
-              <div className="mt-3 h-3 overflow-hidden rounded-full bg-white/[0.05]">
+              <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-50">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{
@@ -276,18 +276,18 @@ export function TwinPreview() {
                   <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%]" />
                 </motion.div>
               </div>
-              <div className="mt-2 flex justify-between text-[11px] text-[#94A3B8]">
+              <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
                 <span>{activeResult.dailyKg} kg/day today</span>
                 <span>{activeResult.dailyBudgetKg} kg target</span>
               </div>
             </div>
 
             <div className="glass rounded-xl p-4">
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#94A3B8]">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground">
                 <MessageCircle className="h-3.5 w-3.5 text-primary" />
                 Coach note
               </div>
-              <p className="mt-2.5 min-h-[3.5rem] text-sm leading-relaxed text-[#F8FAFC]/90">
+              <p className="mt-2.5 min-h-[3.5rem] text-sm leading-relaxed text-foreground/90">
                 {activeResult.coach[0].description}
               </p>
             </div>
@@ -299,7 +299,7 @@ export function TwinPreview() {
                   className="glass flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5"
                 >
                   <TrendingUp className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs text-[#94A3B8]">
+                  <span className="text-xs text-muted-foreground">
                     {outlook.years}y {"->"} {formatTonnes(outlook.plannedAnnualKg)}t
                   </span>
                 </div>

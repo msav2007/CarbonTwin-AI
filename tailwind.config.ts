@@ -55,12 +55,15 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
         brand: {
-          bg: "#08111B",
-          primary: "#00D4FF",
-          accent: "#7DF9FF",
-          text: "#F8FAFC",
-          muted: "#94A3B8",
-          success: "#22C55E",
+          navy: "#08152F",
+          "navy-light": "#102A56",
+          primary: "#2563EB",
+          accent: "#3B82F6",
+          bg: "#F5F7FB",
+          card: "#FFFFFF",
+          text: "#0F172A",
+          muted: "#64748B",
+          border: "#E2E8F0",
         },
       },
       borderRadius: {
@@ -69,8 +72,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-syne)", "system-ui", "sans-serif"],
+        sans: ["var(--font-dm-sans)", "system-ui", "Inter", "sans-serif"],
+        display: ["var(--font-syne)", "system-ui", "Inter", "sans-serif"],
         mono: ["var(--font-geist-mono)", "monospace"],
       },
       animation: {
@@ -79,9 +82,6 @@ const config: Config = {
         "pulse-glow": "pulse-glow 4s ease-in-out infinite",
         float: "float 6s ease-in-out infinite",
         "float-slow": "float 8s ease-in-out infinite",
-        shimmer: "shimmer 2.5s linear infinite",
-        marquee: "marquee 30s linear infinite",
-        "spin-slow": "spin 20s linear infinite",
       },
       keyframes: {
         "fade-in": {
@@ -93,36 +93,16 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.3", transform: "scale(1)" },
-          "50%": { opacity: "0.55", transform: "scale(1.04)" },
+          "0%, 100%": { opacity: "0.8", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.02)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-14px)" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-      },
-      backgroundImage: {
-        "grid-pattern":
-          "linear-gradient(to right, hsl(192 100% 50% / 0.04) 1px, transparent 1px), linear-gradient(to bottom, hsl(192 100% 50% / 0.04) 1px, transparent 1px)",
-        "radial-glow":
-          "radial-gradient(ellipse 70% 55% at 50% -10%, hsl(192 100% 50% / 0.14), transparent 70%)",
-        "radial-glow-bottom":
-          "radial-gradient(ellipse 60% 40% at 50% 110%, hsl(210 90% 55% / 0.1), transparent 70%)",
-      },
-      backgroundSize: {
-        grid: "64px 64px",
       },
       boxShadow: {
-        cyan: "0 0 40px -8px hsl(192 100% 50% / 0.4)",
-        "cyan-sm": "0 0 20px -4px hsl(192 100% 50% / 0.3)",
+        saas: "0 4px 12px rgba(15,23,42,0.08)",
       },
     },
   },

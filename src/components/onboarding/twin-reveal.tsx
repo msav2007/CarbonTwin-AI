@@ -110,11 +110,11 @@ function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.35, duration: 0.45 }}
-          className="font-display text-5xl font-bold text-[#F8FAFC]"
+          className="font-display text-5xl font-bold text-foreground"
         >
           {animated}
         </motion.span>
-        <span className="text-xs uppercase tracking-widest text-[#94A3B8]">
+        <span className="text-xs uppercase tracking-widest text-muted-foreground">
           Carbon Score
         </span>
       </div>
@@ -145,7 +145,7 @@ function TypewriterSummary({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <p className="text-sm leading-relaxed text-[#F8FAFC]/90 sm:text-base">
+    <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
       {displayed}
       <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-primary" />
     </p>
@@ -177,10 +177,10 @@ function TwinAvatar({
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.25, duration: 0.6, type: "spring" }}
-        className="absolute inset-7 flex flex-col items-center justify-center rounded-3xl border border-cyan-300/25 bg-gradient-to-br from-cyan-500/25 via-blue-500/10 to-emerald-400/10 shadow-cyan"
+        className="absolute inset-7 flex flex-col items-center justify-center rounded-3xl border border-cyan-300/25 bg-gradient-to-br from-cyan-500/25 via-blue-500/10 to-emerald-400/10 shadow-sm"
       >
         <Icon className="h-9 w-9 text-primary" />
-        <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7DF9FF]">
+        <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
           {code}
         </span>
       </motion.div>
@@ -201,13 +201,13 @@ function MetricCard({
 }) {
   const toneClass = {
     primary: "text-primary",
-    success: "text-success",
-    warning: "text-amber-300",
+    success: "text-green-600",
+    warning: "text-amber-500",
   }[tone];
 
   return (
-    <div className="rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4">
-      <div className="flex items-center gap-2 text-[#94A3B8]">
+    <div className="rounded-2xl border border-border bg-slate-50 p-4">
+      <div className="flex items-center gap-2 text-muted-foreground">
         <Icon className="h-4 w-4" />
         <span className="text-xs uppercase tracking-[0.14em]">{label}</span>
       </div>
@@ -248,7 +248,7 @@ export function TwinReveal() {
 
   if (!result || !isReady) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#08111B]">
+      <div className="flex min-h-screen items-center justify-center bg-background">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -277,7 +277,7 @@ export function TwinReveal() {
   const reductionPct = Math.round((reductionPotentialKg / result.annualKg) * 100);
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-[#08111B]">
+    <div className="relative isolate min-h-screen overflow-hidden bg-background">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="aurora absolute inset-0" />
         <div className="absolute inset-0 bg-radial-glow" />
@@ -290,13 +290,13 @@ export function TwinReveal() {
         />
       </div>
 
-      <header className="border-b border-cyan-500/[0.06] bg-[#08111B]/80 backdrop-blur-xl">
+      <header className="border-b border-border bg-background/80 backdrop-blur-xl">
         <Container className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-primary/10">
               <Cpu className="h-4 w-4 text-primary" />
             </div>
-            <span className="font-display font-bold text-[#F8FAFC]">
+            <span className="font-display font-bold text-foreground">
               Carbon<span className="text-primary">Twin</span>
             </span>
           </Link>
@@ -334,17 +334,17 @@ export function TwinReveal() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="font-display text-4xl font-bold text-[#F8FAFC] sm:text-5xl"
+                    className="font-display text-4xl font-bold text-foreground sm:text-5xl"
                   >
                     Meet <span className="text-gradient">{twin.name}</span>
                   </motion.h1>
-                  <p className="mt-2 text-sm text-[#7DF9FF]">
+                  <p className="mt-2 text-sm text-primary">
                     Built for {twin.ownerName} - {twin.archetype}
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     <Badge variant="glow">{twin.personality}</Badge>
                     {twin.traits.map((trait) => (
-                      <Badge key={trait} variant="outline" className="text-[#94A3B8]">
+                      <Badge key={trait} variant="outline" className="text-muted-foreground">
                         {trait}
                       </Badge>
                     ))}
@@ -352,10 +352,10 @@ export function TwinReveal() {
                 </div>
               </div>
 
-              <div className="mt-8 rounded-2xl border border-cyan-400/15 bg-white/[0.025] p-5">
+              <div className="mt-8 rounded-2xl border border-border bg-white/[0.025] p-5">
                 <div className="mb-4 flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-primary" />
-                  <h2 className="font-display text-lg font-semibold text-[#F8FAFC]">
+                  <h2 className="font-display text-lg font-semibold text-foreground">
                     Twin Speaks
                   </h2>
                 </div>
@@ -383,13 +383,13 @@ export function TwinReveal() {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4">
+              <div className="mt-4 rounded-2xl border border-border bg-slate-50 p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.14em] text-[#94A3B8]">
+                    <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
                       Daily budget
                     </p>
-                    <p className="mt-1 font-display text-2xl font-bold text-[#F8FAFC]">
+                    <p className="mt-1 font-display text-2xl font-bold text-foreground">
                       {dailyKg} kg / {dailyBudgetKg} kg
                     </p>
                   </div>
@@ -397,7 +397,7 @@ export function TwinReveal() {
                     {budgetPct}%
                   </Badge>
                 </div>
-                <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-50">
                   <motion.div
                     className="h-full rounded-full bg-gradient-to-r from-[#22C55E] via-[#7DF9FF] to-[#F59E0B]"
                     initial={{ width: 0 }}
@@ -405,7 +405,7 @@ export function TwinReveal() {
                     transition={{ duration: 1, delay: 0.5 }}
                   />
                 </div>
-                <p className="mt-3 text-xs text-[#94A3B8]">
+                <p className="mt-3 text-xs text-muted-foreground">
                   Compared to the 4.2t global average baseline.
                 </p>
               </div>
@@ -421,10 +421,10 @@ export function TwinReveal() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="font-display text-xl font-semibold text-[#F8FAFC]">
+                  <h2 className="font-display text-xl font-semibold text-foreground">
                     Emissions fingerprint
                   </h2>
-                  <p className="mt-1 text-sm text-[#94A3B8]">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     {formatTonnes(result.annualKg)}t total - strongest signal:
                     {" "}
                     {topMeta.label.toLowerCase()}
@@ -451,16 +451,16 @@ export function TwinReveal() {
                     >
                       <div className="mb-1.5 flex items-center justify-between gap-3 text-sm">
                         <div className="flex min-w-0 items-center gap-2">
-                          <Icon className="h-4 w-4 shrink-0 text-[#94A3B8]" />
-                          <span className="truncate text-[#F8FAFC]">
+                          <Icon className="h-4 w-4 shrink-0 text-muted-foreground" />
+                          <span className="truncate text-foreground">
                             {cat.label}
                           </span>
                         </div>
-                        <span className="shrink-0 font-mono text-[#94A3B8]">
+                        <span className="shrink-0 font-mono text-muted-foreground">
                           {kg.toLocaleString()} kg / {pct}%
                         </span>
                       </div>
-                      <div className="h-2 overflow-hidden rounded-full bg-white/[0.05]">
+                      <div className="h-2 overflow-hidden rounded-full bg-slate-50">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${pct}%` }}
@@ -487,16 +487,16 @@ export function TwinReveal() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="font-display text-xl font-semibold text-[#F8FAFC]">
+                  <h2 className="font-display text-xl font-semibold text-foreground">
                     First action plan
                   </h2>
-                  <p className="mt-1 text-sm text-[#94A3B8]">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     Potential reduction: {reductionPotentialKg.toLocaleString()} kg
                     CO2/year ({reductionPct}%)
                   </p>
                 </div>
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10">
-                  <Target className="h-5 w-5 text-success" />
+                  <Target className="h-5 w-5 text-green-600" />
                 </div>
               </div>
 
@@ -510,26 +510,26 @@ export function TwinReveal() {
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.75 + index * 0.08 }}
-                      className="rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-4"
+                      className="rounded-2xl border border-border bg-slate-50 p-4"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <div className="mb-2 flex flex-wrap items-center gap-2">
-                            <Badge variant="outline" className="text-[#94A3B8]">
+                            <Badge variant="outline" className="text-muted-foreground">
                               {meta.label}
                             </Badge>
                             <Badge variant="glow">
                               {action.annualSavingsKg} kg saved
                             </Badge>
                           </div>
-                          <h3 className="font-medium text-[#F8FAFC]">
+                          <h3 className="font-medium text-foreground">
                             {action.title}
                           </h3>
-                          <p className="mt-1 text-sm leading-relaxed text-[#94A3B8]">
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                             {action.description}
                           </p>
                         </div>
-                        <span className="shrink-0 rounded-full border border-cyan-400/20 px-2.5 py-1 text-xs text-[#7DF9FF]">
+                        <span className="shrink-0 rounded-full border border-border px-2.5 py-1 text-xs text-primary">
                           {action.difficulty}
                         </span>
                       </div>
@@ -544,18 +544,18 @@ export function TwinReveal() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="mt-6 rounded-2xl border border-cyan-400/15 bg-gradient-to-r from-cyan-500/[0.12] via-white/[0.03] to-emerald-400/[0.08] p-6 sm:p-8"
+            className="mt-6 rounded-2xl border border-border bg-gradient-to-r from-cyan-500/[0.12] via-white/[0.03] to-emerald-400/[0.08] p-6 sm:p-8"
           >
             <div className="grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
                   Simulation seed
                 </p>
-                <h2 className="mt-2 font-display text-2xl font-semibold text-[#F8FAFC]">
+                <h2 className="mt-2 font-display text-2xl font-semibold text-foreground">
                   If you apply this plan, {twin.name} projects a score of{" "}
                   <span className="text-gradient">{targetScore}/100</span>.
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-[#94A3B8]">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   That would move your annual footprint toward{" "}
                   {formatTonnes(targetAnnualKg)}t CO2 while preserving the
                   lifestyle pattern you entered.

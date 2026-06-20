@@ -11,17 +11,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-cyan-sm hover:bg-[#33ddff] hover:shadow-cyan active:scale-[0.98]",
+          "bg-primary text-primary-foreground shadow-sm hover:bg-[#1D4ED8] active:scale-[0.98]",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-cyan-500/20 bg-white/[0.02] text-foreground shadow-sm backdrop-blur-sm hover:border-cyan-400/40 hover:bg-cyan-500/[0.06] hover:shadow-cyan-sm active:scale-[0.98]",
+          "border border-border bg-white text-foreground shadow-sm hover:bg-slate-50 hover:text-foreground active:scale-[0.98]",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-white border border-border text-foreground shadow-sm hover:bg-slate-50",
         ghost:
-          "text-muted-foreground hover:bg-cyan-500/[0.06] hover:text-foreground",
-        link: "text-primary underline-offset-4 hover:text-[#7DF9FF] hover:underline",
-        glow: "btn-shine bg-primary text-primary-foreground shadow-cyan glow-cyan hover:bg-[#33ddff] hover:shadow-cyan active:scale-[0.98]",
+          "text-muted-foreground hover:bg-slate-100 hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        glow: "bg-primary text-primary-foreground shadow-sm hover:bg-[#1D4ED8] active:scale-[0.98]",
       },
       size: {
         default: "h-10 px-5 py-2",

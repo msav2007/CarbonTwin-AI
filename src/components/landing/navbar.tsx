@@ -41,17 +41,16 @@ export function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
           scrolled
-            ? "border-b border-cyan-500/[0.08] bg-[#08111B]/85 shadow-lg shadow-black/30 backdrop-blur-2xl"
-            : "bg-transparent"
+            ? "border-b border-white/10 bg-[#08152F]/90 shadow-lg shadow-black/10 backdrop-blur-md"
+            : "bg-[#08152F]"
         )}
       >
         <Container className="flex h-16 items-center justify-between lg:h-[4.5rem]">
           <Link href="/" className="group flex items-center gap-2.5">
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10 transition-all group-hover:border-cyan-400/40 group-hover:bg-cyan-500/15 group-hover:shadow-cyan-sm">
-              <Cpu className="h-5 w-5 text-primary" />
-              <div className="absolute inset-0 rounded-xl bg-primary/20 opacity-0 blur-md transition-opacity group-hover:opacity-100" />
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary transition-all">
+              <Cpu className="h-5 w-5 text-white" />
             </div>
-            <span className="font-display text-lg font-bold tracking-tight text-[#F8FAFC]">
+            <span className="font-display text-lg font-bold tracking-tight text-white">
               Carbon<span className="text-primary">Twin</span>
             </span>
           </Link>
@@ -61,7 +60,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-4 py-2 text-sm text-[#94A3B8] transition-colors hover:bg-cyan-500/[0.06] hover:text-[#F8FAFC]"
+                className="rounded-lg px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
               >
                 {link.label}
               </a>
@@ -73,11 +72,11 @@ export function Navbar() {
               variant="ghost"
               size="sm"
               asChild
-              className="hidden sm:inline-flex"
+              className="hidden sm:inline-flex text-slate-300 hover:text-white hover:bg-white/10"
             >
               <a href="#demo">See the flow</a>
             </Button>
-            <Button variant="glow" size="sm" asChild className="hidden sm:inline-flex">
+            <Button variant="default" size="sm" asChild className="hidden sm:inline-flex">
               <JourneyLink resumeChildren="Open Dashboard">
                 Get Your Twin
               </JourneyLink>
@@ -85,7 +84,7 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-slate-300 hover:text-white"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
@@ -102,7 +101,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] bg-[#08111B]/90 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[60] bg-[#08152F]/80 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
@@ -110,10 +109,10 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
-              className="fixed inset-y-0 right-0 z-[70] w-full max-w-xs border-l border-cyan-500/10 bg-[#0c1929] p-6 shadow-2xl md:hidden"
+              className="fixed inset-y-0 right-0 z-[70] w-full max-w-xs border-l border-white/10 bg-[#08152F] p-6 shadow-2xl md:hidden"
             >
               <div className="flex items-center justify-between">
-                <span className="font-display font-bold text-[#F8FAFC]">Menu</span>
+                <span className="font-display font-bold text-white">Menu</span>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -129,7 +128,7 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-base text-[#94A3B8] transition-colors hover:bg-cyan-500/[0.06] hover:text-[#F8FAFC]"
+                    className="rounded-xl px-4 py-3 text-base text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
                   >
                     {link.label}
                   </a>
@@ -159,7 +158,5 @@ export function Navbar() {
 }
 
 export function NavbarBackground() {
-  return (
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 h-24 bg-gradient-to-b from-[#08111B] via-[#08111B]/90 to-transparent" />
-  );
+  return null;
 }

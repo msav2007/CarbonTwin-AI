@@ -21,7 +21,7 @@ export function StatsBand() {
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
             CarbonTwin at a glance
           </p>
-          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-[#F8FAFC] sm:text-3xl">
+          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             Personal guidance with a{" "}
             <span className="text-gradient">clear reduction path.</span>
           </h2>
@@ -38,23 +38,23 @@ export function StatsBand() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.55, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl border border-cyan-500/[0.08] bg-white/[0.02] p-6 transition-all duration-300 hover:border-cyan-400/25 hover:bg-cyan-500/[0.03] hover:shadow-cyan-sm"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-slate-50 p-6 transition-all duration-300 hover:border-border hover:bg-slate-50 hover:shadow-sm"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/10 bg-cyan-500/[0.05]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/10 bg-slate-50">
                     <Icon className="h-5 w-5 text-primary" />
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8]/60">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
                     {stat.context}
                   </span>
                 </div>
                 <div className="mt-5">
-                  <p className="font-display text-4xl font-bold tracking-tight text-[#7DF9FF] sm:text-5xl">
+                  <p className="font-display text-4xl font-bold tracking-tight text-primary sm:text-5xl">
                     {stat.value}
                   </p>
                 </div>
-                <p className="mt-4 text-sm font-medium text-[#F8FAFC]/90">
+                <p className="mt-4 text-sm font-medium text-foreground/90">
                   {stat.label}
                 </p>
               </motion.div>

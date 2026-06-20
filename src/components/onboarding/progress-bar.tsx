@@ -14,14 +14,14 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
   return (
     <div className="w-full">
       <div className="mb-3 flex items-center justify-between text-xs">
-        <span className="font-mono uppercase tracking-wider text-[#94A3B8]">
+        <span className="font-mono uppercase tracking-wider text-muted-foreground">
           Step {currentStep} of {STEP_META.length}
         </span>
         <span className="font-medium text-primary">
           {STEP_META[currentStep - 1]?.title}
         </span>
       </div>
-      <div className="relative h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+      <div className="relative h-1.5 overflow-hidden rounded-full bg-slate-50">
         <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
           initial={false}
@@ -35,7 +35,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
             key={step.id}
             className={cn(
               "h-1 flex-1 rounded-full transition-colors duration-300",
-              step.id <= currentStep ? "bg-primary/60" : "bg-white/[0.06]"
+              step.id <= currentStep ? "bg-primary/60" : "bg-slate-50"
             )}
           />
         ))}

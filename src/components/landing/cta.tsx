@@ -11,7 +11,7 @@ export function DemoSection() {
   return (
     <section id="demo" className="py-24 sm:py-32">
       <Container>
-        <div className="relative overflow-hidden rounded-[2rem] border border-cyan-400/15">
+        <div className="relative overflow-hidden rounded-[2rem] border border-border">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0c1929]/90 via-card/95 to-[#08111B]" />
           <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-[#00D4FF]/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-[#3B82F6]/8 blur-3xl" />
@@ -25,15 +25,15 @@ export function DemoSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/25 bg-cyan-500/10 px-4 py-1.5 text-sm font-medium text-[#7DF9FF]">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
                 <Zap className="h-4 w-4 text-primary" />
                 Judge demo script
               </div>
-              <h2 className="font-display text-3xl font-bold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
+              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 One complete journey.{" "}
                 <span className="text-gradient">No fake features.</span>
               </h2>
-              <p className="mt-5 text-base leading-relaxed text-[#94A3B8] sm:text-lg">
+              <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Start on the onboarding flow, reveal the twin, open the dashboard,
                 and show how recommendations change the long-term trajectory.
               </p>
@@ -59,16 +59,16 @@ export function DemoSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="flex items-center gap-4 rounded-xl border border-cyan-500/[0.08] bg-white/[0.02] px-5 py-4 backdrop-blur-sm transition-all hover:border-cyan-400/20 hover:bg-cyan-500/[0.04]"
+                  className="flex items-center gap-4 rounded-xl border border-border bg-slate-50 px-5 py-4 backdrop-blur-sm transition-all hover:border-border hover:bg-slate-50"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-500/15 bg-cyan-500/10 font-mono text-sm font-bold text-primary">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-500/15 bg-primary/10 font-mono text-sm font-bold text-primary">
                     {i + 1}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-[#F8FAFC]">
+                    <p className="text-sm font-semibold text-foreground">
                       {item.title}
                     </p>
-                    <p className="mt-0.5 text-xs text-[#94A3B8]">
+                    <p className="mt-0.5 text-xs text-muted-foreground">
                       {item.detail}
                     </p>
                   </div>
@@ -90,7 +90,7 @@ export function CTA() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[2rem] border border-cyan-500/[0.1] px-6 py-16 text-center sm:px-12 sm:py-24"
+          className="relative overflow-hidden rounded-[2rem] border border-border px-6 py-16 text-center sm:px-12 sm:py-24"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/[0.06] via-transparent to-transparent" />
           <div className="absolute inset-x-0 top-0 h-px glow-line" />
@@ -100,11 +100,11 @@ export function CTA() {
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary">
               The future is personal
             </p>
-            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
               Show judges a carbon assistant{" "}
               <span className="text-gradient">that earns trust</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-base text-[#94A3B8] sm:text-lg">
+            <p className="mx-auto mt-4 max-w-lg text-base text-muted-foreground sm:text-lg">
               CarbonTwin turns personal habits into a profile, a reveal moment,
               a simulation, and a practical reduction plan you can act on immediately.
             </p>

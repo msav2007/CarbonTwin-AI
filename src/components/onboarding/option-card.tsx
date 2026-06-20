@@ -38,8 +38,8 @@ export function OptionCard({
       className={cn(
         "group relative w-full rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/25 sm:p-5",
         selected
-          ? "border-primary/50 bg-cyan-500/10 shadow-cyan-sm"
-          : "border-cyan-500/[0.08] bg-white/[0.02] hover:border-cyan-400/25 hover:bg-cyan-500/[0.04]"
+          ? "border-primary/50 bg-primary/10 shadow-sm"
+          : "border-border bg-slate-50 hover:border-border hover:bg-slate-50"
       )}
     >
       {selected && (
@@ -59,19 +59,19 @@ export function OptionCard({
             "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border transition-colors",
             selected
               ? "border-primary/30 bg-primary/15"
-              : "border-cyan-500/10 bg-cyan-500/5 group-hover:border-cyan-400/20"
+              : "border-cyan-500/10 bg-primary/10 group-hover:border-border"
           )}
         >
           <Icon
             className={cn(
               "h-5 w-5",
-              selected ? "text-primary" : "text-[#94A3B8]"
+              selected ? "text-primary" : "text-muted-foreground"
             )}
           />
         </div>
         <div className="min-w-0 flex-1 pr-8">
           <div className="flex flex-wrap items-center gap-2">
-            <p className="font-medium text-[#F8FAFC]">{label}</p>
+            <p className="font-medium text-foreground">{label}</p>
             <span
               className={cn(
                 "rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider",
@@ -81,7 +81,7 @@ export function OptionCard({
               {badge ?? `${impact} impact`}
             </span>
           </div>
-          <p className="mt-1 text-sm text-[#94A3B8]">{description}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
         </div>
       </div>
     </motion.button>

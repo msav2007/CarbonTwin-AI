@@ -13,7 +13,7 @@ interface OnboardingShellProps {
 
 export function OnboardingShell({ step, children }: OnboardingShellProps) {
   return (
-    <div className="relative isolate min-h-screen bg-[#08111B]">
+    <div className="relative isolate min-h-screen bg-background">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="aurora absolute inset-0" />
         <div className="absolute inset-0 bg-radial-glow" />
@@ -25,7 +25,7 @@ export function OnboardingShell({ step, children }: OnboardingShellProps) {
         rightSlot={
           <Link
             href="/"
-            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-[#94A3B8] transition-colors hover:bg-white/5 hover:text-[#F8FAFC]"
+            className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
           >
             <X className="h-4 w-4" />
             Exit

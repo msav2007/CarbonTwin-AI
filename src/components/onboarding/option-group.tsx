@@ -28,11 +28,11 @@ export function OptionGroup<T extends string>({
       role="radiogroup"
       aria-describedby={description ? descriptionId : undefined}
     >
-      <legend className="mb-3 text-sm font-medium text-[#F8FAFC]">
+      <legend className="mb-3 text-sm font-medium text-foreground">
         {legend}
       </legend>
       {description ? (
-        <p id={descriptionId} className="mb-4 text-sm text-[#94A3B8]">
+        <p id={descriptionId} className="mb-4 text-sm text-muted-foreground">
           {description}
         </p>
       ) : null}

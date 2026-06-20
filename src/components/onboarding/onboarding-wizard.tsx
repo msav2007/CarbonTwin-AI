@@ -179,10 +179,10 @@ export function OnboardingWizard() {
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
                   Signal {currentStep} / {STEP_META.length} - {meta.title}
                 </p>
-                <h1 className="mt-2 font-display text-2xl font-bold text-[#F8FAFC] sm:text-3xl">
+                <h1 className="mt-2 font-display text-2xl font-bold text-foreground sm:text-3xl">
                   {meta.subtitle}
                 </h1>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#94A3B8] sm:text-base">
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {STEP_HELP[currentStep]}
                 </p>
               </div>
@@ -247,10 +247,10 @@ export function OnboardingWizard() {
 
               {currentStep === 5 && (
                 <div className="space-y-6">
-                  <div className="rounded-2xl border border-cyan-400/[0.12] bg-white/[0.03] p-5">
+                  <div className="rounded-2xl border border-border bg-slate-50 p-5">
                     <label
                       htmlFor="carbon-twin-name"
-                      className="flex items-center gap-2 text-sm font-medium text-[#F8FAFC]"
+                      className="flex items-center gap-2 text-sm font-medium text-foreground"
                     >
                       <UserRound className="h-4 w-4 text-primary" />
                       What should your twin call you?
@@ -267,12 +267,12 @@ export function OnboardingWizard() {
                           name: sanitizeNameInput(event.target.value),
                         })
                       }
-                      className="mt-3 h-12 w-full rounded-xl border border-cyan-500/15 bg-[#07101A] px-4 text-sm text-[#F8FAFC] outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
+                      className="mt-3 h-12 w-full rounded-xl border border-cyan-500/15 bg-[#07101A] px-4 text-sm text-foreground outline-none transition focus:border-primary/60 focus:ring-2 focus:ring-primary/20"
                     />
                     {nameTouched && nameError ? (
-                      <p className="mt-2 text-sm text-amber-300">{nameError}</p>
+                      <p className="mt-2 text-sm text-amber-500">{nameError}</p>
                     ) : (
-                      <p className="mt-2 text-xs text-[#94A3B8]">
+                      <p className="mt-2 text-xs text-muted-foreground">
                         We use this only to personalize your twin narrative and dashboard.
                       </p>
                     )}
@@ -286,10 +286,10 @@ export function OnboardingWizard() {
                     onSelect={(motivation) => updateData({ motivation })}
                   />
 
-                  <div className="rounded-2xl border border-cyan-400/[0.12] bg-white/[0.025] p-5">
+                  <div className="rounded-2xl border border-border bg-white/[0.025] p-5">
                     <div className="mb-4 flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
-                      <h2 className="font-display text-lg font-semibold text-[#F8FAFC]">
+                      <h2 className="font-display text-lg font-semibold text-foreground">
                         Lifestyle profile
                       </h2>
                     </div>
@@ -301,13 +301,13 @@ export function OnboardingWizard() {
                         return (
                           <div
                             key={item.field}
-                            className="flex items-center justify-between gap-4 rounded-xl border border-cyan-500/[0.08] bg-white/[0.02] px-4 py-3"
+                            className="flex items-center justify-between gap-4 rounded-xl border border-border bg-slate-50 px-4 py-3"
                           >
                             <div className="min-w-0">
-                              <p className="text-xs uppercase tracking-[0.16em] text-[#94A3B8]">
+                              <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
                                 {item.label}
                               </p>
-                              <p className="mt-1 truncate text-sm font-medium text-[#F8FAFC]">
+                              <p className="mt-1 truncate text-sm font-medium text-foreground">
                                 {value
                                   ? getOptionLabel(item.field, value)
                                   : "Not selected"}
@@ -334,7 +334,7 @@ export function OnboardingWizard() {
                     <motion.div
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="rounded-2xl border border-primary/30 bg-cyan-500/[0.08] p-5"
+                      className="rounded-2xl border border-primary/30 bg-slate-50 p-5"
                     >
                       <div className="flex items-center gap-3">
                         <motion.div
@@ -349,15 +349,15 @@ export function OnboardingWizard() {
                           <Sparkles className="h-5 w-5" />
                         </motion.div>
                         <div>
-                          <p className="text-sm font-medium text-[#F8FAFC]">
+                          <p className="text-sm font-medium text-foreground">
                             {GENERATION_STAGES[generationStage]}
                           </p>
-                          <p className="text-xs text-[#94A3B8]">
+                          <p className="text-xs text-muted-foreground">
                             Building your assistant profile from the signals you provided.
                           </p>
                         </div>
                       </div>
-                      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+                      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-50">
                         <motion.div
                           className="h-full rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
                           animate={{

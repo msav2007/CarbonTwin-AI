@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CarbonTwin AI"
+version = "1.0.0"
+id = "artifacts/carbontwin-ai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19414
+
+[services.development]
+run = "pnpm --filter @workspace/carbontwin-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/carbontwin-ai", "run", "build" ]
+publicDir = "artifacts/carbontwin-ai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19414"
+BASE_PATH = "/"

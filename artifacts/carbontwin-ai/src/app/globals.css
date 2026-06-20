@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F5F7FB;
+    --foreground: #111827;
+    --card: #FFFFFF;
+    --card-foreground: #111827;
+    --popover: #FFFFFF;
+    --popover-foreground: #111827;
+    --primary: #3563E9;
+    --primary-foreground: #FFFFFF;
+    --secondary: #FAFBFD;
+    --secondary-foreground: #111827;
+    --muted: #F5F7FB;
+    --muted-foreground: #6B7280;
+    --accent: #3563E9;
+    --accent-foreground: #FFFFFF;
+    --success: #10B981;
+    --success-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #E5E7EB;
+    --input: #E5E7EB;
+    --ring: #3563E9;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #F5F7FB;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: #F5F7FB;
+  }
+
+  ::selection {
+    @apply bg-primary/10 text-primary;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-[#111827] font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Standard dashboard card */
+  .glass {
+    @apply bg-card border border-border shadow-saas rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-saas-lg;
+  }
+
+  /* Emphasized dashboard card */
+  .glass-strong {
+    @apply bg-card border border-border shadow-saas-lg rounded-2xl transition-all duration-300;
+  }
+  
+  /* Dark landing page cards */
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    @apply rounded-2xl transition-all duration-300;
+  }
+  
+  .glass-dark:hover {
+    transform: translateY(-2px);
+    border-color: rgba(53, 99, 233, 0.35);
+  }
+
+  /* No text gradients in enterprise */
+  .text-gradient {
+    @apply text-primary;
+  }
+
+  .text-gradient-warm {
+    @apply text-foreground;
+  }
+
+  /* Revert glow to null */
+  .glow-cyan {
+    box-shadow: none;
+  }
+
+  .glow-line {
+    @apply bg-border h-px w-full;
+  }
+
+  .vignette {
+    display: none;
+  }
+
+  .noise {
+    display: none;
+  }
+
+  .aurora {
+    display: none;
+  }
+
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    display: none;
+  }
+
+  .twin-ring {
+    stroke-dasharray: 4 6;
+    animation: spin-slow 30s linear infinite;
+  }
+
+  .twin-ring-reverse {
+    stroke-dasharray: 3 8;
+    animation: spin-slow 45s linear infinite reverse;
+  }
+
+  .text-success {
+    color: #10B981;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .step-number {
+    color: rgba(53, 99, 233, 0.18);
+    font-size: 72px;
+    font-weight: 800;
+  }
+  
+  .step-number-dark {
+    color: rgba(255, 255, 255, 0.08);
+    font-size: 72px;
+    font-weight: 800;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

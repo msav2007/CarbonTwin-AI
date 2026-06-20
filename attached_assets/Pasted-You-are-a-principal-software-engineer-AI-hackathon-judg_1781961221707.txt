@@ -1,0 +1,255 @@
+You are a principal software engineer, AI hackathon judge, accessibility expert, testing engineer, and Next.js architect.
+
+You are working on an existing project called CarbonTwin-AI.
+
+Current AI Evaluation:
+
+Overall Score: 90.97/100
+
+Breakdown:
+- Code Quality: 86
+- Security: 98
+- Efficiency: 100
+- Testing: 65
+- Accessibility: 96
+- Problem Statement Alignment: 93
+
+Goal:
+Push the project toward a 95+ score and maximize ranking on AI evaluation platforms.
+
+IMPORTANT RULES:
+
+- Do NOT redesign the UI.
+- Do NOT change the visual style.
+- Do NOT break existing functionality.
+- Do NOT remove any feature.
+- Keep the current CarbonTwin branding.
+- Preserve all existing pages and flows.
+- All changes must improve evaluation score.
+- Project must build successfully.
+- Project must remain deployable to Vercel.
+
+==================================================
+PHASE 1 — FULL PROJECT AUDIT
+==================================================
+
+Analyze the entire repository.
+
+Create a report identifying:
+
+1. Dead code
+2. Unused imports
+3. Unused files
+4. Duplicate logic
+5. TypeScript issues
+6. ESLint warnings
+7. Accessibility issues
+8. Missing tests
+9. Weak AI functionality
+10. Problem statement gaps
+
+Automatically fix everything that is safe to fix.
+
+==================================================
+PHASE 2 — TESTING (HIGHEST PRIORITY)
+==================================================
+
+Testing score is currently 65.
+
+Add a complete testing suite.
+
+Create tests for:
+
+- Carbon calculations
+- User profile scoring
+- Recommendation generation
+- Dashboard rendering
+- Form validation
+- Utility functions
+- Error states
+- Loading states
+- Accessibility behavior
+
+Use Vitest.
+
+Add meaningful assertions.
+
+Avoid trivial tests.
+
+Target:
+
+- 85%+ coverage
+- Passing tests
+- Reliable test execution
+
+Add test scripts if missing.
+
+Verify:
+
+npm run test
+
+passes successfully.
+
+==================================================
+PHASE 3 — CODE QUALITY
+==================================================
+
+Increase Code Quality from 86 to 95+.
+
+Requirements:
+
+- Remove all dead code.
+- Remove unused imports.
+- Remove duplicated functions.
+- Replace any usage of "any".
+- Improve TypeScript typing.
+- Create reusable interfaces.
+- Improve folder structure if necessary.
+- Improve naming consistency.
+- Improve maintainability.
+
+Run lint fixes.
+
+Verify:
+
+npm run lint
+
+passes without warnings.
+
+==================================================
+PHASE 4 — ACCESSIBILITY
+==================================================
+
+Accessibility is already high.
+
+Push toward perfection.
+
+Add:
+
+- aria-labels
+- semantic HTML
+- alt text
+- keyboard navigation
+- focus management
+- accessible form validation
+- proper heading hierarchy
+
+Ensure:
+
+- Screen reader friendly
+- WCAG-minded implementation
+
+==================================================
+PHASE 5 — AI CAPABILITY IMPROVEMENT
+==================================================
+
+Strengthen CarbonTwin's AI functionality.
+
+Implement an AI Carbon Coach.
+
+Features:
+
+- Personalized sustainability advice
+- Dynamic recommendations
+- Lifestyle-specific coaching
+- Carbon reduction suggestions
+- Future impact explanations
+
+Advice must be generated from actual user inputs.
+
+Do not use static hardcoded responses.
+
+If Gemini integration exists:
+
+- Improve prompts
+- Improve reasoning quality
+- Improve response structure
+
+==================================================
+PHASE 6 — PROBLEM STATEMENT ALIGNMENT
+==================================================
+
+Improve alignment with:
+
+"Carbon Footprint Awareness Platform"
+
+Ensure the application clearly demonstrates:
+
+- Carbon footprint estimation
+- User awareness
+- AI-powered recommendations
+- Future scenario simulation
+- Practical action plans
+- Real-world sustainability value
+
+Add missing functionality if necessary.
+
+==================================================
+PHASE 7 — SECURITY REVIEW
+==================================================
+
+Review:
+
+- Environment variables
+- Input validation
+- API handling
+- Error handling
+
+Ensure:
+
+- No secrets exposed
+- Safe defaults
+- Proper validation
+
+==================================================
+PHASE 8 — DOCUMENTATION
+==================================================
+
+Rewrite README professionally.
+
+Include:
+
+- Project Overview
+- Features
+- Architecture
+- AI Workflow
+- CarbonTwin Concept
+- Installation
+- Deployment
+- Testing
+- Tech Stack
+
+Make README hackathon-quality.
+
+==================================================
+PHASE 9 — FINAL VERIFICATION
+==================================================
+
+Run and verify:
+
+npm run lint
+
+npm run test
+
+npm run build
+
+Fix every failure.
+
+==================================================
+DELIVERABLE
+==================================================
+
+Provide:
+
+1. Summary of all improvements
+2. Files changed
+3. Tests added
+4. Coverage improvements
+5. Accessibility improvements
+6. AI feature improvements
+7. Problem-alignment improvements
+8. Security improvements
+
+Then make all changes directly in the codebase.
+
+Do not stop until every possible score-improving change has been completed.

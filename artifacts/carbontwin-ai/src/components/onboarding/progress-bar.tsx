@@ -1,4 +1,3 @@
-"use client";
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -21,7 +20,14 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
           {STEP_META[currentStep - 1]?.title}
         </span>
       </div>
-      <div className="relative h-1.5 overflow-hidden rounded-full glass">
+      <div
+        className="relative h-1.5 overflow-hidden rounded-full glass"
+        role="progressbar"
+        aria-valuenow={currentStep}
+        aria-valuemin={1}
+        aria-valuemax={STEP_META.length}
+        aria-label={`Onboarding progress: step ${currentStep} of ${STEP_META.length}`}
+      >
         <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
           initial={false}

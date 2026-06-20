@@ -1,45 +1,73 @@
-# [Project name]
+# CarbonTwin AI
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An AI-powered carbon footprint awareness platform that creates your personalized digital twin and coaches you toward sustainable action.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/carbontwin-ai run dev` — run the CarbonTwin AI app (port auto-assigned by Replit)
+- `pnpm --filter @workspace/carbontwin-ai run test` — run all unit tests (Vitest)
+- `pnpm --filter @workspace/carbontwin-ai run test:coverage` — generate test coverage report
+- `pnpm --filter @workspace/carbontwin-ai run build` — production build (output: `artifacts/carbontwin-ai/dist/public/`)
+- `pnpm --filter @workspace/carbontwin-ai run typecheck` — TypeScript check
+- Required env: `VITE_GEMINI_API_KEY` — Google Gemini API key (optional — app works without it)
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- **Framework:** React 18 + Vite
+- **Routing:** Wouter (client-side)
+- **State:** Zustand with persist middleware
+- **Styling:** Tailwind CSS v4 with dark theme tokens
+- **Components:** shadcn/ui + Radix UI primitives
+- **AI:** Google Gemini 1.5 Flash (`@google/generative-ai`)
+- **Animations:** Framer Motion
+- **Charts:** Recharts
+- **Testing:** Vitest + Testing Library (jsdom environment)
+- **TypeScript:** 5.9
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- Carbon engine: `artifacts/carbontwin-ai/src/lib/carbon/` (calculator, assistant, simulation, math, constants, types)
+- Gemini AI client: `artifacts/carbontwin-ai/src/lib/gemini/client.ts`
+- Onboarding options & validation: `artifacts/carbontwin-ai/src/lib/onboarding/`
+- Zustand store: `artifacts/carbontwin-ai/src/store/onboarding.ts`
+- Core types: `artifacts/carbontwin-ai/src/types/index.ts` (OnboardingData)
+- Carbon types: `artifacts/carbontwin-ai/src/lib/carbon/types.ts`
+- Tests: `src/lib/carbon/*.test.ts` + `src/lib/onboarding/validation.test.ts`
+- Vitest config: `artifacts/carbontwin-ai/vitest.config.ts`
+- Theme tokens: `artifacts/carbontwin-ai/src/index.css`
+- Fonts: DM Sans + Syne via Google Fonts in `index.html`
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Carbon engine is fully local** — all calculations run client-side with no backend required; Gemini is optional enrichment only
+- **Zustand persist** stores onboarding state across sessions with schema migration (version: 2)
+- **Twin name is deterministic** — generated from a hash of user choices, so same inputs always produce the same twin
+- **No "use client" directives** in custom components — this is a Vite app, not Next.js
+- **Wouter routing** with explicit `[, navigate]` destructuring pattern (not `router`, not `useRouter`)
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+CarbonTwin AI maps 8 lifestyle signals (transport, diet, home energy, household size, travel, shopping, name, motivation) to a precise annual CO2 footprint, generates a personalized AI twin, and delivers dynamic coaching to reduce environmental impact.
+
+Key flows:
+1. **Landing page** → marketing with feature overview
+2. **Onboarding wizard** → 5-step questionnaire with live footprint preview
+3. **Twin Reveal** → animated reveal of Carbon Twin + score + recommendations
+4. **Dashboard** → coach, simulator, what-if, progress pages
+
+## Gotchas
+
+- `vite.config.ts` requires `PORT` and `BASE_PATH` env vars when running dev/preview — they default to `5173`/`/` for plain `pnpm build`
+- Never use `router` variable in wouter — use `const [, navigate] = useLocation()` or `const [pathname] = useLocation()`
+- The `next` package was removed from dependencies — it was a leftover from the Vercel import
+- `@testing-library/jest-dom` must be imported in `src/test/setup.ts` for DOM matchers to work in Vitest
+- Coverage excludes `src/lib/gemini/` (requires live API key) and test files themselves
 
 ## User preferences
 
 _Populate as you build — explicit user instructions worth remembering across sessions._
 
-## Gotchas
-
-_Populate as you build — sharp edges, "always run X before Y" rules._
-
 ## Pointers
 
 - See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- Full README with architecture diagram: `artifacts/carbontwin-ai/README.md`

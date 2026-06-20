@@ -1,4 +1,3 @@
-"use client";
 
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -244,7 +243,7 @@ export function TwinReveal() {
     if (!isReady) {
       navigate("/onboarding");
     }
-  }, [isReady, router]);
+  }, [isReady, navigate]);
 
   if (!result || !isReady) {
     return (

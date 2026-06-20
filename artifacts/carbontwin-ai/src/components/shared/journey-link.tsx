@@ -1,4 +1,3 @@
-"use client";
 
 import { Link, type LinkProps } from "wouter";
 import { useOnboardingStore } from "@/store/onboarding";

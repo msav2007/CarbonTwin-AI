@@ -1,4 +1,3 @@
-"use client";
 
 import { OptionCard } from "@/components/onboarding/option-card";
 import type { OnboardingOption } from "@/lib/onboarding/options";

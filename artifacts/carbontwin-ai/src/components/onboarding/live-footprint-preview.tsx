@@ -1,4 +1,3 @@
-"use client";
 
 import { motion } from "framer-motion";
 import { Activity, Gauge, Radar, SignalHigh } from "lucide-react";

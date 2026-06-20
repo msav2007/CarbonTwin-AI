@@ -1,4 +1,3 @@
-"use client";
 
 import { motion } from "framer-motion";
 import { Check, type LucideIcon } from "lucide-react";

@@ -1,0 +1,2 @@
+- [CarbonTwin wouter routing](carbontwin-wouter.md) — never use `router` variable; always destructure `useLocation()` as `[, navigate]` or `[pathname]`
+- [CarbonTwin test suite](carbontwin-tests.md) — 122 tests across 5 files covering all carbon engine modules; vitest.config.ts lives in artifact dir

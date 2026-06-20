@@ -45,7 +45,10 @@ export function Hero() {
                 PromptWars Challenge 3 · AI Carbon Intelligence
               </Badge>
 
-              <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight text-[#0F172A] sm:text-5xl xl:text-6xl">
+              <h1
+                className="font-display text-balance text-4xl font-bold leading-[1.05] tracking-tight text-[#0F172A] sm:text-5xl xl:text-6xl"
+                aria-label="Meet your Carbon Twin"
+              >
                 {headlineWords.map((word, i) => (
                   <motion.span
                     key={word}

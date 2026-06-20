@@ -149,12 +149,13 @@ export default function DashboardPage() {
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Applying the first action plan can move your score from{" "}
-                {result.carbonScore} to {result.targetScore}. The next feature
-                can expand this into 1, 5, and 10 year projections.
+                {result.carbonScore} to {result.targetScore} — a reduction of{" "}
+                {result.reductionPotentialKg} kg CO₂ per year. Use the
+                simulator to explore 1-year and 5-year futures.
               </p>
               <Button variant="outline" className="mt-5" asChild>
-                <Link href="/onboarding/reveal">
-                  Reopen Reveal
+                <Link href="/dashboard/simulator">
+                  Open Simulator
                   <ArrowRight />
                 </Link>
               </Button>

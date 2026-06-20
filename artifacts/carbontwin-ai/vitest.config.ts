@@ -11,8 +11,15 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json-summary'],
-      include: ['src/lib/**/*.ts', 'src/hooks/**/*.ts'],
-      exclude: ['src/lib/gemini/**', 'src/**/*.test.ts', 'src/test/**'],
+      include: [
+        'src/lib/**/*.ts',
+        'src/store/**/*.ts',
+      ],
+      exclude: [
+        'src/lib/gemini/**',
+        'src/**/*.test.ts',
+        'src/test/**',
+      ],
     },
   },
   resolve: {

@@ -75,7 +75,12 @@ function ScoreRing({ score, delay = 0 }: { score: number; delay?: number }) {
 
   return (
     <div className="relative mx-auto h-52 w-52">
-      <svg className="h-full w-full -rotate-90" viewBox="0 0 200 200">
+      <svg
+        className="h-full w-full -rotate-90"
+        viewBox="0 0 200 200"
+        role="img"
+        aria-label={`Carbon Score: ${animated} out of 100`}
+      >
         <circle
           cx="100"
           cy="100"
@@ -146,7 +151,7 @@ function TypewriterSummary({ text }: { text: string }) {
   return (
     <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
       {displayed}
-      <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-primary" />
+      <span className="ml-0.5 inline-block h-4 w-0.5 animate-pulse bg-primary" aria-hidden="true" />
     </p>
   );
 }

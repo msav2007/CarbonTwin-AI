@@ -14,14 +14,16 @@ export function JourneyLink({
   className,
   onClick,
   resumeChildren,
-  ...props
+  to: _to,
+  asChild: _asChild,
+  ...rest
 }: JourneyLinkProps) {
   const { hasHydrated, result } = useOnboardingStore();
   const hasJourney = hasHydrated && Boolean(result);
 
   return (
     <Link
-      {...props}
+      {...rest}
       href={hasJourney ? "/dashboard" : "/onboarding"}
       className={className}
       onClick={onClick}

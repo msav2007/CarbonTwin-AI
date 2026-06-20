@@ -394,3 +394,129 @@ describe('buildCoachingInsights', () => {
     }
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Branch-coverage gap tests
+// ─────────────────────────────────────────────────────────────────────────────
+
+// transit(900)+vegetarian(1200)+medium,solo(1400)+rare(300)+minimal(400) = 4200kg
+// → vsAveragePct === 0  →  "right on the 4.2t benchmark"
+describe('buildSummary – vsAveragePct === 0 path', () => {
+  const benchmarkProfile: OnboardingData = {
+    name: 'BenchUser',
+    transport: 'transit',
+    diet: 'vegetarian',
+    homeEnergy: 'medium',
+    household: 'solo',
+    travel: 'rare',
+    shopping: 'minimal',
+    motivation: 'shrink-footprint',
+  };
+
+  const benchBreakdown: CategoryBreakdown = {
+    transport: 900,
+    food: 1200,
+    home: 1400,
+    travel: 300,
+    shopping: 400,
+  };
+
+  it('buildTwinProfile summary mentions "right on the 4.2t benchmark"', () => {
+    const actions = buildRecommendedActions(benchmarkProfile, 'home');
+    const twin = buildTwinProfile(benchmarkProfile, benchBreakdown, actions);
+    expect(twin.summary).toMatch(/right on the 4\.2t benchmark/);
+  });
+});
+
+// name = ' ' → ownerName fallback to "Explorer" (line ~400 in assistant.ts)
+describe('buildTwinProfile – empty name triggers Explorer fallback', () => {
+  const noNameProfile: OnboardingData = {
+    name: ' ',
+    transport: 'car',
+    diet: 'meat-heavy',
+    homeEnergy: 'high',
+    household: 'solo',
+    travel: 'frequent',
+    shopping: 'frequent',
+    motivation: 'shrink-footprint',
+  };
+
+  it('ownerName falls back to Explorer for whitespace-only name', () => {
+    const actions = buildRecommendedActions(noNameProfile, 'transport');
+    const twin = buildTwinProfile(noNameProfile, highBreakdown, actions);
+    expect(twin.ownerName).toBe('Explorer');
+    expect(twin.signal).toContain('Explorer');
+  });
+});
+
+// strongestHabit branches in buildCarbonProfile
+describe('buildCarbonProfile – strongestHabit branches', () => {
+  it('diet path: vegetarian driver (transport=transit, not bike/walk)', () => {
+    const profile: OnboardingData = {
+      name: 'DieterUser',
+      transport: 'transit',
+      diet: 'vegetarian',
+      homeEnergy: 'high',
+      household: 'solo',
+      travel: 'frequent',
+      shopping: 'frequent',
+      motivation: 'shrink-footprint',
+    };
+    const breakdown: CategoryBreakdown = { transport: 900, food: 1200, home: 2800, travel: 3500, shopping: 2200 };
+    const result = buildCarbonProfile(profile, breakdown);
+    expect(result.strongestHabit).toMatch(/diet is already doing/i);
+  });
+
+  it('diet path: vegan driver', () => {
+    const profile: OnboardingData = {
+      name: 'VeganUser',
+      transport: 'mixed',
+      diet: 'vegan',
+      homeEnergy: 'high',
+      household: 'solo',
+      travel: 'frequent',
+      shopping: 'frequent',
+      motivation: 'consume-less',
+    };
+    const breakdown: CategoryBreakdown = { transport: 1800, food: 800, home: 2800, travel: 3500, shopping: 2200 };
+    const result = buildCarbonProfile(profile, breakdown);
+    expect(result.strongestHabit).toMatch(/diet is already doing/i);
+  });
+
+  it('travel path: rare traveler, car driver, meat-heavy', () => {
+    const profile: OnboardingData = {
+      name: 'RareTraveler',
+      transport: 'car',
+      diet: 'meat-heavy',
+      homeEnergy: 'high',
+      household: 'solo',
+      travel: 'rare',
+      shopping: 'frequent',
+      motivation: 'lower-bills',
+    };
+    const breakdown: CategoryBreakdown = { transport: 3200, food: 2800, home: 2800, travel: 300, shopping: 2200 };
+    const result = buildCarbonProfile(profile, breakdown);
+    expect(result.strongestHabit).toMatch(/keeping travel rare/i);
+  });
+
+  it('shopping path: minimal spender, car driver, meat-heavy, frequent travel', () => {
+    const profile: OnboardingData = {
+      name: 'MinimalShop',
+      transport: 'car',
+      diet: 'meat-heavy',
+      homeEnergy: 'medium',
+      household: 'solo',
+      travel: 'frequent',
+      shopping: 'minimal',
+      motivation: 'consume-less',
+    };
+    const breakdown: CategoryBreakdown = { transport: 3200, food: 2800, home: 1400, travel: 3500, shopping: 400 };
+    const result = buildCarbonProfile(profile, breakdown);
+    expect(result.strongestHabit).toMatch(/shopping habits already prevent/i);
+  });
+
+  it('default path: high-impact everything', () => {
+    const result = buildCarbonProfile(highImpactProfile, highBreakdown);
+    expect(result.strongestHabit).toMatch(/enough structure/i);
+  });
+});

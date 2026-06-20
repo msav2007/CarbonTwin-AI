@@ -1,13 +1,97 @@
-
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useOnboardingStore } from "@/store/onboarding";
 import { Container } from "@/components/shared/container";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, Zap, Target, Leaf } from "lucide-react";
+import { MessageCircle, Sparkles, Zap, Target, Leaf, AlertCircle } from "lucide-react";
+import {
+  generateCarbonCoachMessage,
+  isGeminiAvailable,
+  type AICarbonCoachResponse,
+} from "@/lib/gemini/client";
+import type { OnboardingData } from "@/types";
+
+function AiCoachCard({ response }: { response: AICarbonCoachResponse }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-cyan-500/5 to-transparent p-6"
+    >
+      <div className="flex items-center gap-2 mb-4">
+        <Sparkles className="h-5 w-5 text-primary" />
+        <h2 className="font-display text-lg font-semibold text-foreground">
+          Your AI Coach Says
+        </h2>
+        <Badge variant="glow" className="ml-auto text-xs">Gemini AI</Badge>
+      </div>
+      <p className="text-sm leading-relaxed text-foreground/90 mb-4">{response.message}</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="rounded-xl border border-cyan-500/15 bg-black/20 p-3">
+          <p className="text-xs font-mono uppercase tracking-wider text-primary mb-1">Top Tip</p>
+          <p className="text-sm text-foreground/80">{response.topTip}</p>
+        </div>
+        <div className="rounded-xl border border-success/15 bg-black/20 p-3">
+          <p className="text-xs font-mono uppercase tracking-wider text-success mb-1">Encouragement</p>
+          <p className="text-sm text-foreground/80">{response.encouragement}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function AiCoachSkeleton() {
+  return (
+    <div className="rounded-2xl border border-primary/15 bg-primary/5 p-6 animate-pulse">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="h-5 w-5 rounded-full bg-primary/20" />
+        <div className="h-4 w-40 rounded bg-primary/20" />
+      </div>
+      <div className="space-y-2 mb-4">
+        <div className="h-3 w-full rounded bg-white/10" />
+        <div className="h-3 w-4/5 rounded bg-white/10" />
+        <div className="h-3 w-3/5 rounded bg-white/10" />
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="h-16 rounded-xl bg-white/5" />
+        <div className="h-16 rounded-xl bg-white/5" />
+      </div>
+    </div>
+  );
+}
 
 export default function CoachPage() {
-  const { hasHydrated, result } = useOnboardingStore();
+  const { hasHydrated, data, result } = useOnboardingStore();
+  const [aiResponse, setAiResponse] = useState<AICarbonCoachResponse | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!result || !data || !isGeminiAvailable()) return;
+
+    let cancelled = false;
+    setAiLoading(true);
+    setAiError(null);
+
+    generateCarbonCoachMessage(data as OnboardingData, result)
+      .then((response) => {
+        if (!cancelled) setAiResponse(response);
+      })
+      .catch((err: unknown) => {
+        if (!cancelled) {
+          const msg = err instanceof Error ? err.message : "AI coaching unavailable.";
+          setAiError(msg);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setAiLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [result, data]);
 
   if (!hasHydrated || !result) {
     return (
@@ -38,6 +122,19 @@ export default function CoachPage() {
         </motion.div>
 
         <div className="grid gap-6">
+          {isGeminiAvailable() && (
+            aiLoading ? (
+              <AiCoachSkeleton />
+            ) : aiError ? (
+              <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-4 flex items-start gap-3" role="alert">
+                <AlertCircle className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
+                <p className="text-sm text-red-400">AI coaching unavailable right now. Static insights are shown below.</p>
+              </div>
+            ) : aiResponse ? (
+              <AiCoachCard response={aiResponse} />
+            ) : null
+          )}
+
           {result.coach.map((insight, idx) => (
             <motion.div
               key={insight.id}

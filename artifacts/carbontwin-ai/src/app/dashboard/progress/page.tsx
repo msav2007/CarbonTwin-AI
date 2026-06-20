@@ -69,12 +69,19 @@ export default function ProgressPage() {
               <span className="text-sm font-medium text-muted-foreground">Daily Allowance Used</span>
               <span className="font-bold text-foreground">{budgetPct}%</span>
             </div>
-            <div className="h-4 w-full bg-white/5 rounded-full overflow-hidden">
-              <motion.div 
+            <div
+              className="h-4 w-full bg-white/5 rounded-full overflow-hidden"
+              role="progressbar"
+              aria-valuenow={Math.min(budgetPct, 100)}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label={`Daily carbon budget utilization: ${budgetPct}%`}
+            >
+              <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(budgetPct, 100)}%` }}
                 transition={{ duration: 1 }}
-                className={`h-full ${budgetPct > 100 ? 'bg-red-500' : 'bg-primary'}`}
+                className={`h-full ${budgetPct > 100 ? "bg-red-500" : "bg-primary"}`}
               />
             </div>
             {budgetPct > 100 && (

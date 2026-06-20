@@ -30,7 +30,7 @@ const headlineWords = ["Meet", "your", "Carbon", "Twin"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-8 sm:pt-36 sm:pb-12 bg-[#08152F]">
+    <section className="relative overflow-hidden pt-28 pb-8 sm:pt-36 sm:pb-12 bg-hero-gradient">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <div>
@@ -39,8 +39,8 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Badge variant="glow" className="mb-6 px-4 py-1.5 text-xs sm:text-sm bg-[#102A56] text-white hover:bg-[#102A56]">
-                <Sparkles className="mr-1.5 h-3.5 w-3.5 text-primary" />
+              <Badge variant="secondary" className="mb-6 px-4 py-1.5 text-xs sm:text-sm bg-white/10 text-white hover:bg-white/20 border-white/10">
+                <Sparkles className="mr-1.5 h-3.5 w-3.5 text-white/70" />
                 PromptWars Challenge 3 · AI Carbon Intelligence
               </Badge>
 
@@ -58,9 +58,9 @@ export function Hero() {
                     className="mr-[0.25em] inline-block last:mr-0"
                   >
                     {word === "Carbon" ? (
-                      <span className="text-gradient">{word}</span>
+                      <span className="text-white">{word}</span>
                     ) : word === "Twin" ? (
-                      <span className="text-gradient-warm">{word}</span>
+                      <span className="text-white/80">{word}</span>
                     ) : (
                       word
                     )}
@@ -90,20 +90,20 @@ export function Hero() {
                 {storyBeats.map((beat) => (
                   <div
                     key={beat.act}
-                    className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 p-3.5 transition-all hover:bg-white/10"
+                    className="group flex items-start gap-4 glass-dark p-3.5 transition-all"
                   >
-                    <span className="font-mono text-xs font-bold text-primary">
+                    <span className="font-mono text-xs font-bold text-white/50">
                       {beat.act}
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-semibold text-white">
                         {beat.title}
                       </p>
-                      <p className="mt-0.5 text-xs leading-relaxed text-slate-300">
+                      <p className="mt-0.5 text-xs leading-relaxed text-white/70">
                         {beat.text}
                       </p>
                     </div>
-                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-white/40 transition-transform group-hover:translate-x-0.5 group-hover:text-white" />
                   </div>
                 ))}
               </motion.div>
@@ -114,13 +114,13 @@ export function Hero() {
                 transition={{ delay: 0.7, duration: 0.5 }}
                 className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
               >
-                <Button variant="glow" size="xl" asChild>
+                <Button variant="default" size="xl" asChild>
                   <Link href="/onboarding">
                     Create Your Twin
                     <ArrowRight />
                   </Link>
                 </Button>
-                <Button variant="outline" size="xl" asChild>
+                <Button variant="secondary" size="xl" asChild className="bg-white/10 text-white hover:bg-white/20 border-white/10">
                   <a href="#demo">
                     <Play className="h-4 w-4" />
                     Watch Demo
@@ -145,7 +145,7 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative lg:pl-4"
           >
-            <div className="pointer-events-none absolute -inset-8 rounded-full bg-primary/20 blur-3xl" />
+            <div className="pointer-events-none absolute -inset-8 rounded-full bg-white/5 blur-3xl" />
             <TwinPreview />
           </motion.div>
         </div>

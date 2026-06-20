@@ -198,7 +198,7 @@ export function TwinPreview() {
                     <span className="w-16 text-xs text-muted-foreground">
                       {row.label}
                     </span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-50">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full glass">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${row.pct}%` }}
@@ -227,7 +227,7 @@ export function TwinPreview() {
                 </p>
               </div>
               <div ref={score.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-green-600">
+                <p className="font-display text-xl font-bold text-success">
                   {score.formatted}
                 </p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -235,7 +235,7 @@ export function TwinPreview() {
                 </p>
               </div>
               <div ref={savings.ref} className="glass rounded-xl p-3 text-center">
-                <p className="font-display text-xl font-bold text-green-600">
+                <p className="font-display text-xl font-bold text-success">
                   {savings.formatted}
                 </p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -259,7 +259,7 @@ export function TwinPreview() {
                   %
                 </span>
               </div>
-              <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-50">
+              <div className="mt-3 h-3 overflow-hidden rounded-full glass">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{

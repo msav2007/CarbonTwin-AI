@@ -59,7 +59,7 @@ export function DemoSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07 }}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-slate-50 px-5 py-4 backdrop-blur-sm transition-all hover:border-border hover:bg-slate-50"
+                  className="flex items-center gap-4 rounded-xl glass px-5 py-4 backdrop-blur-sm transition-all hover:border-border hover:glass"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-500/15 bg-primary/10 font-mono text-sm font-bold text-primary">
                     {i + 1}

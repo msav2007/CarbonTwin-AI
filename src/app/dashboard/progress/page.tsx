@@ -41,19 +41,19 @@ export default function ProgressPage() {
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-8">
-          <Card className="border-border bg-slate-50">
+          <Card className="border-border glass">
             <CardContent className="p-6">
               <p className="text-sm font-medium text-muted-foreground">Daily Target</p>
               <p className="mt-2 font-display text-3xl font-bold text-foreground">{result.dailyBudgetKg} <span className="text-lg text-muted-foreground font-normal">kg</span></p>
             </CardContent>
           </Card>
-          <Card className="border-border bg-slate-50">
+          <Card className="border-border glass">
             <CardContent className="p-6">
               <p className="text-sm font-medium text-muted-foreground">Current Daily Avg</p>
-              <p className={`mt-2 font-display text-3xl font-bold ${budgetPct > 100 ? 'text-red-400' : 'text-green-600'}`}>{result.dailyKg} <span className="text-lg text-muted-foreground font-normal">kg</span></p>
+              <p className={`mt-2 font-display text-3xl font-bold ${budgetPct > 100 ? 'text-red-400' : 'text-success'}`}>{result.dailyKg} <span className="text-lg text-muted-foreground font-normal">kg</span></p>
             </CardContent>
           </Card>
-          <Card className="border-border bg-slate-50">
+          <Card className="border-border glass">
             <CardContent className="p-6">
               <p className="text-sm font-medium text-muted-foreground">Current Score</p>
               <p className="mt-2 font-display text-3xl font-bold text-primary">{result.carbonScore}</p>
@@ -61,7 +61,7 @@ export default function ProgressPage() {
           </Card>
         </div>
 
-        <Card className="border-border bg-slate-50">
+        <Card className="border-border glass">
           <CardHeader>
             <CardTitle>Budget Utilization</CardTitle>
           </CardHeader>
@@ -84,7 +84,7 @@ export default function ProgressPage() {
               </p>
             )}
             {budgetPct <= 100 && (
-              <div className="mt-4 flex items-center gap-2 text-sm text-green-600">
+              <div className="mt-4 flex items-center gap-2 text-sm text-success">
                 <CheckCircle2 className="h-4 w-4" />
                 You are staying within your daily carbon budget. Great job!
               </div>

@@ -41,8 +41,8 @@ export function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-all duration-500",
           scrolled
-            ? "border-b border-white/10 bg-[#08152F]/90 shadow-lg shadow-black/10 backdrop-blur-md"
-            : "bg-[#08152F]"
+            ? "border-b border-border bg-white/90 shadow-saas backdrop-blur-md"
+            : "bg-transparent"
         )}
       >
         <Container className="flex h-16 items-center justify-between lg:h-[4.5rem]">
@@ -50,7 +50,7 @@ export function Navbar() {
             <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary transition-all">
               <Cpu className="h-5 w-5 text-white" />
             </div>
-            <span className="font-display text-lg font-bold tracking-tight text-white">
+            <span className="font-display text-lg font-bold tracking-tight text-foreground">
               Carbon<span className="text-primary">Twin</span>
             </span>
           </Link>
@@ -60,7 +60,7 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                className="rounded-lg px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
               >
                 {link.label}
               </a>
@@ -72,7 +72,7 @@ export function Navbar() {
               variant="ghost"
               size="sm"
               asChild
-              className="hidden sm:inline-flex text-slate-300 hover:text-white hover:bg-white/10"
+              className="hidden sm:inline-flex"
             >
               <a href="#demo">See the flow</a>
             </Button>
@@ -84,7 +84,7 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-slate-300 hover:text-white"
+              className="md:hidden"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
@@ -101,7 +101,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[60] bg-[#08152F]/80 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
@@ -109,10 +109,10 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
-              className="fixed inset-y-0 right-0 z-[70] w-full max-w-xs border-l border-white/10 bg-[#08152F] p-6 shadow-2xl md:hidden"
+              className="fixed inset-y-0 right-0 z-[70] w-full max-w-xs border-l border-border bg-background p-6 shadow-2xl md:hidden"
             >
               <div className="flex items-center justify-between">
-                <span className="font-display font-bold text-white">Menu</span>
+                <span className="font-display font-bold text-foreground">Menu</span>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -128,7 +128,7 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-xl px-4 py-3 text-base text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
+                    className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
                   >
                     {link.label}
                   </a>

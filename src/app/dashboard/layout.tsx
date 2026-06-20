@@ -23,7 +23,7 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen bg-background">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-[#08152F] text-white hidden md:flex md:flex-col">
+      <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-[#07142D] text-white hidden md:flex md:flex-col">
         <div className="flex h-16 shrink-0 items-center px-6 border-b border-white/10">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -46,7 +46,7 @@ export default function DashboardLayout({
                     "group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     isActive
                       ? "bg-primary text-white"
-                      : "text-slate-300 hover:bg-[#102A56] hover:text-white"
+                      : "text-slate-300 hover:bg-[#132B5C] hover:text-white"
                   )}
                 >
                   <item.icon
@@ -63,7 +63,7 @@ export default function DashboardLayout({
           </nav>
         </div>
         <div className="mt-auto p-4 border-t border-white/10">
-          <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-[#102A56] hover:text-white cursor-pointer">
+          <div className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-[#132B5C] hover:text-white cursor-pointer">
             <Settings className="h-5 w-5 text-slate-400" />
             Settings
           </div>

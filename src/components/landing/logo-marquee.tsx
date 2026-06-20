@@ -17,7 +17,7 @@ export function LogoMarquee() {
   const items = [...technologies, ...technologies];
 
   return (
-    <section className="border-y border-border bg-slate-50 py-8">
+    <section className="border-y border-border glass py-8">
       <Container>
         <p className="mb-6 text-center font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">
           Powered by modern stack
@@ -30,7 +30,7 @@ export function LogoMarquee() {
           {items.map((tech, i) => (
             <span
               key={`${tech}-${i}`}
-              className="inline-flex items-center rounded-full border border-cyan-500/10 bg-slate-50 px-5 py-2 text-sm font-medium text-muted-foreground backdrop-blur-sm"
+              className="inline-flex items-center rounded-full border border-cyan-500/10 glass px-5 py-2 text-sm font-medium text-muted-foreground backdrop-blur-sm"
             >
               {tech}
             </span>

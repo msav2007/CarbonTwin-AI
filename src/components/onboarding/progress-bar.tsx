@@ -21,7 +21,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
           {STEP_META[currentStep - 1]?.title}
         </span>
       </div>
-      <div className="relative h-1.5 overflow-hidden rounded-full bg-slate-50">
+      <div className="relative h-1.5 overflow-hidden rounded-full glass">
         <motion.div
           className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
           initial={false}
@@ -35,7 +35,7 @@ export function ProgressBar({ currentStep }: ProgressBarProps) {
             key={step.id}
             className={cn(
               "h-1 flex-1 rounded-full transition-colors duration-300",
-              step.id <= currentStep ? "bg-primary/60" : "bg-slate-50"
+              step.id <= currentStep ? "bg-primary/60" : "glass"
             )}
           />
         ))}

@@ -201,12 +201,12 @@ function MetricCard({
 }) {
   const toneClass = {
     primary: "text-primary",
-    success: "text-green-600",
+    success: "text-success",
     warning: "text-amber-500",
   }[tone];
 
   return (
-    <div className="rounded-2xl border border-border bg-slate-50 p-4">
+    <div className="rounded-2xl glass p-4">
       <div className="flex items-center gap-2 text-muted-foreground">
         <Icon className="h-4 w-4" />
         <span className="text-xs uppercase tracking-[0.14em]">{label}</span>
@@ -383,7 +383,7 @@ export function TwinReveal() {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-border bg-slate-50 p-4">
+              <div className="mt-4 rounded-2xl glass p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
@@ -397,7 +397,7 @@ export function TwinReveal() {
                     {budgetPct}%
                   </Badge>
                 </div>
-                <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-50">
+                <div className="mt-4 h-2 overflow-hidden rounded-full glass">
                   <motion.div
                     className="h-full rounded-full bg-gradient-to-r from-[#22C55E] via-[#7DF9FF] to-[#F59E0B]"
                     initial={{ width: 0 }}
@@ -460,7 +460,7 @@ export function TwinReveal() {
                           {kg.toLocaleString()} kg / {pct}%
                         </span>
                       </div>
-                      <div className="h-2 overflow-hidden rounded-full bg-slate-50">
+                      <div className="h-2 overflow-hidden rounded-full glass">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${pct}%` }}
@@ -496,7 +496,7 @@ export function TwinReveal() {
                   </p>
                 </div>
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/20 bg-emerald-400/10">
-                  <Target className="h-5 w-5 text-green-600" />
+                  <Target className="h-5 w-5 text-success" />
                 </div>
               </div>
 
@@ -510,7 +510,7 @@ export function TwinReveal() {
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.75 + index * 0.08 }}
-                      className="rounded-2xl border border-border bg-slate-50 p-4"
+                      className="rounded-2xl glass p-4"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>

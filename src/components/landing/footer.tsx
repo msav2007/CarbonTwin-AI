@@ -45,7 +45,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <Separator className="my-8 bg-slate-50" />
+        <Separator className="my-8 glass" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
           <p>PromptWars Challenge 3 · National Hackathon 2026</p>

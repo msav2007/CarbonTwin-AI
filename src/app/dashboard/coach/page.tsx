@@ -46,13 +46,13 @@ export default function CoachPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
             >
-              <Card className="border-border bg-slate-50">
+              <Card className="border-border glass">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="flex items-center gap-2">
                       {insight.tone === "encouraging" && <Zap className="h-5 w-5 text-amber-500" />}
                       {insight.tone === "warning" && <Target className="h-5 w-5 text-red-400" />}
-                      {insight.tone === "opportunity" && <Leaf className="h-5 w-5 text-green-600" />}
+                      {insight.tone === "opportunity" && <Leaf className="h-5 w-5 text-success" />}
                       {insight.title}
                     </CardTitle>
                     <Badge variant="outline">{insight.tone}</Badge>
@@ -75,7 +75,7 @@ export default function CoachPage() {
             <h2 className="mb-4 font-display text-xl font-semibold text-foreground">Priority Action Plan</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {result.recommendedActions.map((action) => (
-                <Card key={action.id} className="border-border bg-slate-50">
+                <Card key={action.id} className="border-border glass">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-2">
                       <Badge variant="glow">{action.difficulty}</Badge>
@@ -86,7 +86,7 @@ export default function CoachPage() {
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">{action.description}</p>
                     <div className="rounded-lg bg-black/20 p-3 mb-4 border border-cyan-500/10">
-                      <p className="text-xs font-mono text-green-600 mb-1">Impact</p>
+                      <p className="text-xs font-mono text-success mb-1">Impact</p>
                       <p className="text-sm font-medium text-foreground">Save {action.annualSavingsKg} kg CO₂ / yr</p>
                     </div>
                     <p className="text-xs font-medium text-primary mb-1">First step:</p>

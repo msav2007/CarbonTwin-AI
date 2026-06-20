@@ -69,7 +69,7 @@ export function Features() {
             const Icon = iconMap[feature.icon] ?? Sparkles;
             return (
               <motion.div key={feature.id} variants={item}>
-                <Card className="group relative h-full overflow-hidden border-border bg-slate-50 transition-all duration-500 hover:-translate-y-1.5 hover:border-border hover:bg-slate-50 hover:shadow-sm">
+                <Card className="group relative h-full overflow-hidden border-border glass transition-all duration-500 hover:-translate-y-1.5 hover:border-border hover:glass hover:shadow-sm">
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   <CardHeader className="relative pb-3">

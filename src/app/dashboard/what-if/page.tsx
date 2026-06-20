@@ -53,7 +53,7 @@ export default function WhatIfPage() {
 
         <div className="grid gap-8 lg:grid-cols-12">
           <div className="lg:col-span-7 space-y-6">
-            <Card className="border-border bg-slate-50">
+            <Card className="border-border glass">
               <CardHeader>
                 <CardTitle>Adjust Your Signals</CardTitle>
               </CardHeader>
@@ -119,7 +119,7 @@ export default function WhatIfPage() {
 
           <div className="lg:col-span-5">
             <div className="sticky top-24 space-y-6">
-              <Card className="border-border bg-slate-50">
+              <Card className="border-border glass">
                 <CardHeader>
                   <CardTitle>Impact Results</CardTitle>
                 </CardHeader>
@@ -138,7 +138,7 @@ export default function WhatIfPage() {
 
                   <div className={`rounded-xl p-4 text-center ${isBetter ? 'bg-success/10 border border-success/20' : diffKg === 0 ? 'bg-white/5 border border-white/10' : 'bg-red-500/10 border border-red-500/20'}`}>
                     <p className="text-sm text-muted-foreground mb-1">Difference</p>
-                    <p className={`font-display text-3xl font-bold ${isBetter ? 'text-green-600' : diffKg === 0 ? 'text-foreground' : 'text-red-400'}`}>
+                    <p className={`font-display text-3xl font-bold ${isBetter ? 'text-success' : diffKg === 0 ? 'text-foreground' : 'text-red-400'}`}>
                       {isBetter ? '-' : diffKg === 0 ? '' : '+'}{Math.abs(diffKg)} kg/yr
                     </p>
                   </div>

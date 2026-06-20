@@ -51,7 +51,7 @@ export function LiveFootprintPreview({ data }: LiveFootprintPreviewProps) {
 
         <div className="p-5">
           <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-border bg-slate-50 p-3">
+            <div className="rounded-xl glass p-3">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Activity className="h-3.5 w-3.5" />
                 <span className="text-xs">Annual</span>
@@ -60,7 +60,7 @@ export function LiveFootprintPreview({ data }: LiveFootprintPreviewProps) {
                 {formatTonnes(estimate.annualKg)}t
               </p>
             </div>
-            <div className="rounded-xl border border-border bg-slate-50 p-3">
+            <div className="rounded-xl glass p-3">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Gauge className="h-3.5 w-3.5" />
                 <span className="text-xs">Score</span>
@@ -78,7 +78,7 @@ export function LiveFootprintPreview({ data }: LiveFootprintPreviewProps) {
                 {estimate.confidence}%
               </span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-slate-50">
+            <div className="h-2 overflow-hidden rounded-full glass">
               <motion.div
                 className="h-full rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
                 animate={{ width: `${estimate.confidence}%` }}
@@ -117,7 +117,7 @@ export function LiveFootprintPreview({ data }: LiveFootprintPreviewProps) {
                       {value.toLocaleString()} kg
                     </span>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-slate-50">
+                  <div className="h-1.5 overflow-hidden rounded-full glass">
                     <motion.div
                       className="h-full rounded-full"
                       style={{ backgroundColor: row.color }}
@@ -130,7 +130,7 @@ export function LiveFootprintPreview({ data }: LiveFootprintPreviewProps) {
             })}
           </div>
 
-          <div className="mt-6 rounded-xl border border-border bg-slate-50 p-4">
+          <div className="mt-6 rounded-xl glass p-4">
             <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-primary">
               <SignalHigh className="h-3.5 w-3.5" />
               Calibrating

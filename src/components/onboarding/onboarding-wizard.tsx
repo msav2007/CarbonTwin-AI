@@ -247,7 +247,7 @@ export function OnboardingWizard() {
 
               {currentStep === 5 && (
                 <div className="space-y-6">
-                  <div className="rounded-2xl border border-border bg-slate-50 p-5">
+                  <div className="rounded-2xl glass p-5">
                     <label
                       htmlFor="carbon-twin-name"
                       className="flex items-center gap-2 text-sm font-medium text-foreground"
@@ -301,7 +301,7 @@ export function OnboardingWizard() {
                         return (
                           <div
                             key={item.field}
-                            className="flex items-center justify-between gap-4 rounded-xl border border-border bg-slate-50 px-4 py-3"
+                            className="flex items-center justify-between gap-4 rounded-xl glass px-4 py-3"
                           >
                             <div className="min-w-0">
                               <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
@@ -334,7 +334,7 @@ export function OnboardingWizard() {
                     <motion.div
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="rounded-2xl border border-primary/30 bg-slate-50 p-5"
+                      className="rounded-2xl border border-primary/30 glass p-5"
                     >
                       <div className="flex items-center gap-3">
                         <motion.div
@@ -357,7 +357,7 @@ export function OnboardingWizard() {
                           </p>
                         </div>
                       </div>
-                      <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-50">
+                      <div className="mt-4 h-1.5 overflow-hidden rounded-full glass">
                         <motion.div
                           className="h-full rounded-full bg-gradient-to-r from-[#00D4FF] to-[#7DF9FF]"
                           animate={{

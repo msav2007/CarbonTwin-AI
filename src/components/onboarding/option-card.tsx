@@ -39,7 +39,7 @@ export function OptionCard({
         "group relative w-full rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/25 sm:p-5",
         selected
           ? "border-primary/50 bg-primary/10 shadow-sm"
-          : "border-border bg-slate-50 hover:border-border hover:bg-slate-50"
+          : "border-border glass hover:border-border hover:glass"
       )}
     >
       {selected && (

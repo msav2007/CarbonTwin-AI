@@ -70,21 +70,21 @@ export default function DashboardPage() {
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                <div className="rounded-2xl border border-border bg-slate-50 p-4">
+                <div className="rounded-2xl glass p-4">
                   <Gauge className="h-5 w-5 text-primary" />
                   <p className="mt-3 font-display text-3xl font-bold text-foreground">
                     {result.carbonScore}
                   </p>
                   <p className="text-xs text-muted-foreground">Carbon Score</p>
                 </div>
-                <div className="rounded-2xl border border-border bg-slate-50 p-4">
-                  <Leaf className="h-5 w-5 text-green-600" />
+                <div className="rounded-2xl glass p-4">
+                  <Leaf className="h-5 w-5 text-success" />
                   <p className="mt-3 font-display text-3xl font-bold text-foreground">
                     {formatTonnes(result.annualKg)}t
                   </p>
                   <p className="text-xs text-muted-foreground">Annual CO2</p>
                 </div>
-                <div className="rounded-2xl border border-border bg-slate-50 p-4">
+                <div className="rounded-2xl glass p-4">
                   <TrendingDown className="h-5 w-5 text-amber-500" />
                   <p className="mt-3 font-display text-3xl font-bold text-foreground">
                     {formatTonnes(result.targetAnnualKg)}t
@@ -108,7 +108,7 @@ export default function DashboardPage() {
                   {budgetPct}%
                 </Badge>
               </div>
-              <div className="mt-5 h-3 overflow-hidden rounded-full bg-slate-100">
+              <div className="mt-5 h-3 overflow-hidden rounded-full glass-strong">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.min(budgetPct, 100)}%` }}
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                 {result.recommendedActions.map((action) => (
                   <div
                     key={action.id}
-                    className="flex items-start justify-between gap-4 rounded-2xl border border-border bg-slate-50 p-4"
+                    className="flex items-start justify-between gap-4 rounded-2xl glass p-4"
                   >
                     <div>
                       <p className="font-medium text-foreground">

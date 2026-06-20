@@ -65,7 +65,7 @@ export default function SimulatorPage() {
                         </div>
                         <div className="text-right">
                           <p className="text-[10px] uppercase text-muted-foreground">Projected</p>
-                          <p className="text-2xl font-bold text-green-600">{formatTonnes(outlook.plannedAnnualKg)}t</p>
+                          <p className="text-2xl font-bold text-success">{formatTonnes(outlook.plannedAnnualKg)}t</p>
                         </div>
                       </div>
                       <p className="text-xs text-muted-foreground">{outlook.narrative}</p>

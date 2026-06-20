@@ -32,15 +32,13 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-slate-50 p-6 transition-all hover:border-border hover:bg-slate-50 sm:p-7"
+              className="group relative overflow-hidden rounded-2xl glass p-6 transition-all hover:glass-strong sm:p-7"
             >
-              <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/10 blur-2xl transition-all group-hover:bg-primary/10" />
-
               <div className="relative flex items-start justify-between">
-                <span className="font-display text-4xl font-bold text-white/[0.04] transition-colors group-hover:text-primary/15">
+                <span className="font-display step-number">
                   {step.step}
                 </span>
-                <span className="rounded-full border border-border bg-primary/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-primary">
+                <span className="rounded-full border border-border bg-slate-50 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                   {step.tag}
                 </span>
               </div>
@@ -60,7 +58,7 @@ export function HowItWorks() {
                 />
                 <span
                   className={`text-xs font-medium ${
-                    'outcomeSuccess' in step && step.outcomeSuccess ? "text-green-600" : "text-primary"
+                    'outcomeSuccess' in step && step.outcomeSuccess ? "text-success" : "text-primary"
                   }`}
                 >
                   {step.outcome}

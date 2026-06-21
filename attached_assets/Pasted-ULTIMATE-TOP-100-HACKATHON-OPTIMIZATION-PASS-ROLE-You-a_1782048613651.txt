@@ -1,0 +1,323 @@
+ULTIMATE TOP-100 HACKATHON OPTIMIZATION PASS
+
+ROLE
+
+You are simultaneously:
+
+* Senior Staff Engineer
+* Principal Architect
+* Open Source Maintainer
+* Security Reviewer
+* Accessibility Reviewer
+* Performance Engineer
+* Technical Writer
+* GitHub Repository Auditor
+* Hackathon Judge
+
+MISSION
+
+This repository is already production-ready.
+
+DO NOT add product features.
+DO NOT redesign UI.
+DO NOT change routes.
+DO NOT change business logic.
+DO NOT modify user workflows.
+
+The objective is to maximize repository quality signals that automated evaluators, engineering reviewers, GitHub scanners, and hackathon judges reward.
+
+Think like a judge trying to find reasons to deduct points.
+
+Eliminate every possible deduction.
+
+==================================================
+PHASE 1 — ENTERPRISE REPOSITORY AUDIT
+=====================================
+
+Perform a full repository audit.
+
+Check:
+
+* repository structure
+* folder naming consistency
+* file naming consistency
+* export consistency
+* import ordering consistency
+* architecture consistency
+* dependency hygiene
+* documentation completeness
+* testing quality
+* repository maturity
+
+Produce a list of weaknesses before changing anything.
+
+==================================================
+PHASE 2 — REPOSITORY MATURITY ASSETS
+====================================
+
+Verify existence and quality of:
+
+LICENSE
+README.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+
+If any are weak:
+
+Improve them.
+
+Do not remove existing content.
+
+Enhance professionalism.
+
+==================================================
+PHASE 3 — GITHUB PROFESSIONALIZATION
+====================================
+
+Create if missing:
+
+.github/workflows/ci.yml
+
+Requirements:
+
+* ubuntu latest
+* npm ci
+* npm run lint
+* npm run build
+* npm run test
+
+Fail build on any failure.
+
+No extra dependencies.
+
+Add:
+
+CHANGELOG.md
+
+Version:
+
+1.0.0
+
+Document major milestones.
+
+==================================================
+PHASE 4 — ARCHITECTURE DOCUMENTATION
+====================================
+
+Create:
+
+docs/adr/001-architecture.md
+
+Document:
+
+* Why React
+* Why TypeScript
+* Why Zustand
+* Why Gemini
+* Why deterministic calculations
+* Tradeoffs considered
+* Future evolution path
+
+Create:
+
+docs/architecture.md
+
+Include:
+
+* component architecture
+* data flow
+* state management flow
+* AI workflow
+* carbon calculation workflow
+
+==================================================
+PHASE 5 — README EXCELLENCE
+===========================
+
+Upgrade README to elite open-source quality.
+
+Include:
+
+* badges
+* architecture diagram
+* system overview
+* technical innovation
+* sustainability impact
+* security strategy
+* testing strategy
+* accessibility strategy
+* performance strategy
+* scalability strategy
+* roadmap
+
+Add Mermaid diagrams where appropriate.
+
+==================================================
+PHASE 6 — DOCUMENTATION COMPLETENESS
+====================================
+
+Audit all exported entities.
+
+Ensure:
+
+* all exported functions documented
+* all interfaces documented
+* all public constants documented
+* all utility modules documented
+* all hooks documented
+
+Add file-level @file documentation where missing.
+
+==================================================
+PHASE 7 — DEPENDENCY HYGIENE
+============================
+
+Perform dependency audit.
+
+Remove only dependencies that are:
+
+* completely unused
+* verified safe to remove
+
+Do not remove anything uncertain.
+
+Document findings.
+
+==================================================
+PHASE 8 — COMPLEXITY AUDIT
+==========================
+
+Identify:
+
+* large functions
+* deeply nested logic
+* repeated logic
+* repeated strings
+* repeated validation
+
+Only refactor when:
+
+* zero behavior changes
+* zero UI changes
+* zero routing changes
+
+==================================================
+PHASE 9 — TESTING EXCELLENCE
+============================
+
+Audit tests.
+
+Focus on:
+
+* assertion quality
+* edge cases
+* boundary cases
+* determinism
+* maintainability
+
+Improve tests only if quality increases.
+
+Do not inflate test count artificially.
+
+==================================================
+PHASE 10 — PERFORMANCE DOCUMENTATION
+====================================
+
+Create:
+
+docs/performance.md
+
+Document:
+
+* build performance
+* bundle characteristics
+* coverage metrics
+* optimization strategy
+* rendering strategy
+
+==================================================
+PHASE 11 — SECURITY MATURITY
+============================
+
+Review:
+
+SECURITY.md
+
+Expand with:
+
+* threat model
+* data handling policy
+* dependency update policy
+* disclosure process
+
+Do not modify application logic.
+
+==================================================
+PHASE 12 — AI JUDGE SIMULATION
+==============================
+
+Act as:
+
+* GitHub maintainer
+* Principal Engineer
+* Open Source Reviewer
+* Automated Hackathon Evaluator
+
+Score:
+
+* Code Quality
+* Security
+* Efficiency
+* Testing
+* Accessibility
+* Problem Alignment
+* Repository Maturity
+* Documentation
+
+List the TOP 20 remaining weaknesses.
+
+Fix ONLY low-risk issues.
+
+==================================================
+PHASE 13 — FINAL VALIDATION
+===========================
+
+Run:
+
+npm run lint
+npm run build
+npm run test
+
+Requirements:
+
+* 0 lint warnings
+* 0 lint errors
+* 0 TypeScript errors
+* 0 build errors
+* all tests passing
+
+==================================================
+OUTPUT REQUIRED
+===============
+
+Provide:
+
+1. Files added
+2. Files modified
+3. Why each change improves evaluator scoring
+4. Estimated score impact
+5. Remaining weaknesses
+6. Whether further changes would be more risky than beneficial
+7. Recommended final commit message
+
+IMPORTANT:
+
+Repository quality optimization only.
+
+No feature additions.
+No UI redesign.
+No business logic changes.
+No experimental refactors.
+
+Optimize exclusively for maximum hackathon evaluation score and repository excellence.

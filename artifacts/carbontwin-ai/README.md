@@ -119,6 +119,37 @@ artifacts/carbontwin-ai/
 │       └── setup.ts                # Vitest + Testing Library configuration
 ```
 
+### Data Flow
+
+```mermaid
+flowchart LR
+    A[User\n8 Lifestyle Inputs] --> B[Onboarding Wizard\n5 Steps]
+    B --> C[(Zustand Store\nlocalStorage)]
+    C --> D[Carbon Engine\ncalculator.ts]
+    D --> E{Gemini API\nAvailable?}
+    E -->|Yes| F[Gemini 1.5 Flash\nAI Enrichment]
+    E -->|No| G[Rule-Based\nFallback]
+    F --> H[CarbonResult]
+    G --> H
+    H --> I[Twin Reveal]
+    H --> J[Dashboard\nCoach · Simulator\nWhat-If · Progress]
+```
+
+### Carbon Calculation Pipeline
+
+```mermaid
+flowchart TD
+    A[OnboardingData] --> B[Emission Factor Lookup\nconstants.ts]
+    B --> C[Per-Category kg Sums\nTransport · Food · Home · Travel · Shopping]
+    C --> D[Household Multiplier\nApplied to Home Energy]
+    D --> E[Annual kg CO₂]
+    E --> F[Carbon Score\nclamp 100 minus kg div 100]
+    E --> G[Twin Persona\nDeterministic Hash]
+    E --> H[Future Simulations\n1 · 5 · 10 years]
+    E --> I[Recommended Actions\nRanked by Savings]
+    F & G & H & I --> J[CarbonResult]
+```
+
 ### Key Design Decisions
 
 | Decision | Rationale |

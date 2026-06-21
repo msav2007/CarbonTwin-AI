@@ -9,6 +9,7 @@ export default tseslint.config(
       "node_modules/**",
       "coverage/**",
       "src/components/ui/**",
+      "src/hooks/use-toast.ts",
     ],
   },
   js.configs.recommended,

@@ -114,6 +114,27 @@ function simulateHorizon(
   };
 }
 
+/**
+ * Builds 1-, 5-, and 10-year carbon reduction projections for both
+ * `steady` and `ambitious` simulation modes.
+ *
+ * Each projection combines:
+ * - A **baseline trajectory** driven by the user's current lifestyle habits
+ *   (transport, home energy, travel, shopping)
+ * - An **action capture rate** representing how much of the total reduction
+ *   potential the user is likely to realise over time
+ * - A **maintenance bonus** that grows with sustained effort
+ * - A **floor factor** preventing unrealistically optimistic projections
+ *
+ * @param data - Complete onboarding data (used to derive the baseline growth rate)
+ * @param annualKg - Current annual CO₂ emissions in kilograms
+ * @param reductionPotentialKg - Maximum achievable reduction from all recommended actions
+ * @param topCategory - The user's highest-emission category (drives the narrative)
+ * @param recommendedActions - Ranked list of suggested actions; the top action shapes
+ *   the year-by-year narrative text
+ * @returns An object keyed by {@link SimulationMode} containing year-by-year projections
+ *   and a human-readable summary for each mode
+ */
 export function buildFutureSimulations(
   data: OnboardingData,
   annualKg: number,

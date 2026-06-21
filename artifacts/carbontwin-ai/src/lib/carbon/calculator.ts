@@ -60,6 +60,17 @@ function breakdownPercentages(breakdown: CategoryBreakdown): CategoryBreakdown {
   };
 }
 
+/**
+ * Calculates a live carbon estimate from partially-completed onboarding data.
+ * Used to power the real-time footprint preview during the wizard.
+ *
+ * For missing fields, category-level defaults are substituted so the estimate
+ * remains meaningful at any stage of the form. The `confidence` field (0–100)
+ * indicates how many of the 8 onboarding signals have been provided.
+ *
+ * @param data - Partial onboarding answers (any subset of fields may be present)
+ * @returns A live footprint estimate with per-category breakdown and confidence score
+ */
 export function calculatePartialCarbonEstimate(
   data: Partial<OnboardingData>
 ): PartialCarbonEstimate {
@@ -112,6 +123,17 @@ export function calculatePartialCarbonEstimate(
   };
 }
 
+/**
+ * Performs the full carbon footprint calculation from complete onboarding data.
+ *
+ * Computes annual emissions, Carbon Score, category breakdown, recommended
+ * actions, reduction potential, future simulations, and the user's Carbon Twin
+ * profile in a single deterministic pass — all client-side with no API calls.
+ *
+ * @param data - Fully-completed onboarding data (all 8 signals required)
+ * @returns A complete {@link CarbonResult} ready to display on the reveal screen
+ *   and dashboard
+ */
 export function calculateCarbonResult(data: OnboardingData): CarbonResult {
   const breakdown = calculateBreakdown(data);
   const annualKg = sumBreakdown(breakdown);
@@ -167,6 +189,19 @@ export function calculateCarbonResult(data: OnboardingData): CarbonResult {
   };
 }
 
+/**
+ * Type guard that checks whether all 8 required onboarding signals are present
+ * and non-empty. Returns `true` only when the data object qualifies as a
+ * complete {@link OnboardingData} record.
+ *
+ * @param data - Partial or complete onboarding data to validate
+ * @returns `true` if `data` is a fully-typed `OnboardingData`; `false` otherwise
+ *
+ * @example
+ * if (isOnboardingComplete(store.data)) {
+ *   const result = calculateCarbonResult(store.data); // fully typed
+ * }
+ */
 export function isOnboardingComplete(
   data: Partial<OnboardingData>
 ): data is OnboardingData {

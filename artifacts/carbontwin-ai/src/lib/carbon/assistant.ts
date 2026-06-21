@@ -58,6 +58,19 @@ function buildSummary(
   return `I mapped ${data.name.trim()}'s lifestyle to ${tonnes} tonnes of annual CO2, ${comparison}. Your Carbon Score is ${score}/100 and ${CATEGORY_LABELS[focusCategory]} is the clearest lever to improve next. Because you care about ${MOTIVATION_FRAMES[data.motivation]}, I will coach you with practical steps instead of generic advice. ${firstMove}`;
 }
 
+/**
+ * Generates a ranked list of personalised carbon reduction actions
+ * based on the user's lifestyle choices and dominant emission category.
+ *
+ * Actions are filtered to those relevant to the user's current behaviour,
+ * scored by estimated annual CO₂ savings, and sorted highest-savings first.
+ * The result drives both the Twin Reveal recommendation cards and the
+ * reduction potential calculation used in future simulations.
+ *
+ * @param data - Complete onboarding data used to select applicable actions
+ * @param topCategory - The user's highest-emission category (used to weight action priority)
+ * @returns Ranked array of {@link RecommendedAction} objects, highest-impact first
+ */
 export function buildRecommendedActions(
   data: OnboardingData,
   topCategory: CategoryKey
@@ -387,6 +400,20 @@ export function buildRecommendedActions(
     .slice(0, 4);
 }
 
+/**
+ * Generates the user's Carbon Twin — a deterministic AI persona derived from
+ * their onboarding answers.
+ *
+ * The twin name (e.g. `"Terra-Sage"`) is produced by hashing the user's choices,
+ * ensuring the same inputs always produce the same twin. Personality archetype,
+ * traits, and the opening narrative are also derived deterministically, with
+ * Gemini AI optionally enriching the summary at display time.
+ *
+ * @param data - Complete onboarding data (all 8 signals)
+ * @param breakdown - Per-category annual CO₂ emissions in kg
+ * @param actions - Ranked recommended actions (the top action shapes the summary)
+ * @returns A fully-populated {@link TwinProfile} ready to render on the reveal screen
+ */
 export function buildTwinProfile(
   data: OnboardingData,
   breakdown: CategoryBreakdown,
@@ -438,6 +465,18 @@ export function buildTwinProfile(
   };
 }
 
+/**
+ * Builds the user's Carbon Profile — a structured assessment of strengths,
+ * challenges, and category-level narrative generated from their footprint breakdown.
+ *
+ * The profile identifies the dominant emission category, surfaces the
+ * sustainability strengths the user already demonstrates, and provides
+ * a challenge statement for the highest-impact area to address next.
+ *
+ * @param data - Complete onboarding data
+ * @param breakdown - Per-category annual CO₂ emissions in kg
+ * @returns A {@link CarbonProfile} with strengths, challenges, and narrative fields
+ */
 export function buildCarbonProfile(
   data: OnboardingData,
   breakdown: CategoryBreakdown
@@ -488,6 +527,24 @@ export function buildCarbonProfile(
   };
 }
 
+/**
+ * Generates a set of personalised coaching insight cards shown on the
+ * Dashboard Coach page.
+ *
+ * Each insight has a tone (`warning`, `encouraging`, or `tip`), a title,
+ * a description, and an optional action call-to-action. The set always
+ * includes a daily budget check, a top-action recommendation, and a
+ * motivation-framed encouragement card. Gemini AI can optionally enrich
+ * or replace these with a fully personalised coaching response.
+ *
+ * @param data - Complete onboarding data (motivation framing is used throughout)
+ * @param annualKg - User's current annual CO₂ emissions in kilograms
+ * @param dailyKg - User's current daily CO₂ equivalent in kilograms
+ * @param dailyBudgetKg - The 1.5°C-aligned daily CO₂ budget per person (≈ 11.5 kg)
+ * @param topCategory - The user's highest-emission category
+ * @param topAction - The single highest-impact recommended action
+ * @returns Array of {@link CoachingInsight} cards to display in the coach view
+ */
 export function buildCoachingInsights(
   data: OnboardingData,
   annualKg: number,

@@ -251,7 +251,7 @@ describe('isOnboardingComplete', () => {
   });
 
   it('returns false when name is missing', () => {
-    const { name, ...rest } = highImpactProfile;
+    const { name: _name, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
@@ -264,37 +264,37 @@ describe('isOnboardingComplete', () => {
   });
 
   it('returns false when transport is missing', () => {
-    const { transport, ...rest } = highImpactProfile;
+    const { transport: _transport, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when diet is missing', () => {
-    const { diet, ...rest } = highImpactProfile;
+    const { diet: _diet, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when homeEnergy is missing', () => {
-    const { homeEnergy, ...rest } = highImpactProfile;
+    const { homeEnergy: _homeEnergy, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when household is missing', () => {
-    const { household, ...rest } = highImpactProfile;
+    const { household: _household, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when travel is missing', () => {
-    const { travel, ...rest } = highImpactProfile;
+    const { travel: _travel, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when shopping is missing', () => {
-    const { shopping, ...rest } = highImpactProfile;
+    const { shopping: _shopping, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 
   it('returns false when motivation is missing', () => {
-    const { motivation, ...rest } = highImpactProfile;
+    const { motivation: _motivation, ...rest } = highImpactProfile;
     expect(isOnboardingComplete(rest)).toBe(false);
   });
 

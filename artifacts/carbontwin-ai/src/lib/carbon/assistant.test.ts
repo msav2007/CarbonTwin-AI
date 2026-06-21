@@ -6,7 +6,6 @@ import {
   buildCoachingInsights,
 } from '@/lib/carbon/assistant';
 import { DAILY_BUDGET_KG } from '@/lib/carbon/constants';
-import { calculateCarbonScore } from '@/lib/carbon/math';
 import type { OnboardingData } from '@/types';
 import type { CategoryBreakdown } from '@/lib/carbon/types';
 

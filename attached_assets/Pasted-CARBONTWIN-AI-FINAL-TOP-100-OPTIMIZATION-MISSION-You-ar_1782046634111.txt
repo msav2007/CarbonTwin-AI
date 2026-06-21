@@ -1,0 +1,253 @@
+CARBONTWIN-AI FINAL TOP-100 OPTIMIZATION MISSION
+
+You are an elite Staff Engineer, Technical Architect, Open Source Maintainer, Accessibility Expert, QA Lead, and Hackathon Judge.
+
+Your task is NOT to add features.
+
+Your task is to maximize the repository's AI evaluation score and ranking.
+
+Current status:
+
+Security ≈ 100
+Efficiency ≈ 100
+Testing ≈ 98
+Accessibility ≈ 98
+Problem Alignment ≈ 99
+Code Quality ≈ weakest area
+
+Therefore prioritize Code Quality improvements above everything else.
+
+PHASE 1 — JUDGE THE REPOSITORY
+
+First perform a complete audit exactly as an AI evaluator would.
+
+Evaluate:
+
+Maintainability
+Readability
+Architecture
+Type Safety
+Documentation
+Test Quality
+Reusability
+Accessibility
+Error Handling
+Naming Consistency
+Dead Code
+Complexity
+
+Identify every issue that could reduce score.
+
+PHASE 2 — ELIMINATE ALL CODE QUALITY PENALTIES
+
+Search entire repository for:
+
+unused imports
+unused variables
+dead files
+duplicate code
+magic numbers
+large components
+weak naming
+commented-out code
+temporary code
+debugging code
+console logs
+duplicated calculations
+
+Refactor safely.
+
+PHASE 3 — ENTERPRISE-GRADE TYPESCRIPT
+
+Upgrade repository to production-grade TypeScript.
+
+Requirements:
+
+no implicit any
+strict typing
+strong interfaces
+shared types
+predictable return types
+type-safe utilities
+
+Create:
+
+src/types
+
+for reusable types.
+
+Replace weak typing with proper domain models.
+
+PHASE 4 — CLEAN ARCHITECTURE
+
+Enforce:
+
+Separation of Concerns
+DRY
+SOLID
+Single Responsibility Principle
+
+Move logic out of UI components.
+
+Keep components focused on presentation.
+
+Move calculations into reusable services.
+
+Move helpers into utility modules.
+
+Move constants into constants files.
+
+PHASE 5 — COMPONENT QUALITY PASS
+
+Audit every React component.
+
+Goals:
+
+cleaner props
+smaller files
+reusable logic
+better naming
+reduced complexity
+
+Split oversized components where safe.
+
+Do NOT alter appearance.
+
+PHASE 6 — DOCUMENTATION SCORE BOOST
+
+Add professional JSDoc comments everywhere.
+
+Required:
+
+exported functions
+utility functions
+custom hooks
+simulation engine
+carbon calculator
+validation logic
+
+Example:
+
+/**
+ * Calculates estimated annual carbon emissions
+ * based on user lifestyle inputs.
+ */
+
+Document assumptions and edge cases.
+
+PHASE 7 — TESTING PERFECTION
+
+Audit test coverage.
+
+Add tests for:
+
+calculator engine
+onboarding validation
+simulation engine
+utility functions
+edge cases
+invalid inputs
+empty states
+
+Target:
+
+95%+ meaningful coverage.
+
+Avoid meaningless tests.
+
+PHASE 8 — ACCESSIBILITY 100/100
+
+Ensure:
+
+semantic HTML
+accessible forms
+keyboard navigation
+aria-labels
+aria-describedby
+focus states
+proper heading hierarchy
+
+Accessibility should score as close to perfect as possible.
+
+PHASE 9 — PERFORMANCE POLISH
+
+Review:
+
+rerenders
+unnecessary state
+duplicate computations
+expensive operations
+
+Optimize only when beneficial.
+
+Do not over-engineer.
+
+PHASE 10 — README THAT IMPRESSES JUDGES
+
+Generate a professional README.
+
+Must include:
+
+project overview
+problem statement
+solution approach
+architecture
+AI features
+sustainability impact
+tech stack
+folder structure
+setup instructions
+deployment guide
+screenshots section
+roadmap
+
+Make it look like a mature open-source project.
+
+PHASE 11 — FINAL JUDGE SIMULATION
+
+Before finishing:
+
+Simulate an AI hackathon evaluator.
+
+Score:
+
+Code Quality
+Security
+Efficiency
+Testing
+Accessibility
+Problem Alignment
+
+Then perform one more optimization pass to improve any remaining weaknesses.
+
+PHASE 12 — VERIFICATION
+
+Run:
+
+npm run lint
+npm run build
+npm run test
+
+Fix everything until:
+
+0 lint warnings
+0 lint errors
+0 TypeScript errors
+0 build errors
+all tests passing
+OUTPUT
+
+Provide:
+
+Files modified
+Why each change improves evaluation score
+Estimated score improvement
+Remaining weaknesses
+Recommended commit message
+
+IMPORTANT:
+
+Do not add random features.
+Do not redesign the UI.
+Do not break existing functionality.
+Optimize specifically for AI-evaluation scoring and top-rank hackathon judging.

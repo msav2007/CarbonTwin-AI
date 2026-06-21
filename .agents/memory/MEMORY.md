@@ -1,2 +1,2 @@
-- [CarbonTwin wouter routing](carbontwin-wouter.md) — never use `router` variable; always destructure `useLocation()` as `[, navigate]` or `[pathname]`
-- [CarbonTwin test suite](carbontwin-tests.md) — 122 tests across 5 files covering all carbon engine modules; vitest.config.ts lives in artifact dir
+- [CarbonTwin lint config](carbontwin-lint-config.md) — eslint.config.js ignores ui/** and hooks/use-toast.ts; varsIgnorePattern=^_ for tests.
+- [CarbonTwin app structure](carbontwin-app-structure.md) — wouter routing, no react-query, Zustand persist v2, Gemini optional.

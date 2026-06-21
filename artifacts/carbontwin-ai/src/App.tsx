@@ -1,5 +1,4 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import HomePage from "./app/page";
 import OnboardingPage from "./app/onboarding/page";
@@ -10,8 +9,6 @@ import CoachPage from "./app/dashboard/coach/page";
 import SimulatorPage from "./app/dashboard/simulator/page";
 import WhatIfPage from "./app/dashboard/what-if/page";
 import ProgressPage from "./app/dashboard/progress/page";
-
-const queryClient = new QueryClient();
 
 function Router() {
   return (
@@ -57,10 +54,8 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-        <Router />
-      </WouterRouter>
+    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <Router />
       <Toaster
         theme="dark"
         position="bottom-right"
@@ -70,7 +65,7 @@ function App() {
           },
         }}
       />
-    </QueryClientProvider>
+    </WouterRouter>
   );
 }
 

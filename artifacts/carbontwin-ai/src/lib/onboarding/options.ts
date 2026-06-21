@@ -1,3 +1,14 @@
+/**
+ * @file Onboarding wizard option definitions and metadata.
+ *
+ * Exports typed option arrays for each of the 7 lifestyle question steps
+ * (transport, diet, homeEnergy, household, travel, shopping, motivation).
+ * Each option carries a label, description, icon, and impact level used
+ * by the wizard UI to render option cards.
+ *
+ * Also exports `STEP_META` — display metadata (title, subtitle, key, emoji)
+ * for each wizard step, used by the step header and progress indicator.
+ */
 import type { OnboardingData } from "@/types";
 import type { LucideIcon } from "lucide-react";
 import {

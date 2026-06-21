@@ -1,0 +1,100 @@
+FINAL REPOSITORY EXCELLENCE PASS
+
+The repository is feature complete.
+
+DO NOT add new features.
+DO NOT redesign UI.
+DO NOT change business logic.
+DO NOT change routing.
+
+Perform a final repository excellence audit focused exclusively on signals that advanced AI judges and senior engineers reward.
+
+1. Repository Professionalism Audit
+
+* Verify package.json metadata completeness
+* Verify keywords
+* Verify description quality
+* Verify license presence
+* Verify repository links
+* Verify homepage field
+* Verify funding/support fields if appropriate
+
+2. Engineering Maturity Audit
+
+* Check all exported functions have complete JSDoc
+* Check all interfaces have descriptions
+* Check all constants have source references where appropriate
+* Check all utility modules explain purpose
+
+3. Consistency Audit
+
+* File naming consistency
+* Folder naming consistency
+* Import ordering consistency
+* Export pattern consistency
+* Type naming consistency
+
+4. Complexity Audit
+   Identify any function with unusually high complexity.
+
+Only refactor if:
+
+* zero functionality changes
+* zero UI changes
+* zero behavior changes
+
+5. Dependency Audit
+   Review all dependencies.
+
+Remove any dependency that:
+
+* is unused
+* duplicates functionality
+* increases bundle size unnecessarily
+
+6. Documentation Excellence
+   Ensure README communicates:
+
+* Why this project matters
+* Why this solution is unique
+* Technical architecture
+* Security
+* Testing
+* Accessibility
+* Scalability
+* Sustainability impact
+
+7. Open Source Excellence
+   Verify:
+
+* CONTRIBUTING.md
+* CODE_OF_CONDUCT.md
+* SECURITY.md
+* LICENSE
+
+are complete and professional.
+
+8. Final Judge Simulation
+
+Act as:
+
+* Senior Software Engineer
+* Open Source Maintainer
+* Hackathon Judge
+* Automated Repository Evaluator
+
+List the TOP 10 remaining weaknesses preventing a near-perfect repository score.
+
+Only fix issues with extremely low risk.
+
+Provide:
+
+* files changed
+* reasoning
+* estimated score impact
+* remaining limitations
+
+No feature additions.
+No visual changes.
+No experimental refactors.
+Optimize only for repository quality and evaluator scoring.

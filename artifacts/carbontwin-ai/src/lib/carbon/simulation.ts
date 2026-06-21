@@ -1,3 +1,18 @@
+/**
+ * @file Future carbon simulation engine.
+ *
+ * Exports `buildFutureSimulations`, which projects the user's footprint
+ * over 1-, 5-, and 10-year horizons under two behaviour-change scenarios:
+ *
+ * - `steady`    — gradual adoption, 3-year ramp, 62% action capture rate
+ * - `ambitious` — faster adoption, 2-year ramp, 84% action capture rate
+ *
+ * Both scenarios use the user's ranked recommended actions as the reduction
+ * source. The engine computes cumulative CO₂ avoided, annual reduction,
+ * and the Carbon Score the user would achieve if they maintain the trajectory.
+ *
+ * All computation is pure and synchronous — no network calls.
+ */
 import type { OnboardingData } from "@/types";
 import {
   CATEGORY_LABELS,

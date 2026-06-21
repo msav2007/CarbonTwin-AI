@@ -1,3 +1,20 @@
+/**
+ * @file Main carbon footprint calculator.
+ *
+ * Exports two public functions:
+ * - `calculatePartialCarbonEstimate` — live estimate from partial onboarding data
+ * - `calculateCarbonResult` — full result from complete onboarding data
+ *
+ * The calculation pipeline is:
+ *   emission factors (constants.ts)
+ *   → per-category kg sums
+ *   → carbon score (math.ts)
+ *   → twin / profile / coaching / simulations (assistant.ts, simulation.ts)
+ *   → {@link CarbonResult}
+ *
+ * All computation is synchronous and runs entirely in the browser.
+ * No network calls are made from this module.
+ */
 import type { OnboardingData } from "@/types";
 import {
   AVERAGE_ANNUAL_KG,

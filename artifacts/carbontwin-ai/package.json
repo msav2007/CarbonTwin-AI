@@ -1,6 +1,31 @@
 {
   "name": "@workspace/carbontwin-ai",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "AI-powered carbon footprint platform that creates your personalised digital twin and coaches you toward sustainable action.",
+  "keywords": [
+    "carbon-footprint",
+    "sustainability",
+    "climate",
+    "ai",
+    "digital-twin",
+    "gemini",
+    "react",
+    "vite",
+    "typescript",
+    "carbon-calculator",
+    "co2",
+    "environment"
+  ],
+  "author": "CarbonTwin AI",
+  "license": "MIT",
+  "homepage": "https://github.com/msav2007/CarbonTwin-AI#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/msav2007/CarbonTwin-AI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/msav2007/CarbonTwin-AI/issues"
+  },
   "private": true,
   "type": "module",
   "scripts": {
@@ -56,7 +81,6 @@
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "@vitest/coverage-v8": "^4.1.9",
-    "@workspace/api-client-react": "workspace:*",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "cmdk": "^1.1.1",
@@ -73,7 +97,6 @@
     "react-day-picker": "^9.11.1",
     "react-dom": "catalog:",
     "react-hook-form": "^7.55.0",
-    "react-icons": "^5.4.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.2",
     "sonner": "^2.0.7",

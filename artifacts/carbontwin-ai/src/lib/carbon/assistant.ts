@@ -1,3 +1,17 @@
+/**
+ * @file Carbon Twin, CarbonProfile, coaching insight, and recommendation generation.
+ *
+ * This module contains the rule-based intelligence layer that turns a raw
+ * emission breakdown into a rich, personalised user experience:
+ *
+ * - `generateTwinProfile`     — deterministic AI persona from lifestyle choices
+ * - `generateCarbonProfile`   — narrative strengths / challenges assessment
+ * - `generateCoachingInsights`— coaching insight cards for the Dashboard Coach page
+ * - `buildRecommendedActions` — ranked, difficulty-rated action plan
+ *
+ * All functions are pure (no side effects, no network calls).
+ * Gemini AI enrichment is layered on top in `src/lib/gemini/client.ts`.
+ */
 import type { OnboardingData } from "@/types";
 import {
   CATEGORY_LABELS,

@@ -1,0 +1,135 @@
+FINAL AI-JUDGE SCORE MAXIMIZATION PASS
+
+The repository is already production-ready and all tests, builds, and lint checks pass.
+
+DO NOT perform large refactors.
+
+DO NOT redesign UI.
+
+DO NOT change functionality.
+
+DO NOT change routing.
+
+DO NOT change business logic.
+
+Your task is to identify the final 1–2% improvements that an automated hackathon evaluator may reward.
+
+Phase 1: Advanced Static Analysis
+
+Review entire repository and identify:
+
+Functions with high cyclomatic complexity
+Components with excessive responsibilities
+Repeated conditional logic
+Repeated calculations
+Repeated string literals
+Repeated validation logic
+Repeated error handling
+
+Refactor only if the improvement is measurable and safe.
+
+Phase 2: Maintainability Score Boost
+
+For every exported function:
+
+Verify naming clarity
+Verify parameter naming clarity
+Verify return type clarity
+Verify JSDoc completeness
+
+Improve documentation quality where weak.
+
+Focus on maintainability signals AI judges detect.
+
+Phase 3: Domain Modeling
+
+Review all interfaces and types.
+
+Identify:
+
+duplicated types
+weak types
+overly generic types
+unnecessary optional fields
+
+Improve type safety without changing functionality.
+
+Phase 4: Architecture Consistency Audit
+
+Check:
+
+consistent folder naming
+consistent file naming
+consistent import ordering
+consistent export patterns
+consistent hook usage
+consistent utility organization
+
+Normalize inconsistencies.
+
+Phase 5: Test Quality Audit
+
+Do NOT increase test count unnecessarily.
+
+Instead:
+
+identify weak assertions
+identify duplicated tests
+identify missing edge-case assertions
+
+Improve quality of existing tests.
+
+Phase 6: AI Judge README Optimization
+
+Improve README specifically for automated evaluation.
+
+Add:
+
+Why this solution is unique
+Technical innovation section
+Scalability section
+Security section
+Accessibility section
+Testing strategy section
+Performance strategy section
+
+Make repository appear enterprise-grade.
+
+Phase 7: GitHub Repository Excellence
+
+Generate:
+
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+
+Professional quality.
+
+These files improve repository maturity signals.
+
+Phase 8: Final Score Simulation
+
+Act as a hackathon evaluator.
+
+Score:
+
+Code Quality
+Security
+Efficiency
+Testing
+Accessibility
+Problem Alignment
+
+Explain exactly what still prevents a perfect score.
+
+Only make improvements that address those remaining weaknesses.
+
+Output Required
+
+Provide:
+
+Every file changed
+Why it was changed
+Estimated AI-evaluation impact
+Remaining weaknesses
+Whether any additional change would now be more risky than beneficial

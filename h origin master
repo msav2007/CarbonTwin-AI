@@ -1,0 +1,53 @@
+[33mcommit 61ed0144301eebc18476bc042be350e65da5dc0e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31mgitsafe-backup/main[m[33m)[m
+Author: Replit Agent <agent@replit.com>
+Date:   Sat Jun 20 14:00:36 2026 +0000
+
+    Enhance application quality and user experience with improved testing and AI features
+    
+    Integrate Gemini AI into coach and what-if pages, add comprehensive tests, fix accessibility issues, and improve overall code quality.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: e263c87f-8c7f-4128-afd7-0746f4b812cf
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: a77d17f9-e919-4c69-bed9-9047340829cc
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/1ec03b8d-7a13-4066-83a6-c11f78215a77/e263c87f-8c7f-4128-afd7-0746f4b812cf/DsROIav
+    Replit-Helium-Checkpoint-Created: true
+
+ artifacts/carbontwin-ai/coverage/coverage-summary.json             |  13 [32m+[m[31m--[m
+ artifacts/carbontwin-ai/coverage/hooks/use-count-up.ts.html        | 307 [31m---------------------------------------------------[m
+ artifacts/carbontwin-ai/coverage/hooks/use-toast.ts.html           | 658 [31m-------------------------------------------------------------------------------------------------------------[m
+ artifacts/carbontwin-ai/coverage/index.html                        | 108 [32m+++++++++[m[31m---------[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/assistant.ts.html      | 140 [32m+++++++++++[m[31m------------[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/calculator.ts.html     |   2 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/constants.ts.html      |   2 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/index.html             |  10 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/math.ts.html           |  12 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/simulation.ts.html     |   2 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/carbon/types.ts.html          |   2 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/index.html                    |  34 [32m+++[m[31m---[m
+ artifacts/carbontwin-ai/coverage/lib/landing/content.ts.html       |  28 [32m++[m[31m---[m
+ artifacts/carbontwin-ai/coverage/lib/landing/index.html            |  26 [32m++[m[31m---[m
+ artifacts/carbontwin-ai/coverage/lib/onboarding/index.html         |  42 [32m+++[m[31m----[m
+ artifacts/carbontwin-ai/coverage/lib/onboarding/options.ts.html    |  66 [32m+++++[m[31m------[m
+ artifacts/carbontwin-ai/coverage/lib/onboarding/validation.ts.html |   2 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/coverage/lib/utils.ts.html                 |  22 [32m++[m[31m--[m
+ artifacts/carbontwin-ai/coverage/{hooks => store}/index.html       |  57 [32m++++[m[31m------[m
+ artifacts/carbontwin-ai/coverage/store/onboarding.ts.html          | 247 [32m+++++++++++++++++++++++++++++++++++++++++[m
+ artifacts/carbontwin-ai/eslint.config.js                           |  35 [32m++++++[m
+ artifacts/carbontwin-ai/package.json                               |   7 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/src/app/dashboard/coach/page.tsx           | 103 [32m++++++++++++++++[m[31m-[m
+ artifacts/carbontwin-ai/src/app/dashboard/page.tsx                 |   9 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/src/app/dashboard/progress/page.tsx        |  13 [32m++[m[31m-[m
+ artifacts/carbontwin-ai/src/app/dashboard/what-if/page.tsx         |  97 [32m+++++++++++++[m[31m---[m
+ artifacts/carbontwin-ai/src/app/layout.tsx                         |  79 [31m-------------[m
+ artifacts/carbontwin-ai/src/components/landing/hero.tsx            |   5 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/src/components/onboarding/twin-reveal.tsx  |   9 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/src/components/shared/journey-link.tsx     |   6 [32m+[m[31m-[m
+ artifacts/carbontwin-ai/src/lib/carbon/assistant.test.ts           | 126 [32m+++++++++++++++++++++[m
+ artifacts/carbontwin-ai/src/lib/landing/content.test.ts            |  64 [32m+++++++++++[m
+ artifacts/carbontwin-ai/src/lib/onboarding/options.test.ts         | 219 [32m++++++++++++++++++++++++++++++++++++[m
+ artifacts/carbontwin-ai/src/lib/utils.test.ts                      |  36 [32m++++++[m
+ artifacts/carbontwin-ai/src/store/onboarding.test.ts               | 142 [32m++++++++++++++++++++++++[m
+ artifacts/carbontwin-ai/vitest.config.ts                           |  11 [32m+[m[31m-[m
+ pnpm-lock.yaml                                                     | 653 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ 37 files changed, 2024 insertions(+), 1370 deletions(-)
